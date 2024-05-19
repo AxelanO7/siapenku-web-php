@@ -8,19 +8,19 @@ const cardItems = [
         title: "Title 1",
         description: "Description 1",
         shortDescription: "Short Description 1",
-        route: "/admin/dashboard",
+        cardRoute: "/admin/dashboard",
     },
     {
         title: "Title 2",
         description: "Description 2",
         shortDescription: "Short Description 2",
-        route: "/admin/dashboard",
+        cardRoute: "/admin/dashboard",
     },
     {
         title: "Title 3",
         description: "Description 3",
         shortDescription: "Short Description 3",
-        route: "/admin/dashboard",
+        cardRoute: "/admin/dashboard",
     },
 ];
 </script>
@@ -28,7 +28,7 @@ const cardItems = [
 <template>
     <CustomAppLayout title="Dashboard">
         <CustomSearchInput />
-        <div class="flex space-x-12 px-8 pt-8">
+        <div class="flex space-x-12 px-8 mt-8 mb-12">
             <div class="w-full space-y-4">
                 <CustomCard
                     v-for="card in cardItems"
@@ -36,10 +36,10 @@ const cardItems = [
                     :title="card.title"
                     :description="card.description"
                     :shortDescription="card.shortDescription"
-                    :route="card.route"
+                    :cardRoute="card.cardRoute"
                 />
             </div>
-            <div class="card bg-[#d0f0c0] shadow-xl px-8 py-4">
+            <div class="card bg-blue-50 shadow-xl px-8 py-4">
                 <h2 class="text-center underline text-2xl font-bold rounded-md">
                     Dokumentasi
                 </h2>

@@ -7,56 +7,31 @@ import {
     DocumentArrowUpIcon,
     UserGroupIcon,
     Cog6ToothIcon,
+    ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/vue/24/solid";
 import Sidebar from "./Items/CustomSidebar.vue";
 import { Head } from "@inertiajs/vue3";
 
-// dynamic by role
 const sidebarItems = [
     {
         title: "Dashboard",
-        route: "/admin/dashboard",
+        sidebarRoute: "/admin",
         icon: HomeIcon,
-        children: [
-            {
-                title: "Children 1",
-                route: "/admin/dashboard",
-            },
-            {
-                title: "Children 2",
-                route: "/admin/dashboard",
-            },
-        ],
     },
     {
         title: "Pengajuan",
-        route: "/admin/submission",
+        sidebarRoute: "/admin/submission",
         icon: DocumentArrowUpIcon,
-        children: [
-            {
-                title: "Children 1",
-                route: "/admin/dashboard",
-            },
-            {
-                title: "Children 2",
-                route: "/admin/dashboard",
-            },
-        ],
     },
     {
         title: "Data Penduduk",
-        route: "/admin/resident",
+        sidebarRoute: "/admin/resident",
         icon: UserGroupIcon,
-        children: [
-            {
-                title: "Children 1",
-                route: "/admin/dashboard",
-            },
-            {
-                title: "Children 2",
-                route: "/admin/dashboard",
-            },
-        ],
+    },
+    {
+        title: "Logout",
+        sidebarRoute: "/",
+        icon: ArrowLeftStartOnRectangleIcon,
     },
 ];
 
@@ -66,27 +41,26 @@ defineProps({ title: String });
     <div>
         <Head :title="title" />
         <div class="flex min-h-screen w-full">
-            <div class="select-none px-8 bg-[#98bf64] flex flex-col pt-4 pb-8">
+            <div class="select-none px-8 bg-blue-400 flex flex-col pt-4 pb-8">
                 <p class="font-semibold text-xl text-center">Desa Bulian</p>
                 <div class="space-y-4 mt-8">
                     <Sidebar
                         v-for="item in sidebarItems"
                         :key="item.title"
                         :title="item.title"
-                        :route="item.route"
+                        :sidebarRoute="item.sidebarRoute"
                         :icon="item.icon"
-                        :children="item.children"
                     />
                 </div>
                 <div class="flex-1" />
                 <div
-                    class="flex items-center space-x-8 cursor-pointer justify-center hover:bg-[#7a9c3e] hover:text-white hover:rounded-tl-2xl hover:rounded-br-2xl py-2"
+                    class="flex items-center space-x-8 cursor-pointer justify-center hover:bg-blue-500 hover:text-white hover:rounded-tl-2xl hover:rounded-br-2xl py-2"
                 >
                     <Cog6ToothIcon class="h-6 w-6" />
                     <p>Pengaturan</p>
                 </div>
             </div>
-            <div class="bg-[#628643] grow">
+            <div class="bg-blue-500 grow">
                 <nav
                     class="flex justify-end items-center space-x-4 h-12 pe-12 pt-4"
                 >

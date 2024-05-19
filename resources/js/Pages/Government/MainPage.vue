@@ -63,7 +63,7 @@ const reportItems = [
                     :title="card.title"
                     :description="card.description"
                     :shortDescription="card.shortDescription"
-                    :route="card.route"
+                    :cardRoute="card.route"
                 />
             </div>
             <div class="card bg-[#d0f0c0] shadow-xl px-8 py-4">

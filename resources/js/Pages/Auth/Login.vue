@@ -1,5 +1,9 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import axios from "axios";
+import { Checkbox } from "@sc/components/ui/checkbox";
+import { Button } from "@sc/components/ui/button";
+import ApiHelper from "@/Helper/api_helper";
 
 defineProps({
     canResetPassword: Boolean,
@@ -7,18 +11,42 @@ defineProps({
 });
 
 const form = useForm({
-    email: "",
+    name: "",
     password: "",
     remember: false,
 });
 
-const submit = () => {
-    form.transform((data) => ({
-        ...data,
-        remember: form.remember ? "on" : "",
-    })).post(route("login"), {
-        onFinish: () => form.reset("password"),
-    });
+const validate = () => {
+    if (!form.name) {
+        alert("Username tidak boleh kosong");
+        return false;
+    }
+
+    if (!form.password) {
+        alert("Password tidak boleh kosong");
+        return false;
+    }
+
+    return true;
+};
+
+const submit = async () => {
+    if (!validate()) {
+        return;
+    }
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios
+        .post(`${baseUrl}/login`, {
+            name: form.name,
+            password: form.password,
+        })
+        .then((response) => {
+            alert("Login berhasil");
+            window.location.href = "/admin";
+        })
+        .catch((error) => {
+            alert("Login gagal");
+        });
 };
 </script>
 
@@ -26,83 +54,53 @@ const submit = () => {
     <Head title="Log in" />
 
     <div
-        class="flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#bee6a7] space-x-12 w-screen h-screen select-none"
+        class="flex items-center justify-center py-20 px-4 bg-blue-400 space-x-12 w-screen h-screen select-none"
     >
-        <div class="flex max-w-screen-xl">
-            <img
-                src="/assets/images/login.png"
-                alt="login"
-                class="w-1/3 h-1/2 object-cover flex self-center"
-            />
+        <div class="flex w-full px-20">
+            <div class="flex items-center justify-center grow">
+                <img src="/assets/images/logo.png" class="object-cover" />
+            </div>
             <form
-                class="p-8 bg-[#D0F0C0] rounded-xl shadow-lg w-full"
+                class="p-8 bg-blue-range-50 rounded-xl shadow-lg bg-blue-50 max-w-md"
                 @submit.prevent="submit"
             >
-                <div class="w-32 h-32 mx-auto">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="black"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                </div>
-                <p
-                    class="bg-white px-4 py-1 w-max mt-8 font-semibold text-lg text-center mx-auto mb-16"
-                >
-                    USER LOGIN
+                <p class="font-black text-2xl text-center tracking-widest">
+                    SIAPENKU
                 </p>
                 <div
-                    class="flex flex-col items-center justify-center w-96 mx-auto space-y-8"
+                    class="flex flex-col items-center justify-center mx-auto space-y-8 mt-16"
                 >
-                    <div class="flex items-center w-96 justify-between">
-                        <!-- <InputLabel for="username" value="Username" />
-                        <TextInput
-                            id="username"
-                            type="text"
-                            class="mt-1 block w-full"
-                            required
-                            autofocus
-                            autocomplete="username"
-                        /> -->
-                        <p class="bg-white p-1">Username :</p>
-                        <input
-                            type="text"
-                            v-model="form.email"
-                            @input="form.email = $event.target.value"
-                            class="border-gray-300 focus:border-lime-400 focus:ring-lime-400 rounded-md shadow-sm focus:ring-opacity-50"
-                        />
-                    </div>
-                    <div class="flex items-center w-96 justify-between">
-                        <p class="bg-white p-1">Password :</p>
-                        <input
-                            type="password"
-                            v-model="form.password"
-                            @input="form.password = $event.target.value"
-                            class="border-gray-300 focus:border-lime-400 focus:ring-lime-400 rounded-md shadow-sm focus:ring-opacity-50"
-                        />
-                    </div>
+                    <input
+                        type="text"
+                        v-model="form.name"
+                        @input="form.name = $event.target.value"
+                        placeholder="Username"
+                        class="border-gray-300 w-full rounded-md"
+                    />
+                    <input
+                        type="password"
+                        v-model="form.password"
+                        @input="form.password = $event.target.value"
+                        class="border-gray-300 w-full rounded-md"
+                        placeholder="Password"
+                    />
                 </div>
-                <p
-                    class="mt-4 flex justify-end cursor-pointer max-w-sm mx-auto hover:text-lime-400 transition duration-300 ease-in-out"
+                <div
+                    class="flex transition duration-300 ease-in-out justify-between mt-4 text-sm"
                 >
-                    Lupa password ?
-                </p>
-                <div class="flex justify-center mt-12">
-                    <button
-                        class="py-1 rounded-md bg-white px-24 font-bold text-lg text-black hover:bg-lime-400 hover:text-white transition duration-300 ease-in-out"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        type="submit"
+                    <div
+                        class="flex space-x-2 cursor-pointer items-center"
+                        @click="form.remember = !form.remember"
                     >
-                        Log in
-                    </button>
+                        <Checkbox />
+                        <p class="my-auto">Ingat Saya</p>
+                    </div>
+                    <p class="my-auto">Lupa password ?</p>
                 </div>
-                <p class="mt-8 mb-8 max-w-sm text-center mx-auto font-semibold">
+                <div class="flex justify-center mt-12">
+                    <Button class="px-12">Login</Button>
+                </div>
+                <p class="mt-8 text-center font-semibold">
                     Sistem Pengolahan Data Administrasi Desa Balian Kecamatan
                     Kabutambangan
                 </p>

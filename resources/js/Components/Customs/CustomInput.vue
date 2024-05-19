@@ -9,18 +9,34 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex space-x-4 items-center">
-        <label class="text-sm font-medium text-gray-700 w-1/4 text-left">
+    <div class="text-left flex flex-col">
+        <label class="text-base font-bold">
             {{ label }}
         </label>
-        :
-        <div class="w-full">
-            <input
-                :type="type"
-                :value="value"
-                :class="`mt-1 block rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-400 focus:ring-opacity-50 
-            ${type === 'file' ? 'w-max file-input ' : 'w-full'} `"
-            />
-        </div>
+
+        <select
+            v-if="type === 'radio'"
+            :v-model="value"
+            class="rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring-blue-400 focus:ring-opacity-50"
+        >
+            <option value="l">Laki-laki</option>
+            <option value="p">Perempuan</option>
+        </select>
+
+        <input
+            v-else-if="type === 'file'"
+            type="file"
+            :name="label"
+            :placeholder="label"
+            :class="`${'text-sm'}`"
+        />
+
+        <input
+            v-else
+            :type="type"
+            :v-model="value"
+            :placeholder="label"
+            :class="`${'rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring-blue-400 focus:ring-opacity-50'} `"
+        />
     </div>
 </template>

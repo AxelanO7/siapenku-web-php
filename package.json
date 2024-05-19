@@ -11,7 +11,7 @@
         "@tailwindcss/typography": "^0.5.2",
         "@vitejs/plugin-vue": "^4.5.0",
         "autoprefixer": "^10.4.7",
-        "axios": "^1.6.4",
+        "axios": "^1.6.8",
         "daisyui": "^4.6.2",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.14",
@@ -20,6 +20,13 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
-        "@heroicons/vue": "^2.1.1"
+        "@heroicons/vue": "^2.1.1",
+        "bootstrap": "^5.3.3",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "lucide-vue-next": "^0.378.0",
+        "radix-vue": "^1.7.4",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7"
     }
 }
