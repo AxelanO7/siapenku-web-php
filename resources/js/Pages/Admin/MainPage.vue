@@ -5,21 +5,21 @@ import CustomCard from "@/Components/Customs/CustomCard.vue";
 
 const cardItems = [
     {
-        title: "Title 1",
-        description: "Description 1",
-        shortDescription: "Short Description 1",
+        title: "Surat Keterangan Miskin",
+        description: "Dokumen pengajuan surat keterangan miskin",
+        shortDescription: "Miskin",
         cardRoute: "/admin/dashboard",
     },
     {
-        title: "Title 2",
-        description: "Description 2",
-        shortDescription: "Short Description 2",
+        title: "Surat Keterangan Usaha",
+        description: "Dokumen pengajuan surat keterangan usaha",
+        shortDescription: "Usaha",
         cardRoute: "/admin/dashboard",
     },
     {
-        title: "Title 3",
-        description: "Description 3",
-        shortDescription: "Short Description 3",
+        title: "Surat Keterangan KK Baru",
+        description: "Dokumen pengajuan surat keterangan KK baru",
+        shortDescription: "KK Baru",
         cardRoute: "/admin/dashboard",
     },
 ];
