@@ -8,19 +8,19 @@ const cardItems = [
         title: "Surat Keterangan Miskin",
         description: "Klik untuk melihat pengajuan surat",
         shortDescription: "keterangan kemiskinan",
-        route: "/admin/dashboard",
+        route: "/village-chief/validate",
     },
     {
         title: "Surat Keterangan Usaha",
         description: "Klik untuk melihat pengajuan surat",
         shortDescription: "keterangan usaha",
-        route: "/admin/dashboard",
+        route: "/village-chief/validate",
     },
     {
         title: "Surat Keterangan KK Baru",
         description: "Klik untuk melihat pengajuan surat",
         shortDescription: "keterangan keluarga baru",
-        route: "/admin/dashboard",
+        route: "/village-chief/validate",
     },
 ];
 
