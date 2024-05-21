@@ -1,12 +1,6 @@
 <script setup>
 import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
 
-const isAlert = false;
-
-function switchAlert() {
-    isAlert = !isAlert;
-}
-
 const tableHeaders = ["No.", "NIK", "Nama", "L/P", "Tgl Lahir"];
 
 const tableItems = [
