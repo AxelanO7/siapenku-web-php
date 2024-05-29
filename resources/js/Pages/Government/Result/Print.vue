@@ -27,6 +27,7 @@ const handlePrint = async () => {
     windowUrl.focus();
     windowUrl.print();
     windowUrl.close();
+    window.location.href = "/";
 };
 
 const idIndex = window.location.href.split("/").pop();
