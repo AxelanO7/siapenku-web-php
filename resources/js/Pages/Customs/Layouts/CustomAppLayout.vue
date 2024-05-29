@@ -8,32 +8,84 @@ import {
     UserGroupIcon,
     Cog6ToothIcon,
     ArrowLeftStartOnRectangleIcon,
+    DocumentTextIcon,
 } from "@heroicons/vue/24/solid";
 import Sidebar from "./Items/CustomSidebar.vue";
 import { Head } from "@inertiajs/vue3";
+import { onMounted, ref, defineProps } from "vue";
+import ApiHelper from "@/Helper/auth_helper";
 
-const sidebarItems = [
-    {
-        title: "Dashboard",
-        sidebarRoute: "/admin",
-        icon: HomeIcon,
-    },
-    {
-        title: "Pengajuan",
-        sidebarRoute: "/admin/submission",
-        icon: DocumentArrowUpIcon,
-    },
-    {
-        title: "Data Penduduk",
-        sidebarRoute: "/admin/resident",
-        icon: UserGroupIcon,
-    },
-    {
+const sidebarItems = ref([]);
+const profile = ref();
+
+const getSidebarItems = () => {
+    const role = localStorage.getItem("role");
+    sidebarItems.value = [
+        {
+            title: "Dashboard",
+            sidebarRoute: "/",
+            icon: HomeIcon,
+        },
+        {
+            title: `${role === "Admin" ? "Pengajuan" : "Validasi"}`,
+            sidebarRoute: `
+            ${
+                role === "Admin"
+                    ? "submission"
+                    : role === "Kadus"
+                    ? "/village-chief/validate"
+                    : "/government/validate"
+            }
+        `,
+            icon: DocumentArrowUpIcon,
+        },
+        role === "Admin"
+            ? {
+                  title: "Data Penduduk",
+                  sidebarRoute: "/resident",
+                  icon: UserGroupIcon,
+              }
+            : {
+                  title: `Surat ${
+                      role === "Kadus" ? "Rekomendasi" : "Pengajuan"
+                  }`,
+                  sidebarRoute: `
+              ${
+                  role === "Kadus"
+                      ? "/village-chief/validate"
+                      : "/government/submission"
+              }
+              `,
+                  icon: UserGroupIcon,
+              },
+    ];
+    if (role === "Kasi") {
+        sidebarItems.value.push({
+            title: "Laporan Pengajuan",
+            sidebarRoute: "/report",
+            icon: DocumentTextIcon,
+        });
+    }
+    sidebarItems.value.push({
         title: "Logout",
-        sidebarRoute: "/",
+        sidebarRoute: "/login",
         icon: ArrowLeftStartOnRectangleIcon,
-    },
-];
+    });
+};
+
+const getProfile = async () => {
+    profile.value = await ApiHelper.getProfile();
+};
+
+const logout = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+};
+
+onMounted(() => {
+    getSidebarItems();
+    getProfile();
+});
 
 defineProps({ title: String });
 </script>
@@ -66,8 +118,9 @@ defineProps({ title: String });
                 >
                     <p
                         class="font-semibold text-lg cursor-pointer hover:text-white"
+                        v-if="profile"
                     >
-                        I KETUT ARTA SEDANA
+                        {{ profile.name }}
                     </p>
                     <UserCircleIcon
                         class="h-6 w-6 cursor-pointer hover:text-white"
@@ -75,6 +128,7 @@ defineProps({ title: String });
                     <BellIcon class="h-6 w-6 cursor-pointer hover:text-white" />
                     <ArrowRightStartOnRectangleIcon
                         class="h-6 w-6 cursor-pointer hover:text-white"
+                        @click="logout"
                     />
                 </nav>
                 <main class="mt-4">

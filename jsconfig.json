@@ -3,7 +3,7 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["resources/js/*"],
-            "@sc/*": ["shadcn/*"]
+            "@sc/*": ["resources/js/shadcn/*"]
         }
     },
     "exclude": ["node_modules", "public"]

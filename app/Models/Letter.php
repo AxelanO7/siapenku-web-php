@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class letter extends Model
+class Letter extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -20,6 +20,10 @@ class letter extends Model
         'nationality',
         'needs',
         'attachment',
-        'status'
+        'status',
+        'type_letter',
+        'no_letter',
+        'name_witness',
+        'position_witness',
     ];
 }

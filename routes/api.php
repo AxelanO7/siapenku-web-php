@@ -25,3 +25,5 @@ Route::post('/letter', [LetterController::class, 'createLetter']);
 Route::get('/letter', [LetterController::class, 'getAllLetters']);
 Route::get('/letter/{id}', [LetterController::class, 'getLetterById']);
 Route::put('/letter/{id}', [LetterController::class, 'updateLetter']);
+
+Route::get('/profile', [AuthController::class, 'getProfile']);

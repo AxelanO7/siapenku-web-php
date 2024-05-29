@@ -102,7 +102,7 @@ const tableItems = [
                 </div>
                 <div class="flex justify-end mt-8">
                     <button
-                        class="bg-[#98bf64] text-white font-bold py-2 px-4 rounded hover:bg-lime-600 transition duration-200 ease-in-out"
+                        class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
                         onclick="switchAlert"
                     >
                         Kirim

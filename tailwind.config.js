@@ -7,13 +7,12 @@ const animate = require("tailwindcss-animate");
 module.exports = {
     darkMode: ["class"],
     content: [
-        // "./pages/**/*.{js,jsx,vue}",
-        // "./components/**/*.{js,jsx,vue}",
-        // "./app/**/*.{js,jsx,vue}",
-        // "./src/**/*.{js,jsx,vue}",
+        "./pages/**/*.{js,jsx,vue}",
+        "./components/**/*.{js,jsx,vue}",
+        "./app/**/*.{js,jsx,vue}",
+        "./src/**/*.{js,jsx,vue}",
         "./resources/**/*.{js,jsx,vue}",
         "./shadcn/**/*.{js,jsx,vue}",
-
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./vendor/laravel/jetstream/**/*.blade.php",
         "./storage/framework/views/*.php",
@@ -60,31 +59,3 @@ module.exports = {
         themes: [],
     },
 };
-
-// /** @type {import('tailwindcss').Config} */
-// export default {
-//     content: [
-//         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-//         "./vendor/laravel/jetstream/**/*.blade.php",
-//         "./storage/framework/views/*.php",
-//         "./resources/views/**/*.blade.php",
-//         "./resources/js/**/*.vue",
-//     ],
-
-//     theme: {
-//         extend: {
-//             fontFamily: {
-//                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
-//             },
-//         },
-//     },
-//     plugins: [
-//         forms,
-//         typography,
-//         require("@tailwindcss/typography"),
-//         require("daisyui"),
-//     ],
-//     daisyui: {
-//         themes: [],
-//     },
-// };

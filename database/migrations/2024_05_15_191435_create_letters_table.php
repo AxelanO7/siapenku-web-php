@@ -26,6 +26,10 @@ return new class extends Migration
             $table->string('needs');
             $table->string('attachment');
             $table->string('status');
+            $table->string('type_letter')->nullable();
+            $table->string('no_letter')->nullable();
+            $table->string('name_witness')->nullable();
+            $table->string('position_witness')->nullable();
         });
     }
 

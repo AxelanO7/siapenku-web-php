@@ -1,7 +1,7 @@
 <script setup>
 import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
 import { onMounted, ref } from "vue";
-import ApiHelper from "@/Helper/api_helper";
+import ApiHelper from "@/Helper/auth_helper";
 import axios from "axios";
 
 const indexItems = window.location.href.split("/").pop();
@@ -9,19 +9,19 @@ const indexItems = window.location.href.split("/").pop();
 const submit = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     const data = dataValidate.value;
-    data.status = "validated";
+    data.status = "sending";
     axios
         .put(`${baseUrl}/letter/${indexItems}`, data)
         .then((response) => {
             console.log(response);
-            window.location.href = "/village-chief/validate";
+            window.location.href = `/village-chief/recommendation/${indexItems}`;
         })
         .catch((error) => {
             console.log(error);
         });
 };
 
-let dataValidate = ref();
+const dataValidate = ref();
 
 const getValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
@@ -101,7 +101,11 @@ onMounted(() => {
                                         key !== 'id' &&
                                         key !== 'status' &&
                                         key !== 'created_at' &&
-                                        key !== 'updated_at'
+                                        key !== 'updated_at' &&
+                                        key !== 'no_letter' &&
+                                        key !== 'type_letter' &&
+                                        key !== 'name_witness' &&
+                                        key !== 'position_witness'
                                     "
                                 >
                                     <div class="w-1/3">
@@ -117,7 +121,7 @@ onMounted(() => {
                 </div>
                 <div class="flex justify-end mt-8">
                     <button
-                        class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                        class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
                         @click="submit"
                     >
                         Validasi

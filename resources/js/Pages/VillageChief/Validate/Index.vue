@@ -1,22 +1,20 @@
 <script setup>
 import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
-import ApiHelper from "@/Helper/api_helper";
+import ApiHelper from "@/Helper/auth_helper";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 
 const handleValidate = (item) => {
-    if (item.status !== "pending") {
-        return;
+    if (item.status === "pending") {
+        window.location.href = `/village-chief/detail-validate/${item.id}`;
     }
-
-    window.location.href = `/village-chief/detail-validate/${item.id}`;
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
 
-let isLoading = ref(false);
-let letters = ref([]);
+const isLoading = ref(false);
+const letters = ref([]);
 
 const getLetters = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
@@ -29,6 +27,10 @@ const getLetters = async () => {
         .catch((error) => {
             console.log(error);
         });
+};
+
+const getYearNow = () => {
+    return new Date().getFullYear();
 };
 
 const goToDashboard = () => {
@@ -44,7 +46,7 @@ onMounted(() => {
 
 <template>
     <CustomAppLayout title="Resident">
-        <div class="mx-12 mt-12">
+        <div class="mx-12 mt-12 select-none">
             <div class="bg-white rounded-lg shadow-lg">
                 <div
                     class="flex justify-center items-center py-8"
@@ -56,8 +58,7 @@ onMounted(() => {
                 <div class="text-center font-medium text-xl pb-8 pt-4" v:else>
                     <h3>Data Masyarakat Desa Bulian</h3>
                     <h3>Kecamatan Kabutambahan</h3>
-                    <!-- Todo Dynamic Year -->
-                    <h3>Tahun 2023</h3>
+                    <h3>Tahun {{ getYearNow() }}</h3>
                     <hr class="border-2 border-black my-4" />
                     <table
                         class="table-auto w-full text-center border-collapse border border-gray-400"
@@ -127,7 +128,7 @@ onMounted(() => {
             </div>
             <div class="flex justify-end mt-8">
                 <button
-                    class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                    class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
                     @click="goToDashboard"
                 >
                     Selesai

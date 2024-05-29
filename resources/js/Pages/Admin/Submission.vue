@@ -1,8 +1,25 @@
 <script setup>
 import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
-import CustomInput from "@/Components/Customs/CustomInput.vue";
 import { useForm } from "@inertiajs/vue3";
-import ApiHelper from "@/Helper/api_helper";
+import AuthHelper from "@/Helper/auth_helper";
+import { ref } from "vue";
+import { Check, ChevronsUpDown } from "lucide-vue-next";
+
+import { cn } from "@sc/utils";
+import { Button } from "@sc/components/ui/button";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@sc/components/ui/command";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@sc/components/ui/popover";
 
 const form = useForm({
     name: "",
@@ -19,7 +36,7 @@ const form = useForm({
 });
 
 const submit = async () => {
-    const baseUrl = await ApiHelper.getBaseUrl();
+    const baseUrl = await AuthHelper.getBaseUrl();
     axios
         .post(`${baseUrl}/letter`, {
             name: form.name,
@@ -37,6 +54,7 @@ const submit = async () => {
         })
         .then((response) => {
             alert("Berhasil mengirimkan data");
+            window.location.href = "/submission";
         })
         .catch((error) => {
             alert("Gagal mengirimkan data");
@@ -46,6 +64,14 @@ const submit = async () => {
 const pickFile = (e) => {
     form.attachment = e.target.files[0].name;
 };
+
+const genders = [
+    { value: "l", label: "Laki-laki" },
+    { value: "p", label: "Perempuan" },
+];
+
+const openGender = ref(false);
+const valueGender = ref("");
 </script>
 
 <template>
@@ -94,17 +120,80 @@ const pickFile = (e) => {
                                 />
                             </div>
                             <!-- gender -->
-                            <div>
+                            <div class="flex flex-col">
                                 <label class="text-base font-bold">
                                     Jenis Kelamin
                                 </label>
-                                <select
-                                    v-model="form.gender"
-                                    class="border-gray-300 w-full rounded-md"
-                                >
-                                    <option value="l">Laki-laki</option>
-                                    <option value="p">Perempuan</option>
-                                </select>
+                                <Popover v-model:open="openGender">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openGender"
+                                            class="w-full justify-between"
+                                        >
+                                            {{
+                                                form.gender
+                                                    ? genders.find(
+                                                          (gender) =>
+                                                              gender.value ===
+                                                              form.gender
+                                                      )?.label
+                                                    : "Jenis kelamin"
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Search..."
+                                            />
+                                            <CommandEmpty
+                                                >No data found</CommandEmpty
+                                            >
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="gender in genders"
+                                                        :key="gender.value"
+                                                        :value="gender.value"
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'string'
+                                                                ) {
+                                                                    form.gender =
+                                                                        ev.detail.value;
+                                                                }
+                                                                openGender = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{ gender.label }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    form.gender ===
+                                                                        gender.value
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
                             <!-- religion -->
                             <div>
@@ -182,20 +271,12 @@ const pickFile = (e) => {
                                     class="border-gray-300 w-full text-sm"
                                 />
                             </div>
-
-                            <!-- <CustomInput
-                                v-for="item in formItems"
-                                :key="item.label"
-                                :label="item.label"
-                                :type="item.type"
-                                :value="item.value"
-                            /> -->
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-end mt-8">
                     <button
-                        class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                        class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
                         @click="submit"
                     >
                         Kirim

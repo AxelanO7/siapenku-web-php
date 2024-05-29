@@ -1,50 +1,64 @@
 <script setup>
 import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
+import ApiHelper from "@/Helper/auth_helper";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 
-const isAlert = false;
-
-// function switchAlert() {
-//     isAlert = !isAlert;
-// }
-
-function handleValidate(id) {
-    // go to detail page
-    window.location.href = `/village-chief/detail-validate/${id}`;
-}
+const handleValidate = (item) => {
+    if (item.status === "sended") {
+        window.location.href = `/government/detail-validate/${item.id}`;
+    }
+};
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
 
-const tableItems = [
-    {
-        id: 1,
-        time: "5108082002980001",
-        name: "HENDRY SUDIARSA",
-        status: "Not Validate",
-    },
-    {
-        id: 2,
-        time: "5108082002980002",
-        name: "HENDRY SUDIARSA",
-        status: "Not Validate",
-    },
-    {
-        id: 3,
-        time: "5108082002980003",
-        name: "HENDRY SUDIARSA",
-        status: "Not Validate",
-    },
-];
+const isLoading = ref(false);
+const letters = ref([]);
+
+const getLetters = async () => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    await axios
+        .get(`${baseUrl}/letter`)
+        .then((response) => {
+            const data = response.data.data;
+            letters.value = data;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+const getYearNow = () => {
+    return new Date().getFullYear();
+};
+
+const goToDashboard = () => {
+    window.location.href = "/";
+};
+
+onMounted(() => {
+    isLoading.value = true;
+    getLetters();
+    isLoading.value = false;
+});
 </script>
 
 <template>
     <CustomAppLayout title="Resident">
         <form @submit.prevent="submit" class="mx-12 mt-12">
             <div class="bg-white rounded-lg shadow-lg">
-                <div class="text-center font-medium text-xl pb-8 pt-4">
+                <div
+                    class="flex justify-center items-center py-8"
+                    v-if="isLoading"
+                >
+                    <CustomSpinner />
+                </div>
+
+                <div class="text-center font-medium text-xl pb-8 pt-4" v:else>
                     <h3>Data Masyarakat Desa Bulian</h3>
                     <h3>Kecamatan Kabutambahan</h3>
-                    <!-- Todo Dynamic Year -->
-                    <h3>Tahun 2023</h3>
+                    <h3>Tahun {{ getYearNow() }}</h3>
                     <hr class="border-2 border-black my-4" />
                     <table
                         class="table-auto w-full text-center border-collapse border border-gray-400"
@@ -61,7 +75,7 @@ const tableItems = [
                         <tbody>
                             <tr
                                 class="bg-gray-100 text-gray-600 border border-gray-400"
-                                v-for="(item, index) in tableItems"
+                                v-for="(item, index) in letters"
                                 :key="index"
                             >
                                 <td
@@ -72,7 +86,16 @@ const tableItems = [
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
                                 >
-                                    {{ item.time }}
+                                    {{
+                                        new Date(
+                                            item.created_at
+                                        ).toLocaleDateString("id-ID", {
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }}
                                 </td>
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
@@ -81,14 +104,21 @@ const tableItems = [
                                 </td>
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
-                                    v-if="item.status === 'Not Validate'"
                                 >
-                                    <!-- todo : color -->
                                     <button
-                                        class="bg-[#98bf64] text-white font-bold py-2 px-4 rounded hover:bg-lime-600 transition duration-200 ease-in-out"
-                                        @click="handleValidate(item.id)"
+                                        :class="{
+                                            'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
+                                                item.status === 'sended',
+                                            'bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
+                                                item.status === 'validated',
+                                        }"
+                                        @click="handleValidate(item)"
                                     >
-                                        Validasi
+                                        {{
+                                            item.status === "sended"
+                                                ? "Validasi"
+                                                : "Tervalidasi"
+                                        }}
                                     </button>
                                 </td>
                             </tr>
@@ -98,9 +128,10 @@ const tableItems = [
             </div>
             <div class="flex justify-end mt-8">
                 <button
-                    class="bg-[#98bf64] text-white font-bold py-2 px-4 rounded hover:bg-lime-600 transition duration-200 ease-in-out"
+                    class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
+                    @click="goToDashboard"
                 >
-                    Kirim
+                    Selesai
                 </button>
             </div>
         </form>

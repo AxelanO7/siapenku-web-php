@@ -10,8 +10,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('name', 'password');
+        $token = $this->generateToken($request);
+        $user = Admin::where($credentials)->first();
         if (Admin::where($credentials)->exists()) {
+            Admin::where($credentials)->update(['token' => $token]);
             return response()->json([
+                'user' => $user,
+                'token' => $token,
                 'message' => 'Successfully logged in'
             ]);
         } else {
@@ -23,9 +28,29 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $token = $request->bearerToken();
+        Admin::where('token', $token)->update(['token' => null]);
         return redirect('/');
+    }
+
+    public function generateToken(Request $request)
+    {
+        $token = $request->bearerToken();
+        if (!$token) {
+            $token = bin2hex(random_bytes(40));
+        }
+        return $token;
+    }
+
+    public function getProfile(Request $request)
+    {
+        $token = $request->bearerToken();
+        $user = Admin::where('token', $token)->first();
+        return response()->json(
+            [
+                'user' => $user,
+                'message' => 'Successfully fetched user profile'
+            ]
+        );
     }
 }

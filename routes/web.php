@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,15 +14,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -34,45 +24,33 @@ Route::middleware([
     })->name('dashboard');
 });
 
-// Admin
-Route::get('/admin', function () {
-    return Inertia::render('Admin/MainPage');
-})->name('admin_index');
+// Global
+Route::get('/', function () {
+    return Inertia::render('Global/MainPage');
+})->name('main_page');
 
-Route::get('/admin/submission', function () {
+
+Route::get('submission', function () {
     return Inertia::render('Admin/Submission');
 })->name('submission');
 
-Route::get('/admin/resident', function () {
+Route::get('resident', function () {
     return Inertia::render('Admin/Resident');
 })->name('resident');
 
-// Village Chief
-Route::get('/village-chief', function () {
-    return Inertia::render('VillageChief/MainPage');
-})->name('village_chief_index');
 
 Route::get('/village-chief/validate', function () {
     return Inertia::render('VillageChief/Validate/Index');
 })->name('village_chief_validate');
 
-// todo: confirm validate
-Route::get('/village-chief/confirm-validate', function () {
-    return Inertia::render('VillageChief/Validate/Confirm');
-})->name('village_chief_confirm_validate');
-
 Route::get('/village-chief/detail-validate/{id}', function () {
     return Inertia::render('VillageChief/Validate/Detail');
 })->name('village_chief_detail_validate');
 
-Route::get('/village-chief/recommendation', function () {
+Route::get('/village-chief/recommendation/{id}', function () {
     return Inertia::render('VillageChief/Recommendation');
 })->name('village_chief_recommendation');
 
-// Government
-Route::get('/government', function () {
-    return Inertia::render('Government/MainPage');
-})->name('government_index');
 
 Route::get('/government/validate', function () {
     return Inertia::render('Government/Validate/Index');
@@ -82,10 +60,10 @@ Route::get('/government/detail-validate/{id}', function () {
     return Inertia::render('Government/Validate/Detail');
 })->name('government_detail_validate');
 
-Route::get('/government/submission', function () {
-    return Inertia::render('Government/Submission/Letter');
-})->name('government_submission');
+Route::get('/government/print/{id}', function () {
+    return Inertia::render('Government/Result/Print');
+})->name('government_print');
 
-Route::get('/government/submission/report', function () {
-    return Inertia::render('Government/Submission/Report');
-})->name('government_submission_report');
+Route::get('/report', function () {
+    return Inertia::render('Government/Result/Report');
+})->name('government_report');

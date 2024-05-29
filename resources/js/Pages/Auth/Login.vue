@@ -3,7 +3,8 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import { Checkbox } from "@sc/components/ui/checkbox";
 import { Button } from "@sc/components/ui/button";
-import ApiHelper from "@/Helper/api_helper";
+import AuthHelper from "@/Helper/auth_helper";
+import { onMounted } from "vue";
 
 defineProps({
     canResetPassword: Boolean,
@@ -34,20 +35,28 @@ const submit = async () => {
     if (!validate()) {
         return;
     }
-    const baseUrl = await ApiHelper.getBaseUrl();
+    const baseUrl = await AuthHelper.getBaseUrl();
     axios
         .post(`${baseUrl}/login`, {
             name: form.name,
             password: form.password,
         })
-        .then((response) => {
+        .then(async (response) => {
+            localStorage.setItem("token", response.data.token);
+            const roleApi = response.data.user.role;
+            const role = await AuthHelper.getRoleString(roleApi);
+            localStorage.setItem("role", role);
             alert("Login berhasil");
-            window.location.href = "/admin";
+            window.location.href = "/";
         })
         .catch((error) => {
             alert("Login gagal");
         });
 };
+
+onMounted(() => {
+    LocalStorage.clear();
+});
 </script>
 
 <template>
