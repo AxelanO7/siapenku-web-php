@@ -186,7 +186,7 @@ class LetterController extends Controller
             $no_letter = $letter->no_letter;
             $no_letter = explode('/', $no_letter);
             $no_letter = $no_letter[0];
-            $no_letter = $no_letter + 1;
+            $no_letter = (int)$no_letter + 1;
             $no_letter = $no_letter . '/' . $typeLetter . '/' . date('Y');
             return $no_letter;
         } else {
