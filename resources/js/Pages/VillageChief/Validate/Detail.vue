@@ -14,9 +14,11 @@ const submit = async () => {
         .put(`${baseUrl}/letter/${indexItems}`, data)
         .then((response) => {
             console.log(response);
+            alert("Berhasil divalidasi");
             window.location.href = `/village-chief/recommendation/${indexItems}`;
         })
         .catch((error) => {
+            alert("Gagal divalidasi");
             console.log(error);
         });
 };

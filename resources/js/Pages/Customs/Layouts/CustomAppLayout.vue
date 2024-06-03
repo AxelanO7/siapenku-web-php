@@ -59,13 +59,13 @@ const getSidebarItems = () => {
                   icon: UserGroupIcon,
               },
     ];
-    if (role === "Kasi") {
-        sidebarItems.value.push({
-            title: "Laporan Pengajuan",
-            sidebarRoute: "/report",
-            icon: DocumentTextIcon,
-        });
-    }
+    // if (role === "Kasi") {
+    //     sidebarItems.value.push({
+    //         title: "Laporan Pengajuan",
+    //         sidebarRoute: "/report",
+    //         icon: DocumentTextIcon,
+    //     });
+    // }
     sidebarItems.value.push({
         title: "Logout",
         sidebarRoute: "/login",

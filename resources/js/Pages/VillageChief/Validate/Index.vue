@@ -9,6 +9,9 @@ const handleValidate = (item) => {
     if (item.status === "pending") {
         window.location.href = `/village-chief/detail-validate/${item.id}`;
     }
+    if (item.status === "sending") {
+        window.location.href = `/village-chief/recommendation/${item.id}`;
+    }
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
@@ -109,6 +112,8 @@ onMounted(() => {
                                         :class="{
                                             'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                                 item.status === 'pending',
+                                            'bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
+                                                item.status === 'sending',
                                             'bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                                 item.status === 'validated',
                                         }"
@@ -117,6 +122,8 @@ onMounted(() => {
                                         {{
                                             item.status === "pending"
                                                 ? "Validasi"
+                                                : item.status === "sending"
+                                                ? "Surat Rekomendasi"
                                                 : "Tervalidasi"
                                         }}
                                     </button>
