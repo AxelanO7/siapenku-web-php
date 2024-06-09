@@ -62,12 +62,27 @@ const submit = async () => {
 };
 
 const pickFile = (e) => {
+    const allowedExtensions = /(\.pdf|\.png)$/i;
+    if (!allowedExtensions.exec(e.target.files[0].name)) {
+        alert("File harus berupa pdf atau png");
+        e.target.value = "";
+        return;
+    }
     form.attachment = e.target.files[0].name;
 };
 
 const genders = [
     { value: "l", label: "Laki-laki" },
     { value: "p", label: "Perempuan" },
+];
+
+const religions = [
+    { value: "islam", label: "Islam" },
+    { value: "kristen", label: "Kristen" },
+    { value: "katolik", label: "Katolik" },
+    { value: "hindu", label: "Hindu" },
+    { value: "budha", label: "Budha" },
+    { value: "konghucu", label: "Konghucu" },
 ];
 
 const openGender = ref(false);
@@ -89,7 +104,10 @@ const valueGender = ref("");
                         <div class="space-y-4 px-8 py-4 text-left">
                             <!-- name -->
                             <div>
-                                <label class="text-base font-bold">Nama</label>
+                                <label class="text-base font-bold flex"
+                                    >Nama
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.name"
                                     placeholder="Nama"
@@ -98,8 +116,9 @@ const valueGender = ref("");
                             </div>
                             <!-- birth place -->
                             <div>
-                                <label class="text-base font-bold">
+                                <label class="text-base font-bold flex">
                                     Tempat Lahir
+                                    <p class="text-red-500 ml-1">*</p>
                                 </label>
                                 <input
                                     v-model="form.birthPlace"
@@ -109,8 +128,9 @@ const valueGender = ref("");
                             </div>
                             <!-- birth date -->
                             <div>
-                                <label class="text-base font-bold">
+                                <label class="text-base font-bold flex">
                                     Tanggal Lahir
+                                    <p class="text-red-500 ml-1">*</p>
                                 </label>
                                 <input
                                     type="date"
@@ -121,8 +141,9 @@ const valueGender = ref("");
                             </div>
                             <!-- gender -->
                             <div class="flex flex-col">
-                                <label class="text-base font-bold">
+                                <label class="text-base font-bold flex">
                                     Jenis Kelamin
+                                    <p class="text-red-500 ml-1">*</p>
                                 </label>
                                 <Popover v-model:open="openGender">
                                     <PopoverTrigger as-child>
@@ -197,18 +218,87 @@ const valueGender = ref("");
                             </div>
                             <!-- religion -->
                             <div>
-                                <label class="text-base font-bold">Agama</label>
-                                <input
-                                    v-model="form.religion"
-                                    placeholder="Agama"
-                                    class="border-gray-300 w-full rounded-md"
-                                />
+                                <label class="text-base font-bold flex"
+                                    >Agama
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <Popover v-model:open="openReligion">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openReligion"
+                                            class="w-full justify-between"
+                                        >
+                                            {{
+                                                form.religion
+                                                    ? religions.find(
+                                                          (religion) =>
+                                                              religion.value ===
+                                                              form.religion
+                                                      )?.label
+                                                    : "Agama"
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Search..."
+                                            />
+                                            <CommandEmpty
+                                                >No data found</CommandEmpty
+                                            >
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="religion in religions"
+                                                        :key="religion.value"
+                                                        :value="religion.value"
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'string'
+                                                                ) {
+                                                                    form.religion =
+                                                                        ev.detail.value;
+                                                                }
+                                                                openReligion = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{ religion.label }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    form.religion ===
+                                                                        religion.value
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
                             <!-- family card -->
                             <div>
-                                <label class="text-base font-bold"
-                                    >No. KK</label
-                                >
+                                <label class="text-base font-bold flex"
+                                    >No. KK
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.familyCard"
                                     type="number"
@@ -218,7 +308,10 @@ const valueGender = ref("");
                             </div>
                             <!-- identity card -->
                             <div>
-                                <label class="text-base font-bold">NIK</label>
+                                <label class="text-base font-bold flex"
+                                    >NIK
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.identityCard"
                                     type="number"
@@ -228,9 +321,10 @@ const valueGender = ref("");
                             </div>
                             <!-- address -->
                             <div>
-                                <label class="text-base font-bold"
-                                    >Alamat</label
-                                >
+                                <label class="text-base font-bold flex"
+                                    >Alamat
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.address"
                                     placeholder="Alamat"
@@ -239,9 +333,10 @@ const valueGender = ref("");
                             </div>
                             <!-- nationaly -->
                             <div>
-                                <label class="text-base font-bold"
-                                    >Kebangsaan</label
-                                >
+                                <label class="text-base font-bold flex"
+                                    >Kebangsaan
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.nationality"
                                     placeholder="Kebangsaan"
@@ -250,9 +345,10 @@ const valueGender = ref("");
                             </div>
                             <!-- needs -->
                             <div>
-                                <label class="text-base font-bold"
-                                    >Keperluan</label
-                                >
+                                <label class="text-base font-bold flex"
+                                    >Keperluan
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     v-model="form.needs"
                                     placeholder="Keperluan"
@@ -261,9 +357,10 @@ const valueGender = ref("");
                             </div>
                             <!-- attachment -->
                             <div>
-                                <label class="text-base font-bold"
-                                    >Lampiran</label
-                                >
+                                <label class="text-base font-bold flex"
+                                    >Lampiran
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
                                 <input
                                     type="file"
                                     placeholder="Lampiran"
