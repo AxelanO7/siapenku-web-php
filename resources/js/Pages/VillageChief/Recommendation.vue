@@ -20,6 +20,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@sc/components/ui/popover";
+import Swal from "sweetalert2";
 
 // surat keterangan combo box
 const sukets = [
@@ -139,11 +140,23 @@ const handleValidate = async () => {
         .put(`${baseUrl}/letter/${idIndex}`, payload)
         .then((response) => {
             console.log(response);
-            alert("Data berhasil dikirim");
+            // alert("Data berhasil dikirim");
+            Swal.fire({
+                icon: "success",
+                title: "Data berhasil dikirim",
+                showConfirmButton: false,
+                timer: 1500,
+            });
             window.location.href = `/village-chief/validate`;
         })
         .catch((error) => {
-            alert("Data gagal dikirim");
+            // alert("Data gagal dikirim");
+            Swal.fire({
+                icon: "error",
+                title: "Data gagal dikirim",
+                showConfirmButton: false,
+                timer: 1500,
+            });
             console.log(error);
         });
 };

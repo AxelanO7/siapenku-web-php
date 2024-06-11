@@ -20,6 +20,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@sc/components/ui/popover";
+import Swal from "sweetalert2";
 
 const form = useForm({
     name: "",
@@ -53,18 +54,36 @@ const submit = async () => {
             status: "pending",
         })
         .then((response) => {
-            alert("Berhasil mengirimkan data");
+            // alert("Berhasil mengirimkan data");
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil mengirimkan data",
+                showConfirmButton: false,
+                timer: 1500,
+            });
             window.location.href = "/submission";
         })
         .catch((error) => {
-            alert("Gagal mengirimkan data");
+            // alert("Gagal mengirimkan data");
+            Swal.fire({
+                icon: "error",
+                title: "Gagal mengirimkan data",
+                showConfirmButton: false,
+                timer: 1500,
+            });
         });
 };
 
 const pickFile = (e) => {
     const allowedExtensions = /(\.pdf|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
-        alert("File harus berupa pdf atau png");
+        // alert("File harus berupa pdf atau png");
+        Swal.fire({
+            icon: "error",
+            title: "File harus berupa pdf atau png",
+            showConfirmButton: false,
+            timer: 1500,
+        });
         e.target.value = "";
         return;
     }

@@ -5,6 +5,7 @@ import { Checkbox } from "@sc/components/ui/checkbox";
 import { Button } from "@sc/components/ui/button";
 import AuthHelper from "@/Helper/auth_helper";
 import { onMounted } from "vue";
+import Swal from "sweetalert2";
 
 defineProps({
     canResetPassword: Boolean,
@@ -19,12 +20,22 @@ const form = useForm({
 
 const validate = () => {
     if (!form.name) {
-        alert("Username tidak boleh kosong");
+        // alert("Username tidak boleh kosong");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Username tidak boleh kosong",
+        });
         return false;
     }
 
     if (!form.password) {
-        alert("Password tidak boleh kosong");
+        // alert("Password tidak boleh kosong");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Password tidak boleh kosong",
+        });
         return false;
     }
 
@@ -46,11 +57,22 @@ const submit = async () => {
             const roleApi = response.data.user.role;
             const role = await AuthHelper.getRoleString(roleApi);
             localStorage.setItem("role", role);
-            alert("Login berhasil");
+            // alert("Login berhasil");
+            Swal.fire({
+                icon: "success",
+                title: "Login berhasil",
+                showConfirmButton: false,
+                timer: 1500,
+            });
             window.location.href = "/";
         })
         .catch((error) => {
-            alert("Login gagal");
+            // alert("Login gagal");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Login gagal",
+            });
         });
 };
 

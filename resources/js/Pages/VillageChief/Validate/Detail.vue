@@ -3,6 +3,7 @@ import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
 import { onMounted, ref } from "vue";
 import ApiHelper from "@/Helper/auth_helper";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const indexItems = window.location.href.split("/").pop();
 
@@ -14,11 +15,21 @@ const submit = async () => {
         .put(`${baseUrl}/letter/${indexItems}`, data)
         .then((response) => {
             console.log(response);
-            alert("Berhasil divalidasi");
+            // alert("Berhasil divalidasi");
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil divalidasi",
+            });
             window.location.href = `/village-chief/recommendation/${indexItems}`;
         })
         .catch((error) => {
-            alert("Gagal divalidasi");
+            // alert("Gagal divalidasi");
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: "Gagal divalidasi",
+            });
             console.log(error);
         });
 };

@@ -3,8 +3,8 @@ import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import ApiHelper from "@/Helper/auth_helper";
-
 import { Button } from "@sc/components/ui/button";
+import Swal from "sweetalert2";
 
 // applicant data
 const getLetter = async () => {
@@ -28,11 +28,21 @@ const handleValidate = async () => {
         .put(`${baseUrl}/letter/${idIndex}`, dataValidate.value)
         .then((response) => {
             console.log(response);
-            alert("Data berhasil dikirim");
+            // alert("Data berhasil dikirim");
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Data berhasil dikirim",
+            });
             window.location.href = `/government/print/${idIndex}`;
         })
         .catch((error) => {
-            alert("Data gagal dikirim");
+            // alert("Data gagal dikirim");
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: "Data gagal dikirim",
+            });
             console.log(error);
         });
 };
