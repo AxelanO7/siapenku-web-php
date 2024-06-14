@@ -23,7 +23,9 @@ class Letter extends Model
         'status',
         'type_letter',
         'no_letter',
-        'name_witness',
-        'position_witness',
+        'kasi_id',
+        'kasi',
+        'kadus_id',
+        'kadus'
     ];
 }

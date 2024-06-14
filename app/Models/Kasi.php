@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Witness extends Model
+class Kasi extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
-        'position'
+        'position',
+        'signature',
     ];
-
-    public function letters()
-    {
-        return $this->hasMany(Letter::class);
-    }
 }

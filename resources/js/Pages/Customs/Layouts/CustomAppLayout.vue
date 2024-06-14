@@ -53,19 +53,19 @@ const getSidebarItems = () => {
               ${
                   role === "Kadus"
                       ? "/village-chief/validate"
-                      : "/government/submission"
+                      : "/government/validate"
               }
               `,
                   icon: UserGroupIcon,
               },
     ];
-    // if (role === "Kasi") {
-    //     sidebarItems.value.push({
-    //         title: "Laporan Pengajuan",
-    //         sidebarRoute: "/report",
-    //         icon: DocumentTextIcon,
-    //     });
-    // }
+    if (role === "Kasi") {
+        sidebarItems.value.push({
+            title: "Laporan",
+            sidebarRoute: "/report",
+            icon: DocumentTextIcon,
+        });
+    }
     sidebarItems.value.push({
         title: "Logout",
         sidebarRoute: "/login",
@@ -95,7 +95,7 @@ defineProps({ title: String });
         <div class="flex min-h-screen w-full">
             <div class="select-none px-8 bg-blue-400 flex flex-col pt-4 pb-8">
                 <p class="font-semibold text-xl text-center">Desa Bulian</p>
-                <div class="space-y-4 mt-8">
+                <div class="space-y-4 mt-8 w-max">
                     <Sidebar
                         v-for="item in sidebarItems"
                         :key="item.title"

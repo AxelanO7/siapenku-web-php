@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\witness;
+use App\Models\Kasi;
+use App\Models\Kadus;
 use Illuminate\Http\Request;
 
 class WitnessController extends Controller
@@ -61,5 +62,29 @@ class WitnessController extends Controller
     public function destroy(witness $witness)
     {
         //
+    }
+
+    // get all kasi table
+    public function getAllKasi()
+    {
+        $res = Kasi::all();
+        return response()->json(
+            [
+                'message' => 'Success',
+                'data' => $res
+            ]
+        );
+    }
+
+    // get all kadus table
+    public function getAllKadus()
+    {
+        $res = Kadus::all();
+        return response()->json(
+            [
+                'message' => 'Success',
+                'data' => $res
+            ]
+        );
     }
 }

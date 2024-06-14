@@ -28,8 +28,11 @@ return new class extends Migration
             $table->string('status');
             $table->string('type_letter')->nullable();
             $table->string('no_letter')->nullable();
-            $table->string('name_witness')->nullable();
-            $table->string('position_witness')->nullable();
+
+            $table->unsignedBigInteger('kasi_id')->nullable();
+            $table->foreign('kasi_id')->references('id')->on('kasis');
+            $table->unsignedBigInteger('kadus_id')->nullable();
+            $table->foreign('kadus_id')->references('id')->on('kaduses');
         });
     }
 

@@ -33,7 +33,8 @@ const form = useForm({
     address: "",
     nationality: "",
     needs: "",
-    attachment: "",
+    attachmentName: "",
+    attachment: null,
 });
 
 const submit = async () => {
@@ -50,21 +51,20 @@ const submit = async () => {
             address: form.address,
             nationality: form.nationality,
             needs: form.needs,
-            attachment: form.attachment,
+            attachment: form.attachmentName,
             status: "pending",
         })
         .then((response) => {
-            // alert("Berhasil mengirimkan data");
             Swal.fire({
                 icon: "success",
                 title: "Berhasil mengirimkan data",
                 showConfirmButton: false,
                 timer: 1500,
             });
-            window.location.href = "/submission";
+            const resId = response.data.data.id;
+            saveFile(resId, form.attachment);
         })
         .catch((error) => {
-            // alert("Gagal mengirimkan data");
             Swal.fire({
                 icon: "error",
                 title: "Gagal mengirimkan data",
@@ -74,10 +74,71 @@ const submit = async () => {
         });
 };
 
+const updateAttachment = async (idProps, filename) => {
+    const baseUrl = await AuthHelper.getBaseUrl();
+    const payload = {
+        name: form.name,
+        birth_place: form.birthPlace,
+        birth_date: form.birthDate,
+        gender: form.gender,
+        religion: form.religion,
+        family_card: form.familyCard,
+        identity_card: form.identityCard,
+        address: form.address,
+        nationality: form.nationality,
+        needs: form.needs,
+        attachment: filename,
+        status: "pending",
+    };
+    axios
+        .put(`${baseUrl}/letter/${idProps}`, payload)
+        .then((response) => {
+            console.log(response);
+            // window.location.reload();
+            // Swal.fire({
+            //     icon: "success",
+            //     title: "Berhasil mengirimkan data",
+            //     showConfirmButton: false,
+            //     timer: 1500,
+            // });
+            // saveFile(form.attachment);
+            // window.location.href = "/submission";
+        })
+        .catch((error) => {
+            console.log(error);
+            // window.location.reload();
+            // Swal.fire({
+            //     icon: "error",
+            //     title: "Gagal mengirimkan data",
+            //     showConfirmButton: false,
+            //     timer: 1500,
+            // });
+        });
+};
+
+const saveFile = async (idProps, file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const baseUrl = await AuthHelper.getBaseUrl();
+    axios
+        .post(`${baseUrl}/letter/file`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            const fileName = response.data.data;
+            updateAttachment(idProps, fileName);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
 const pickFile = (e) => {
     const allowedExtensions = /(\.pdf|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
-        // alert("File harus berupa pdf atau png");
         Swal.fire({
             icon: "error",
             title: "File harus berupa pdf atau png",
@@ -87,7 +148,19 @@ const pickFile = (e) => {
         e.target.value = "";
         return;
     }
-    form.attachment = e.target.files[0].name;
+    if (e.target.files[0].size > 2097152) {
+        Swal.fire({
+            icon: "error",
+            title: "File tidak boleh lebih dari 2MB",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        e.target.value = "";
+        return;
+    }
+    form.attachmentName = e.target.files[0].name;
+    form.attachment = e.target.files[0];
+    console.log(form.attachment);
 };
 
 const genders = [

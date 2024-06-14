@@ -86,6 +86,17 @@ const translateKeyToIndonesian = (key) => {
     }
 };
 
+const handleTapFile = (value) => {
+    Swal.fire({
+        title: "Lampiran",
+        text: value,
+        imageUrl: `/files/${value}`,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+    });
+};
+
 onMounted(() => {
     getValidate();
 });
@@ -118,7 +129,9 @@ onMounted(() => {
                                         key !== 'no_letter' &&
                                         key !== 'type_letter' &&
                                         key !== 'name_witness' &&
-                                        key !== 'position_witness'
+                                        key !== 'position_witness' &&
+                                        key !== 'kasi_id' &&
+                                        key !== 'kadus_id'
                                     "
                                 >
                                     <div class="w-1/3">
@@ -126,7 +139,26 @@ onMounted(() => {
                                             {{ translateKeyToIndonesian(key) }}
                                         </h3>
                                     </div>
-                                    <div class="w-2/3">: {{ value }}</div>
+                                    <div
+                                        v-if="key === 'attachment'"
+                                        class="w-2/3 flex"
+                                        @click="handleTapFile(value)"
+                                    >
+                                        :
+                                        <div
+                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
+                                            @click="
+                                                handleTapFile(
+                                                    dataValidate.attachment
+                                                )
+                                            "
+                                        >
+                                            {{ dataValidate.attachment }}
+                                        </div>
+                                    </div>
+                                    <div v-else class="w-2/3">
+                                        : {{ value }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

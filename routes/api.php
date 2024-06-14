@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\WitnessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,11 @@ Route::post('/letter', [LetterController::class, 'createLetter']);
 Route::get('/letter', [LetterController::class, 'getAllLetters']);
 Route::get('/letter/{id}', [LetterController::class, 'getLetterById']);
 Route::put('/letter/{id}', [LetterController::class, 'updateLetter']);
+
+// save file with form-data
+Route::post('/letter/file', [LetterController::class, 'saveFile']);
+
+Route::get('/kasi', [WitnessController::class, 'getAllKasi']);
+Route::get('/kadus', [WitnessController::class, 'getAllKadus']);
 
 Route::get('/profile', [AuthController::class, 'getProfile']);

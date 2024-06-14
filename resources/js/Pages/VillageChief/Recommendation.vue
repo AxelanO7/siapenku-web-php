@@ -107,8 +107,9 @@ const openNoLetter = ref(false);
 const valueNoLetter = ref("");
 
 // input witness
-const nameWitness = ref("");
-const positionWitness = ref("");
+const openKadus = ref(false);
+const valueKadus = ref("");
+const selectedKadus = ref();
 
 // applicant data
 const getLetter = async () => {
@@ -125,14 +126,28 @@ const getLetter = async () => {
 };
 const dataValidate = ref();
 
+// kadus data
+const getKadus = async () => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios
+        .get(`${baseUrl}/kadus`)
+        .then((response) => {
+            const data = response.data.data;
+            dataKadus.value = data;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+const dataKadus = ref();
+
 const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     let payload = dataValidate.value;
     const additionalPayload = {
         no_letter: valueNoLetter.value,
         type_letter: valueSuket.value,
-        name_witness: nameWitness.value,
-        position_witness: positionWitness.value,
+        kadus_id: valueKadus.value,
     };
     payload = { ...payload, ...additionalPayload };
     payload.status = "sended";
@@ -140,7 +155,6 @@ const handleValidate = async () => {
         .put(`${baseUrl}/letter/${idIndex}`, payload)
         .then((response) => {
             console.log(response);
-            // alert("Data berhasil dikirim");
             Swal.fire({
                 icon: "success",
                 title: "Data berhasil dikirim",
@@ -150,7 +164,6 @@ const handleValidate = async () => {
             window.location.href = `/village-chief/validate`;
         })
         .catch((error) => {
-            // alert("Data gagal dikirim");
             Swal.fire({
                 icon: "error",
                 title: "Data gagal dikirim",
@@ -161,9 +174,21 @@ const handleValidate = async () => {
         });
 };
 
+const handleTapFile = (value) => {
+    Swal.fire({
+        title: "Lampiran",
+        text: value,
+        imageUrl: `/files/${value}`,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+    });
+};
+
 const idIndex = window.location.href.split("/").pop();
 onMounted(() => {
-    getLetter(idIndex);
+    getLetter();
+    getKadus();
 });
 </script>
 
@@ -202,6 +227,7 @@ onMounted(() => {
                                     />
                                 </Button>
                             </PopoverTrigger>
+
                             <PopoverContent class="w-[200px] p-0">
                                 <Command>
                                     <CommandInput
@@ -334,17 +360,88 @@ onMounted(() => {
                             <div class="flex items-center">
                                 <p class="w-1/4">a. Nama</p>
                                 <p class="mx-4">:</p>
-                                <input
-                                    v-model="nameWitness"
-                                    class="w-3/4 rounded"
-                                />
+                                <Popover v-model:open="openKadus">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openKadus"
+                                            class="justify-between w-3/4"
+                                        >
+                                            {{
+                                                valueKadus
+                                                    ? dataKadus.find(
+                                                          (kadus) =>
+                                                              kadus.id ===
+                                                              valueKadus
+                                                      )?.name
+                                                    : "Pilih nama..."
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="w-[200px] p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Cari nama..."
+                                            />
+                                            <CommandEmpty>
+                                                Tidak ada data
+                                            </CommandEmpty>
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="kadus in dataKadus"
+                                                        :key="kadus.id"
+                                                        :value="kadus.id"
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'number'
+                                                                ) {
+                                                                    valueKadus =
+                                                                        ev
+                                                                            .detail
+                                                                            .value;
+                                                                }
+                                                                selectedKadus =
+                                                                    kadus;
+                                                                openKadus = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{ kadus.name }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    valueKadus ===
+                                                                        kadus.id
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
                             <div class="flex">
                                 <p class="w-1/4">b. Jabatan</p>
                                 <p class="mx-4">:</p>
                                 <input
-                                    v-model="positionWitness"
-                                    class="w-3/4 rounded"
+                                    class="w-3/4 rounded border border-gray-300"
+                                    disabled
+                                    :value="selectedKadus?.position || `-`"
                                 />
                             </div>
                         </div>
@@ -450,9 +547,19 @@ onMounted(() => {
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
                                     <div class="w-1/4">11 : Lampiran</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.attachment }}
-                                    </p>
+                                    <div class="flex">
+                                        :
+                                        <div
+                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
+                                            @click="
+                                                handleTapFile(
+                                                    dataValidate.attachment
+                                                )
+                                            "
+                                        >
+                                            {{ dataValidate.attachment }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -468,21 +575,26 @@ onMounted(() => {
                                 <div
                                     class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
                                 >
-                                    <p>Tanda Tangan Digital</p>
+                                    <!-- <p>Tanda Tangan Digital</p> -->
+                                    <img
+                                        :src="`/assets/images/signature/${selectedKadus?.signature}`"
+                                        alt="tanda tangan"
+                                        class="w-full"
+                                    />
                                 </div>
-                                <p class="mt-4">(I Ketut Arta Sedana)</p>
+                                <p class="mt-4">({{ selectedKadus.name }})</p>
                             </div>
-                        </div>
-                        <div class="flex justify-end mt-96">
-                            <button
-                                class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
-                                @click="handleValidate"
-                            >
-                                Kirim
-                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-end mt-8">
+                <button
+                    class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
+                    @click="handleValidate"
+                >
+                    Kirim
+                </button>
             </div>
         </div>
     </CustomAppLayout>

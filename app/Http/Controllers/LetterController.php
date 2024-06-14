@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Letter;
+use App\Models\Kasi;
+use App\Models\Kadus;
 use Illuminate\Http\Request;
 
 class LetterController extends Controller
@@ -80,8 +82,6 @@ class LetterController extends Controller
             'status' => 'required',
             'type_letter' => 'optional',
             'no_letter' => 'optional',
-            'name_witness' => 'optional',
-            'position_witness' => 'optional'
         ]);
         return true;
     }
@@ -104,8 +104,8 @@ class LetterController extends Controller
         $letter->status = $request->status;
         $letter->type_letter = $request->type_letter;
         $letter->no_letter = $request->no_letter;
-        $letter->name_witness = $request->name_witness;
-        $letter->position_witness = $request->position_witness;
+        $letter->kasi_id = $request->kasi_id;
+        $letter->kadus_id = $request->kadus_ids;
         $letter->save();
 
         return response()->json([
@@ -117,6 +117,16 @@ class LetterController extends Controller
     public function getAllLetters()
     {
         $letters = letter::all();
+        foreach ($letters as $letter) {
+            if ($letter->kasi_id) {
+                $kasi = kasi::find($letter->kasi_id);
+                $letter->kasi = $kasi;
+            }
+            if ($letter->kadus_id) {
+                $kadus = kadus::find($letter->kadus_id);
+                $letter->kadus = $kadus;
+            }
+        }
         return response()->json([
             'message' => 'All letters',
             'data' => $letters
@@ -126,6 +136,14 @@ class LetterController extends Controller
     public function getLetterById($id)
     {
         $letter = letter::find($id);
+        if ($letter->kasi_id) {
+            $kasi = kasi::find($letter->kasi_id);
+            $letter->kasi = $kasi;
+        }
+        if ($letter->kadus_id) {
+            $kadus = kadus::find($letter->kadus_id);
+            $letter->kadus = $kadus;
+        }
         return response()->json([
             'message' => 'Letter by id',
             'data' => $letter
@@ -153,8 +171,8 @@ class LetterController extends Controller
         } else {
             $letter->no_letter = $request->no_letter;
         }
-        $letter->name_witness = $request->name_witness;
-        $letter->position_witness = $request->position_witness;
+        $letter->kasi_id = $request->kasi_id;
+        $letter->kadus_id = $request->kadus_id;
         $letter->save();
         return response()->json([
             'message' => 'Letter updated successfully',
@@ -192,5 +210,21 @@ class LetterController extends Controller
         } else {
             return '01/' . $typeLetter . '/' . date('Y');
         }
+    }
+
+    public function saveFile(
+        Request $request
+    ) {
+        $file = $request->file('file');
+        // filename from file
+        $file_name = time() . '.' . $file->getClientOriginalExtension();
+        if (!file_exists(public_path('files'))) {
+            mkdir(public_path('files'), 0777, true);
+        }
+        $file->move(public_path('files'), $file_name);
+        return response()->json([
+            'message' => 'File uploaded successfully',
+            'data' => $file_name
+        ]);
     }
 }
