@@ -49,7 +49,7 @@ onMounted(() => {
 
 <template>
     <CustomAppLayout title="Resident">
-        <div class="bg-white rounded-lg shadow-lg px-8">
+        <div class="bg-white rounded-lg shadow-lg px-20">
             <div class="flex justify-center items-center py-8" v-if="isLoading">
                 <CustomSpinner />
             </div>
