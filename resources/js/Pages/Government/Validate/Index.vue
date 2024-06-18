@@ -107,7 +107,7 @@ onMounted(() => {
                                 <button
                                     :class="{
                                         'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
-                                            item.status !== 'sended',
+                                            item.status === 'sended',
                                         'bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                             item.status === 'validated',
                                         'bg-gray-400 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
