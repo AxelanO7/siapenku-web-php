@@ -582,7 +582,7 @@ onMounted(() => {
                                         class="w-full"
                                     />
                                 </div>
-                                <p class="mt-4">({{ selectedKadus.name }})</p>
+                                <p class="mt-4">({{ selectedKadus?.name }})</p>
                             </div>
                         </div>
                     </div>
