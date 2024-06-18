@@ -240,7 +240,7 @@ onMounted(() => {
                                     />
                                 </div>
                                 <p class="mt-4">
-                                    ({{ dataValidate.kadus.name }})
+                                    ({{ dataValidate?.kadus.name }})
                                 </p>
                             </div>
                         </div>
