@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\WitnessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,13 @@ Route::put('/letter/{id}', [LetterController::class, 'updateLetter']);
 
 // save file with form-data
 Route::post('/letter/file', [LetterController::class, 'saveFile']);
+
+// resident
+Route::get('/resident', [ResidentController::class, 'show']);
+Route::post('/resident', [ResidentController::class, 'store']);
+Route::put('/resident/{id}', [ResidentController::class, 'update']);
+Route::delete('/resident/{id}', [ResidentController::class, 'deleteById']);
+
 
 Route::get('/kasi', [WitnessController::class, 'getAllKasi']);
 Route::get('/kadus', [WitnessController::class, 'getAllKadus']);
