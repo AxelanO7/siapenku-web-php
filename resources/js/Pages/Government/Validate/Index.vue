@@ -54,7 +54,7 @@ onMounted(() => {
                 <CustomSpinner />
             </div>
 
-            <div class="text-center font-medium text-xl pb-8 pt-4" v:else>
+            <div class="text-center font-medium text-xl pb-8 pt-4" v-else>
                 <h3>Data Masyarakat Desa Bulian</h3>
                 <h3>Kecamatan Kabutambahan</h3>
                 <h3>Tahun {{ getYearNow() }}</h3>
