@@ -187,11 +187,22 @@ const valueGender = ref("");
             <div class="mx-12 mt-12 mb-8">
                 <div class="bg-white rounded-lg shadow-lg">
                     <div class="text-center font-medium text-xl pt-4 pb-8">
-                        <h3>
-                            Formulir Pengajuan Surat Administrasi Desa Bulian
-                        </h3>
-                        <h3>Kecamatan Kabutambahan</h3>
-                        <h3>Banjar Dinas Dangin Margi</h3>
+                        <div
+                            class="flex items-center px-20 justify-center h-max relative py-6"
+                        >
+                            <img
+                                src="/assets/images/kop.png"
+                                class="h-28 w-28 absolute left-20"
+                            />
+                            <div>
+                                <h3>
+                                    Formulir Pengajuan Surat Administrasi Desa
+                                    Bulian
+                                </h3>
+                                <h3>Kecamatan Kabutambahan</h3>
+                                <h3>Banjar Dinas Dangin Margi</h3>
+                            </div>
+                        </div>
                         <hr class="border-2 border-black my-4" />
                         <div class="space-y-4 px-8 py-4 text-left">
                             <!-- name -->

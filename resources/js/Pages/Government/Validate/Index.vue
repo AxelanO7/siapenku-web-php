@@ -59,9 +59,19 @@ onMounted(() => {
                 </div>
 
                 <div class="text-center font-medium text-xl pb-8 pt-4" v-else>
-                    <h3>Data Masyarakat Desa Bulian</h3>
-                    <h3>Kecamatan Kabutambahan</h3>
-                    <h3>Tahun {{ getYearNow() }}</h3>
+                    <div
+                        class="flex items-center px-20 justify-center h-max relative py-6"
+                    >
+                        <img
+                            src="/assets/images/kop.png"
+                            class="h-28 w-28 absolute left-20"
+                        />
+                        <div>
+                            <h3>Data Masyarakat Desa Bulian</h3>
+                            <h3>Kecamatan Kabutambahan</h3>
+                            <h3>Tahun {{ getYearNow() }}</h3>
+                        </div>
+                    </div>
                     <hr class="border-2 border-black my-4" />
                     <table
                         class="table-auto w-full text-center border-collapse border border-gray-400"
