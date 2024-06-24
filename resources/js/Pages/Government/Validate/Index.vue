@@ -67,7 +67,7 @@ onMounted(() => {
                             class="h-28 w-28 absolute left-20"
                         />
                         <div>
-                            <h3>Data Masyarakat Desa Bulian</h3>
+                            <h3>Validasi Surat Administrasi Desa Bulian</h3>
                             <h3>Kecamatan Kabutambahan</h3>
                             <h3>Tahun {{ getYearNow() }}</h3>
                         </div>
