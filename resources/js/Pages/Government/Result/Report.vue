@@ -134,9 +134,7 @@ const chartOptions = {
                         Desa Bulian.
                     </p>
                     <p class="mt-4">B. Pengajuan Surat</p>
-                    <div
-                        class="flex justify-center items-center max-w-6xl mx-auto"
-                    >
+                    <div class="flex items-center max-w-6xl">
                         <Bar
                             v-if="!isLoading"
                             id="my-chart-id"
