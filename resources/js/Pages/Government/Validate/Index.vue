@@ -4,6 +4,7 @@ import ApiHelper from "@/Helper/auth_helper";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
+import Swal from "sweetalert2";
 
 const handleValidate = (item) => {
     if (item.status === "sended") {
@@ -12,6 +13,13 @@ const handleValidate = (item) => {
     if (item.status === "validated") {
         window.location.href = `/government/print/${item.id}`;
     }
+    if (item.status === ("pending" || "sending"))
+        Swal.fire({
+            title: "Error!",
+            text: "Surat belum divalidasi olek Kadus",
+            icon: "error",
+            confirmButtonText: "OK",
+        });
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
@@ -93,11 +101,17 @@ onMounted(() => {
                             >
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    v-if="
+                                        item.status !== ('pending' || 'sending')
+                                    "
                                 >
                                     {{ index + 1 }}
                                 </td>
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    v-if="
+                                        item.status !== ('pending' || 'sending')
+                                    "
                                 >
                                     {{
                                         new Date(
@@ -112,16 +126,23 @@ onMounted(() => {
                                 </td>
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    v-if="
+                                        item.status !== ('pending' || 'sending')
+                                    "
                                 >
                                     {{ item.name }}
                                 </td>
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    v-if="
+                                        item.status !== ('pending' || 'sending')
+                                    "
                                 >
                                     <button
                                         :class="{
                                             'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
-                                                item.status === 'sended',
+                                                item.status !==
+                                                ('validated' || 'done'),
                                             'bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                                 item.status === 'validated',
                                             'bg-gray-400 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':

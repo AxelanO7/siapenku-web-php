@@ -125,7 +125,8 @@ onMounted(() => {
                                             'bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                                 item.status === 'sending',
                                             'bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
-                                                item.status === 'validated',
+                                                item.status !==
+                                                ('pending' || 'sending'),
                                         }"
                                         @click="handleValidate(item)"
                                     >
