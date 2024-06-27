@@ -20,6 +20,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@sc/components/ui/popover";
+import html2pdf from "html2pdf.js";
 
 const getLetter = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
@@ -100,16 +101,17 @@ const handleSend = async () => {
         });
 };
 
-const handlePrint = async () => {
+const handleDownload = async () => {
     handleSend();
-    const printContent = document.getElementById("print-content");
-    const windowUrl = window.open("", "_blank");
-    windowUrl.document.write(printContent.outerHTML);
-    windowUrl.document.close();
-    windowUrl.focus();
-    windowUrl.print();
-    windowUrl.close();
-    window.location.href = "/";
+    const downloadElement = document.getElementById("download-content");
+    const opt = {
+        margin: 0,
+        filename: "surat.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+    html2pdf().from(downloadElement).set(opt).save();
 };
 
 const idIndex = window.location.href.split("/").pop();
@@ -123,8 +125,8 @@ onMounted(() => {
     <CustomAppLayout title="Submission">
         <div class="m-12">
             <div
-                class="bg-white rounded-lg shadow-lg print-content"
-                id="print-content"
+                class="bg-white rounded-lg shadow-lg download-content"
+                id="download-content"
             >
                 <div class="text-center font-medium text-xl pt-4 pb-8">
                     <div
@@ -393,9 +395,9 @@ onMounted(() => {
             <div class="flex justify-end mt-8">
                 <button
                     class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
-                    @click="handlePrint"
+                    @click="handleDownload"
                 >
-                    Print
+                    Download
                 </button>
             </div>
         </div>
