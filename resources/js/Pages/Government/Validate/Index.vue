@@ -7,12 +7,10 @@ import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 import Swal from "sweetalert2";
 
 const handleValidate = (item) => {
-    if (item.status === "sended") {
+    if (item.status === "sended")
         window.location.href = `/government/detail-validate/${item.id}`;
-    }
-    if (item.status === "validated") {
+    if (item.status === "validated")
         window.location.href = `/government/print/${item.id}`;
-    }
     if (item.status === ("pending" || "sending"))
         Swal.fire({
             title: "Error!",
@@ -20,6 +18,8 @@ const handleValidate = (item) => {
             icon: "error",
             confirmButtonText: "OK",
         });
+    if (item.status === "done")
+        window.location.href = `/government/print/${item.id}`;
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
