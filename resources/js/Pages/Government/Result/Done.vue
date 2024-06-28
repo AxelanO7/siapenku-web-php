@@ -69,7 +69,7 @@ onMounted(() => {
                             class="h-24 w-24 absolute left-20"
                         />
                         <div>
-                            <h3>Validasi Surat Administrassi Desa Bulian</h3>
+                            <h3>Pemerintahan Kabupaten Buleleng</h3>
                             <h3>Kecamatan Kabutambahan</h3>
                             <h3>Banjar Dinas Dangin Margi</h3>
                         </div>

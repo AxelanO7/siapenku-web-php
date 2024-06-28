@@ -63,7 +63,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <CustomAppLayout title="Submission">
+<CustomAppLayout title="Submission">
         <div class="m-12">
             <div class="bg-white rounded-lg shadow-lg">
                 <div class="text-center font-medium text-xl pt-4 pb-8">
