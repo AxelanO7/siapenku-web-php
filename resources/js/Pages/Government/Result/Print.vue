@@ -375,8 +375,7 @@ onMounted(() => {
                         </p>
                         <div class="flex justify-end">
                             <div class="text-center">
-                                <!-- todo: dynamic date -->
-                                <p>Bulian, 16-05-2023</p>
+                                <!-- <p>Bulian, 16-05-2023</p> -->
                                 <p>Kelian Banjar Dinas Dangin Margi</p>
                                 <div
                                     class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
