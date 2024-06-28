@@ -19,7 +19,7 @@ const handleValidate = (item) => {
             confirmButtonText: "OK",
         });
     if (item.status === "done")
-        window.location.href = `/government/print/${item.id}`;
+        window.location.href = `/government/done/${item.id}`;
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];

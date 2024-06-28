@@ -12,6 +12,9 @@ const handleValidate = (item) => {
     if (item.status === "sending") {
         window.location.href = `/village-chief/recommendation/${item.id}`;
     }
+    if (item.status === "sended" || "validated" || "done") {
+        window.location.href = `/village-chief/done/${item.id}`;
+    }
 };
 
 const tableHeaders = ["No.", "Time", "Nama", "Status"];
@@ -37,7 +40,7 @@ const getYearNow = () => {
 };
 
 const goToDashboard = () => {
-    // window.location.href = "/village-chief";
+    window.location.href = "/";
 };
 
 onMounted(() => {

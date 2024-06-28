@@ -3,6 +3,7 @@ import CustomAppLayout from "@/Pages/Customs/Layouts/CustomAppLayout.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import ApiHelper from "@/Helper/auth_helper";
+
 import { Button } from "@sc/components/ui/button";
 import Swal from "sweetalert2";
 
@@ -23,25 +24,34 @@ const dataValidate = ref();
 
 const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
-    dataValidate.value.status = "validated";
+    let payload = dataValidate.value;
+    const additionalPayload = {
+        no_letter: valueNoLetter.value,
+        type_letter: valueSuket.value,
+        kadus_id: valueKadus.value,
+    };
+    payload = { ...payload, ...additionalPayload };
+    payload.status = "sended";
     axios
-        .put(`${baseUrl}/letter/${idIndex}`, dataValidate.value)
+        .put(`${baseUrl}/letter/${idIndex}`, payload)
         .then((response) => {
             console.log(response);
             Swal.fire({
                 icon: "success",
-                title: "Berhasil",
-                text: "Data berhasil dikirim",
+                title: "Data berhasil dikirim",
+                showConfirmButton: false,
+                timer: 1500,
             });
-            window.location.href = `/government/print/${idIndex}`;
+            window.location.href = `/village-chief/validate`;
         })
         .catch((error) => {
-            console.log(error);
             Swal.fire({
                 icon: "error",
-                title: "Gagal",
-                text: "Data gagal dikirim",
+                title: "Data gagal dikirim",
+                showConfirmButton: false,
+                timer: 1500,
             });
+            console.log(error);
         });
 };
 
@@ -85,14 +95,18 @@ onMounted(() => {
                         class="flex items-center w-full justify-center space-x-4"
                     >
                         <h3>Surat Keterangan :</h3>
-                        <p>{{ dataValidate?.type_letter }}</p>
+                        <p class="text-base items-center" v-if="dataValidate">
+                            {{ dataValidate.type_letter || "-" }}
+                        </p>
                     </div>
                     <div class="h-4" />
                     <div
                         class="flex items-center w-full justify-center space-x-4"
                     >
                         <h3>Nomor :</h3>
-                        <p>{{ dataValidate?.no_letter }}</p>
+                        <p class="text-base items-center" v-if="dataValidate">
+                            {{ dataValidate.no_letter || "-" }}
+                        </p>
                     </div>
                     <div class="h-4" />
                     <div class="px-8 text-left">
@@ -103,12 +117,16 @@ onMounted(() => {
                             <div class="flex items-center">
                                 <p class="w-1/4">a. Nama</p>
                                 <p class="mx-4">:</p>
-                                <p>{{ dataValidate?.kadus.name }}</p>
+                                <p class="w-3/4">
+                                    {{ dataValidate?.kadus?.name || "-" }}
+                                </p>
                             </div>
                             <div class="flex">
                                 <p class="w-1/4">b. Jabatan</p>
                                 <p class="mx-4">:</p>
-                                <p>{{ dataValidate?.kadus.position }}</p>
+                                <p class="w-3/4">
+                                    {{ dataValidate?.kadus?.position || "-" }}
+                                </p>
                             </div>
                         </div>
                         <h3 class="my-4">Dengan ini menyatakan bahwa :</h3>
@@ -116,7 +134,7 @@ onMounted(() => {
                             <!-- nama -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">1 : Nama</div>
+                                    <div class="w-1/4">1. Nama</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.name }}
                                     </p>
@@ -125,7 +143,7 @@ onMounted(() => {
                             <!-- tempat lahir -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">2 : Tempat Lahir</div>
+                                    <div class="w-1/4">2. Tempat Lahir</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.birth_place }}
                                     </p>
@@ -134,7 +152,7 @@ onMounted(() => {
                             <!-- tanggal lahir -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">3 : Tanggal Lahir</div>
+                                    <div class="w-1/4">3. Tanggal Lahir</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.birth_date }}
                                     </p>
@@ -143,7 +161,7 @@ onMounted(() => {
                             <!-- jenis kelamin -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">4 : Jenis Kelamin</div>
+                                    <div class="w-1/4">4. Jenis Kelamin</div>
                                     <p class="w-3/4">
                                         :
                                         {{
@@ -157,7 +175,7 @@ onMounted(() => {
                             <!-- agama -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">5 : Agama</div>
+                                    <div class="w-1/4">5. Agama</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.religion }}
                                     </p>
@@ -166,7 +184,7 @@ onMounted(() => {
                             <!-- no kk -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">6 : No. KK</div>
+                                    <div class="w-1/4">6. No. KK</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.family_card }}
                                     </p>
@@ -175,7 +193,7 @@ onMounted(() => {
                             <!-- nik -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">7 : NIK</div>
+                                    <div class="w-1/4">7. NIK</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.identity_card }}
                                     </p>
@@ -184,7 +202,7 @@ onMounted(() => {
                             <!-- alamat -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">8 : Alamat</div>
+                                    <div class="w-1/4">8. Alamat</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.address }}
                                     </p>
@@ -193,7 +211,7 @@ onMounted(() => {
                             <!-- kebangsaan -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">9 : Kebangsaan</div>
+                                    <div class="w-1/4">9. Kebangsaan</div>
                                     <p class="w-3/4">
                                         :
                                         {{ dataValidate.nationality }}
@@ -203,7 +221,7 @@ onMounted(() => {
                             <!-- keperluan -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">10 : Keperluan</div>
+                                    <div class="w-1/4">10. Keperluan</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.needs }}
                                     </p>
@@ -212,7 +230,7 @@ onMounted(() => {
                             <!-- lampiran -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">11 : Lampiran</div>
+                                    <div class="w-1/4">11. Lampiran</div>
                                     <div class="flex">
                                         :
                                         <div
@@ -235,33 +253,24 @@ onMounted(() => {
                         </p>
                         <div class="flex justify-end">
                             <div class="text-center">
-                                <!-- todo: dynamic date -->
                                 <p>Bulian, 16-05-2023</p>
                                 <p>Kelian Banjar Dinas Dangin Margi</p>
                                 <div
                                     class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
                                 >
                                     <img
-                                        :src="`/assets/images/signature/${dataValidate?.kadus.signature}`"
+                                        :src="`/assets/images/signature/${dataValidate?.kadus?.signature}`"
                                         alt="tanda tangan"
                                         class="w-full"
                                     />
                                 </div>
                                 <p class="mt-4">
-                                    ({{ dataValidate?.kadus.name }})
+                                    ({{ dataValidate?.kadus?.name }})
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="flex justify-end mt-8">
-                <button
-                    class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
-                    @click="handleValidate"
-                >
-                    Validasi
-                </button>
             </div>
         </div>
     </CustomAppLayout>
