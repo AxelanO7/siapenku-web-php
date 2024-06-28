@@ -22,7 +22,6 @@ import ApiHelper from "@/Helper/auth_helper";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
-import { reactive } from "vue";
 
 const lettersByMonth = ref([
     { month: 1, total: 0 },

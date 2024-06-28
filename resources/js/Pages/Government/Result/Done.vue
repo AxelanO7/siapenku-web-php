@@ -5,22 +5,8 @@ import { ref, onMounted } from "vue";
 import ApiHelper from "@/Helper/auth_helper";
 
 import { Button } from "@sc/components/ui/button";
-import { Check, ChevronsUpDown } from "lucide-vue-next";
-import { cn } from "@sc/utils";
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@sc/components/ui/command";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@sc/components/ui/popover";
 import html2pdf from "html2pdf.js";
+import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 
 const getLetter = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
@@ -36,106 +22,51 @@ const getLetter = async () => {
 };
 const dataValidate = ref();
 
-// kasi data
-const getKasi = async () => {
-    const baseUrl = await ApiHelper.getBaseUrl();
-    axios
-        .get(`${baseUrl}/kasi`)
-        .then((response) => {
-            const data = response.data.data;
-            dataKasi.value = data;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
-const dataKasi = ref();
-// input witness
-const openKasi = ref(false);
-const valueKasi = ref("");
-const selectedKasi = ref();
-
-// const handleSend = async () => {
-//     const baseUrl = await ApiHelper.getBaseUrl();
-//     const payload = {
-//         status: "done",
-//     };
-//     axios
-//         .put(`${baseUrl}/letter/send/${idIndex}`)
-//         .then((response) => {
-//             console.log(response);
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//         });
-// };
-
-const handleSend = async () => {
-    const baseUrl = await ApiHelper.getBaseUrl();
-    let payload = dataValidate.value;
-    const additionalPayload = {
-        kasi_id: valueKasi.value,
-    };
-    payload = { ...payload, ...additionalPayload };
-    payload.status = "done";
-    axios
-        .put(`${baseUrl}/letter/${idIndex}`, payload)
-        .then((response) => {
-            console.log(response);
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "Data berhasil dikirim",
-            //     showConfirmButton: false,
-            //     timer: 1500,
-            // });
-            // window.location.href = `/goverment/validate`;
-        })
-        .catch((error) => {
-            // Swal.fire({
-            //     icon: "error",
-            //     title: "Data gagal dikirim",
-            //     showConfirmButton: false,
-            //     timer: 1500,
-            // });
-            console.log(error);
-        });
-};
-
 const handleDownload = async () => {
-    handleSend();
-    window.location.href = `/government/done/${idIndex}`;
-    // const downloadElement = document.getElementById("download-content");
-    // const opt = {
-    //     margin: 0,
-    //     filename: "surat.pdf",
-    //     image: { type: "jpeg", quality: 0.98 },
-    //     html2canvas: { scale: 2 },
-    //     jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    // };
-    // html2pdf().from(downloadElement).set(opt).save();
+    const downloadElement = document.getElementById("download-content");
+    // set size a4
+    const opt = {
+        size: "A4",
+        margin: 0,
+        filename: "surat.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+    html2pdf().from(downloadElement).set(opt).save();
 };
 
 const idIndex = window.location.href.split("/").pop();
-onMounted(() => {
+
+const isLoading = ref();
+const fetchData = async () => {
+    isLoading.value = true;
     getLetter();
-    getKasi();
+    isLoading.value = false;
+};
+onMounted(() => {
+    fetchData();
 });
 </script>
 
 <template lang="html">
-    <CustomAppLayout title="Submission">
-        <div class="m-12">
+    <CustomAppLayout title="Done">
+        <div class="flex justify-center items-center py-8" v-if="isLoading">
+            <CustomSpinner />
+        </div>
+
+        <div class="m-12" v-else>
             <div
                 class="bg-white rounded-lg shadow-lg download-content"
                 id="download-content"
             >
-                <div class="text-center font-medium text-xl pt-4 pb-8">
+                <div class="text-center font-medium text-base pt-4 pb-8">
                     <div
                         class="flex items-center px-20 justify-center h-max relative py-6"
                     >
                         <img
                             src="/assets/images/kop.png"
-                            class="h-28 w-28 absolute left-20"
+                            class="h-24 w-24 absolute left-20"
                         />
                         <div>
                             <h3>Validasi Surat Administrassi Desa Bulian</h3>
@@ -150,7 +81,7 @@ onMounted(() => {
                         <h3>Surat Keterangan :</h3>
                         <p>{{ dataValidate?.type_letter }}</p>
                     </div>
-                    <div class="h-4" />
+                    <!-- <div class="h-4" /> -->
                     <div
                         class="flex items-center w-full justify-center space-x-4"
                     >
@@ -166,89 +97,12 @@ onMounted(() => {
                             <div class="flex items-center">
                                 <p class="w-1/4">a. Nama</p>
                                 <p class="mx-4">:</p>
-                                <Popover v-model:open="openKasi">
-                                    <PopoverTrigger as-child>
-                                        <Button
-                                            variant="outline"
-                                            role="combobox"
-                                            :aria-expanded="openKasi"
-                                            class="justify-between"
-                                        >
-                                            {{
-                                                valueKasi
-                                                    ? dataKasi.find(
-                                                          (kasi) =>
-                                                              kasi.id ===
-                                                              valueKasi
-                                                      )?.name
-                                                    : "Pilih nama..."
-                                            }}
-                                            <ChevronsUpDown
-                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
-                                            />
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent class="w-[200px] p-0">
-                                        <Command>
-                                            <CommandInput
-                                                class="h-9"
-                                                placeholder="Cari nama..."
-                                            />
-                                            <CommandEmpty>
-                                                Tidak ada data
-                                            </CommandEmpty>
-                                            <CommandList>
-                                                <CommandGroup>
-                                                    <CommandItem
-                                                        v-for="kasi in dataKasi"
-                                                        :key="kasi.id"
-                                                        :value="kasi.id"
-                                                        @select="
-                                                            (ev) => {
-                                                                if (
-                                                                    typeof ev
-                                                                        .detail
-                                                                        .value ===
-                                                                    'number'
-                                                                ) {
-                                                                    valueKasi =
-                                                                        ev
-                                                                            .detail
-                                                                            .value;
-                                                                }
-                                                                selectedKasi =
-                                                                    kasi;
-                                                                openKasi = false;
-                                                            }
-                                                        "
-                                                    >
-                                                        {{ kasi.name }}
-                                                        <Check
-                                                            :class="
-                                                                cn(
-                                                                    'ml-auto h-4 w-4',
-                                                                    valueKasi ===
-                                                                        kasi.id
-                                                                        ? 'opacity-100'
-                                                                        : 'opacity-0'
-                                                                )
-                                                            "
-                                                        />
-                                                    </CommandItem>
-                                                </CommandGroup>
-                                            </CommandList>
-                                        </Command>
-                                    </PopoverContent>
-                                </Popover>
+                                <p>{{ dataValidate?.kasi?.name }}</p>
                             </div>
                             <div class="flex">
                                 <p class="w-1/4">b. Jabatan</p>
                                 <p class="mx-4">:</p>
-                                <input
-                                    class="rounded border border-gray-300"
-                                    disabled
-                                    :value="selectedKasi?.position || `-`"
-                                />
+                                <p>{{ dataValidate?.kasi?.position }}</p>
                             </div>
                         </div>
                         <h3 class="my-4">Dengan ini menyatakan bahwa :</h3>
@@ -369,7 +223,7 @@ onMounted(() => {
                                 </div>
                             </div> -->
                         </div>
-                        <p class="mt-12">
+                        <p class="mt-4">
                             Demikian surat keterangan ini dibuat untuk
                             dipergunakan dengan semestinya.
                         </p>
@@ -382,12 +236,14 @@ onMounted(() => {
                                     class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
                                 >
                                     <img
-                                        :src="`/assets/images/signature/${selectedKasi?.signature}`"
+                                        :src="`/assets/images/signature/${dataValidate?.kasi?.signature}`"
                                         alt="tanda tangan"
                                         class="w-full"
                                     />
                                 </div>
-                                <p class="mt-4">({{ selectedKasi?.name }})</p>
+                                <p class="mt-2">
+                                    ({{ dataValidate?.kasi?.name }})
+                                </p>
                             </div>
                         </div>
                     </div>

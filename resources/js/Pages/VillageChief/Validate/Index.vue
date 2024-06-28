@@ -37,7 +37,7 @@ const getYearNow = () => {
 };
 
 const goToDashboard = () => {
-    window.location.href = "/village-chief";
+    // window.location.href = "/village-chief";
 };
 
 onMounted(() => {
