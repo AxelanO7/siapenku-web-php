@@ -116,7 +116,7 @@ onMounted(() => {
                             <!-- nama -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">1 : Nama</div>
+                                    <div class="w-1/4">1. Nama</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.name }}
                                     </p>
@@ -125,7 +125,7 @@ onMounted(() => {
                             <!-- tempat lahir -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">2 : Tempat Lahir</div>
+                                    <div class="w-1/4">2. Tempat Lahir</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.birth_place }}
                                     </p>
@@ -134,7 +134,7 @@ onMounted(() => {
                             <!-- tanggal lahir -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">3 : Tanggal Lahir</div>
+                                    <div class="w-1/4">3. Tanggal Lahir</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.birth_date }}
                                     </p>
@@ -143,7 +143,7 @@ onMounted(() => {
                             <!-- jenis kelamin -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">4 : Jenis Kelamin</div>
+                                    <div class="w-1/4">4. Jenis Kelamin</div>
                                     <p class="w-3/4">
                                         :
                                         {{
@@ -157,7 +157,7 @@ onMounted(() => {
                             <!-- agama -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">5 : Agama</div>
+                                    <div class="w-1/4">5. Agama</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.religion }}
                                     </p>
@@ -166,7 +166,7 @@ onMounted(() => {
                             <!-- no kk -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">6 : No. KK</div>
+                                    <div class="w-1/4">6. No. KK</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.family_card }}
                                     </p>
@@ -175,7 +175,7 @@ onMounted(() => {
                             <!-- nik -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">7 : NIK</div>
+                                    <div class="w-1/4">7. NIK</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.identity_card }}
                                     </p>
@@ -184,7 +184,7 @@ onMounted(() => {
                             <!-- alamat -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">8 : Alamat</div>
+                                    <div class="w-1/4">8. Alamat</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.address }}
                                     </p>
@@ -193,7 +193,7 @@ onMounted(() => {
                             <!-- kebangsaan -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">9 : Kebangsaan</div>
+                                    <div class="w-1/4">9. Kebangsaan</div>
                                     <p class="w-3/4">
                                         :
                                         {{ dataValidate.nationality }}
@@ -203,7 +203,7 @@ onMounted(() => {
                             <!-- keperluan -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">10 : Keperluan</div>
+                                    <div class="w-1/4">10. Keperluan</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.needs }}
                                     </p>
@@ -212,7 +212,7 @@ onMounted(() => {
                             <!-- lampiran -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">11 : Lampiran</div>
+                                    <div class="w-1/4">11. Lampiran</div>
                                     <div class="flex">
                                         :
                                         <div
