@@ -62,7 +62,7 @@ onMounted(() => {
             >
                 <div class="text-center font-medium text-base pt-4 pb-8">
                     <div
-                        class="flex items-center px-20 justify-center h-max relative py-6"
+                        class="flex items-center px-20 justify-center h-max relative py-2"
                     >
                         <img
                             src="/assets/images/kop.png"
@@ -71,7 +71,11 @@ onMounted(() => {
                         <div>
                             <h3>Pemerintahan Kabupaten Buleleng</h3>
                             <h3>Kecamatan Kabutambahan</h3>
-                            <h3>Banjar Dinas Dangin Margi</h3>
+                            <h3>Desa Bulian</h3>
+                            <h3>
+                                Jln. Kubutambahan-Kintamani, Telp. 087758730344,
+                                Kode Pos 81172
+                            </h3>
                         </div>
                     </div>
                     <hr class="border-2 border-black my-4" />
@@ -227,9 +231,18 @@ onMounted(() => {
                             Demikian surat keterangan ini dibuat untuk
                             dipergunakan dengan semestinya.
                         </p>
-                        <div class="flex justify-end">
+                        <div class="flex justify-end mt-4">
                             <div class="text-center">
-                                <!-- <p>Bulian, 16-05-2023</p> -->
+                                <p>
+                                    Bulian,
+                                    {{
+                                        new Date(dataValidate?.updated_at)
+                                            .toLocaleDateString("id-ID")
+                                            .split("/")
+                                            .join("-")
+                                    }}
+                                </p>
+
                                 <p>Kelian Banjar Dinas Dangin Margi</p>
                                 <div
                                     class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
