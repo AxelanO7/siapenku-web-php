@@ -27,6 +27,7 @@ Route::post('/letter', [LetterController::class, 'createLetter']);
 Route::get('/letter', [LetterController::class, 'getAllLetters']);
 Route::get('/letter/{id}', [LetterController::class, 'getLetterById']);
 Route::put('/letter/{id}', [LetterController::class, 'updateLetter']);
+Route::delete('/letter/{id}', [LetterController::class, 'deleteLetter']);
 
 // save file with form-data
 Route::post('/letter/file', [LetterController::class, 'saveFile']);

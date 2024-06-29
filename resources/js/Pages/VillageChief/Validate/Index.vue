@@ -20,7 +20,7 @@ const handleValidate = (item) => {
     }
 };
 
-const tableHeaders = ["No.", "Time", "Nama", "Status"];
+const tableHeaders = ["No.", "Time", "Nama", "Status", "Aksi"];
 
 const isLoading = ref(false);
 const letters = ref([]);
@@ -44,6 +44,29 @@ const getYearNow = () => {
 
 const goToDashboard = () => {
     window.location.href = "/";
+};
+
+const handleDelete = async (item) => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios
+        .delete(`${baseUrl}/letter/${item.id}`)
+        .then((response) => {
+            console.log(response);
+            getLetters();
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil divalidasi",
+            });
+        })
+        .catch((error) => {
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: "Gagal divalidasi",
+            });
+            console.log(error);
+        });
 };
 
 onMounted(() => {
@@ -143,6 +166,16 @@ onMounted(() => {
                                                 ? "Surat Rekomendasi"
                                                 : "Tervalidasi"
                                         }}
+                                    </button>
+                                </td>
+                                <td
+                                    class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                >
+                                    <button
+                                        class="bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
+                                        @click="handleDelete(item)"
+                                    >
+                                        Hapus
                                     </button>
                                 </td>
                             </tr>

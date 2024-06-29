@@ -227,4 +227,13 @@ class LetterController extends Controller
             'data' => $file_name
         ]);
     }
+
+    public function deleteLetter($id)
+    {
+        $letter = letter::find($id);
+        $letter->delete();
+        return response()->json([
+            'message' => 'Letter deleted successfully'
+        ]);
+    }
 }
