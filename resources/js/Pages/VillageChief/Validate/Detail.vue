@@ -142,7 +142,9 @@ onMounted(() => {
                                         key !== 'name_witness' &&
                                         key !== 'position_witness' &&
                                         key !== 'kasi_id' &&
-                                        key !== 'kadus_id'
+                                        key !== 'kadus_id' &&
+                                        key !== 'kadus' &&
+                                        key !== 'kasi'
                                     "
                                 >
                                     <div class="w-1/3">
