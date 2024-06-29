@@ -8,12 +8,15 @@ import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 const handleValidate = (item) => {
     if (item.status === "pending") {
         window.location.href = `/village-chief/detail-validate/${item.id}`;
+        return;
     }
     if (item.status === "sending") {
         window.location.href = `/village-chief/recommendation/${item.id}`;
+        return;
     }
     if (item.status === "sended" || "validated" || "done") {
         window.location.href = `/village-chief/done/${item.id}`;
+        return;
     }
 };
 
