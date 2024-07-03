@@ -215,6 +215,7 @@ const valueGender = ref("");
                                     v-model="form.name"
                                     placeholder="Nama"
                                     class="border-gray-300 w-full rounded-md"
+                                    oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
                                 />
                             </div>
                             <!-- birth place -->
@@ -227,6 +228,7 @@ const valueGender = ref("");
                                     v-model="form.birthPlace"
                                     placeholder="Tempat Lahir"
                                     class="border-gray-300 w-full rounded-md"
+                                    oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
                                 />
                             </div>
                             <!-- birth date -->
@@ -444,6 +446,7 @@ const valueGender = ref("");
                                     v-model="form.nationality"
                                     placeholder="Kebangsaan"
                                     class="border-gray-300 w-full rounded-md"
+                                    oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
                                 />
                             </div>
                             <!-- needs -->
@@ -452,10 +455,12 @@ const valueGender = ref("");
                                     >Keperluan
                                     <p class="text-red-500 ml-1">*</p>
                                 </label>
-                                <input
+                                <textarea
                                     v-model="form.needs"
                                     placeholder="Keperluan"
                                     class="border-gray-300 w-full rounded-md"
+                                    rows="4"
+                                    style="resize: none"
                                 />
                             </div>
                             <!-- attachment -->
