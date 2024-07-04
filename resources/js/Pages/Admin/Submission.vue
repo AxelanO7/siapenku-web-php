@@ -21,6 +21,7 @@ import {
     PopoverTrigger,
 } from "@sc/components/ui/popover";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const form = useForm({
     name: "",
@@ -38,6 +39,7 @@ const form = useForm({
 });
 
 const submit = async () => {
+    isSubmiting.value = true;
     const baseUrl = await AuthHelper.getBaseUrl();
     axios
         .post(`${baseUrl}/letter`, {
@@ -72,6 +74,7 @@ const submit = async () => {
                 timer: 1500,
             });
         });
+    isSubmiting.value = false;
 };
 
 const updateAttachment = async (idProps, filename) => {
@@ -179,6 +182,8 @@ const religions = [
 
 const openGender = ref(false);
 const valueGender = ref("");
+
+const isSubmiting = ref(false);
 </script>
 
 <template>
@@ -256,7 +261,7 @@ const valueGender = ref("");
                                             variant="outline"
                                             role="combobox"
                                             :aria-expanded="openGender"
-                                            class="w-full justify-between"
+                                            class="justify-between"
                                         >
                                             {{
                                                 form.gender
@@ -479,9 +484,18 @@ const valueGender = ref("");
                         </div>
                     </div>
                 </div>
+
                 <div class="flex justify-end mt-8">
                     <button
-                        class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
+                        :class="
+                            cn(
+                                'bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white',
+                                isSubmiting
+                                    ? 'opacity-50 cursor-not-allowed'
+                                    : ''
+                            )
+                        "
+                        :disabled="isSubmiting"
                         @click="submit"
                     >
                         Kirim
