@@ -385,9 +385,7 @@ onMounted(() => {
                                     }}
                                 </p>
                                 <p>Kelian Banjar Dinas Dangin Margi</p>
-                                <div
-                                    class="w-44 bg-[#d9d9d9] mx-auto p-1 rounded mt-4"
-                                >
+                                <div class="w-44 mx-auto p-1 rounded mt-4">
                                     <img
                                         :src="`/assets/images/signature/${selectedKasi?.signature}`"
                                         alt="tanda tangan"
