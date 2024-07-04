@@ -61,19 +61,19 @@ onMounted(() => {
                 <div class="h-4" />
                 <div class="flex-col justify-center space-y-4">
                     <img
-                        src="https://via.placeholder.com/150"
+                        src="/assets/images/doc_1.jpg"
                         alt="Dokumentasi"
-                        class="rounded-md"
+                        class="rounded-md w-56"
                     />
                     <img
-                        src="https://via.placeholder.com/150"
+                        src="/assets/images/doc_2.jpg"
                         alt="Dokumentasi"
-                        class="rounded-md"
+                        class="rounded-md w-56"
                     />
                     <img
-                        src="https://via.placeholder.com/150"
+                        src="/assets/images/doc_3.jpg"
                         alt="Dokumentasi"
-                        class="rounded-md"
+                        class="rounded-md w-56"
                     />
                 </div>
             </div>

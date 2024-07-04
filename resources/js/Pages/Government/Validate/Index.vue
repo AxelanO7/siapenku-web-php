@@ -22,7 +22,13 @@ const handleValidate = (item) => {
         window.location.href = `/government/done/${item.id}`;
 };
 
-const tableHeaders = ["No.", "Time", "Nama", "Status", "Aksi"];
+const tableHeaders = [
+    "No.",
+    "Time",
+    "Nama",
+    "Status",
+    // , "Aksi"
+];
 
 const isLoading = ref(false);
 const letters = ref([]);
@@ -161,7 +167,15 @@ onMounted(() => {
                                         item.status !== ('pending' || 'sending')
                                     "
                                 >
+                                    <div
+                                        class="flex justify-center items-center py-8"
+                                        v-if="isSubmitting"
+                                    >
+                                        <CustomSpinner />
+                                    </div>
+
                                     <button
+                                        v-else
                                         :class="{
                                             'bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out':
                                                 item.status !==
@@ -182,7 +196,7 @@ onMounted(() => {
                                         }}
                                     </button>
                                 </td>
-                                <td
+                                <!-- <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
                                 >
                                     <button
@@ -191,7 +205,7 @@ onMounted(() => {
                                     >
                                         Hapus
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>

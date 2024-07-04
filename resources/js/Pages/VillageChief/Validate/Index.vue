@@ -20,7 +20,13 @@ const handleValidate = (item) => {
     }
 };
 
-const tableHeaders = ["No.", "Time", "Nama", "Status", "Aksi"];
+const tableHeaders = [
+    "No.",
+    "Time",
+    "Nama",
+    "Status",
+    // , "Aksi"
+];
 
 const isLoading = ref(false);
 const letters = ref([]);
@@ -168,7 +174,7 @@ onMounted(() => {
                                         }}
                                     </button>
                                 </td>
-                                <td
+                                <!-- <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"
                                 >
                                     <button
@@ -177,7 +183,7 @@ onMounted(() => {
                                     >
                                         Hapus
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
