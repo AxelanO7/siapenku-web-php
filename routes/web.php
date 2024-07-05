@@ -67,3 +67,7 @@ Route::get('/report', function () {
 Route::get('/government/done/{id}', function () {
     return Inertia::render('Government/Result/Done');
 })->name('government_done');
+
+Route::get('/health', function () {
+    return "Health Page";
+})->name('health');
