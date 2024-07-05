@@ -19,5 +19,17 @@ class AdminSeeder extends Seeder
             'password' => 'admin',
             'role' => 1,
         ]);
+        Admin::create([
+            'id' => 2,
+            'name' => 'kadus',
+            'password' => 'kadus',
+            'role' => 2,
+        ]);
+        Admin::create([
+            'id' => 3,
+            'name' => 'kasi',
+            'password' => 'kasi',
+            'role' => 3,
+        ]);
     }
 }
