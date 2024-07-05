@@ -47,6 +47,7 @@ const submit = async () => {
         return;
     }
     const baseUrl = await AuthHelper.getBaseUrl();
+    console.log({ baseUrl });
     axios
         .post(`${baseUrl}/login`, {
             name: form.name,
@@ -77,7 +78,7 @@ const submit = async () => {
 };
 
 onMounted(() => {
-    LocalStorage.clear();
+    localStorage.clear();
 });
 </script>
 
