@@ -44,7 +44,7 @@ const getLetters = async () => {
         .then((response) => {
             const data = response.data.data;
             data.forEach((item) => {
-                const month = new Date(item.created_at).getMonth();
+                const month = new Date(item.updated_at).getMonth();
                 lettersByMonth.value[month].total += 1;
             });
         })
