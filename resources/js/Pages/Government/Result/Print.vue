@@ -140,7 +140,11 @@ onMounted(() => {
                         <div>
                             <h3>Pemerintahan Kabupaten Buleleng</h3>
                             <h3>Kecamatan Kabutambahan</h3>
-                            <h3>Banjar Dinas Dangin Margi</h3>
+                            <h3>Desa Bulian</h3>
+                            <h3>
+                                Jln. Kubutambahan-Kintamani, Telp. 087758730344,
+                                Kode Pos 81172
+                            </h3>
                         </div>
                     </div>
                     <hr class="border-2 border-black my-4" />
