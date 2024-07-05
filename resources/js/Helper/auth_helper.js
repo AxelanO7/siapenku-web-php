@@ -3,7 +3,7 @@ import axios from "axios";
 class ApiHelper {
     baseUrl = "";
     constructor() {
-        this.baseUrl = "http://127.0.0.1:8000/api";
+        this.baseUrl = `${import.meta.env.BACKEND_HOST}/api`;
     }
     async getBaseUrl() {
         return this.baseUrl;
