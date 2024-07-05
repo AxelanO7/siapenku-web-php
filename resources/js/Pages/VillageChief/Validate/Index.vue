@@ -136,7 +136,7 @@ onMounted(() => {
                                 >
                                     {{
                                         new Date(
-                                            item.created_at
+                                            item.updated_at
                                         ).toLocaleDateString("id-ID", {
                                             weekday: "long",
                                             year: "numeric",
