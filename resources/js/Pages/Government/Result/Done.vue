@@ -242,12 +242,12 @@ onMounted(() => {
                                             .join("-")
                                     }}
                                 </p>
-                                <p>Kelian Banjar Dinas Dangin Margi</p>
+                                <p>An. Prebekel Bulian</p>
                                 <div class="w-44 mx-auto p-1 rounded mt-4">
                                     <img
                                         :src="`/assets/images/signature/${dataValidate?.kasi?.signature}`"
                                         alt="tanda tangan"
-                                        class="w-full"
+                                        class="h-24 w-full"
                                     />
                                 </div>
                                 <p class="mt-2">
