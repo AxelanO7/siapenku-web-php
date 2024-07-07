@@ -16,7 +16,7 @@ class KasiSeeder extends Seeder
             'id' => 1,
             'name' => 'I Made Sudirsa',
             'position' => 'Prebekel Bulian',
-            'signature' => 'prebekel_desa_bulian_1.png',
+            'signature' => 'kasi.png',
         ]);
     }
 }
