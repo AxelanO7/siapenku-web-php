@@ -122,7 +122,19 @@ onMounted(() => {
                         </thead>
                         <tbody>
                             <tr
+                            v-if="letters.length === 0"
+                            class="bg-gray-100 text-gray-600 border border-gray-400"
+                            >
+                                <td
+                                    class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    :colspan="tableHeaders.length"
+                                >
+                                    Tidak ada data
+                                </td>
+                            </tr>
+                            <tr
                                 class="bg-gray-100 text-gray-600 border border-gray-400"
+                                v-else
                                 v-for="(item, index) in letters"
                                 :key="index"
                             >
