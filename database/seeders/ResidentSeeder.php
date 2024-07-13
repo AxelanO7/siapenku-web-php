@@ -18,10 +18,10 @@ class ResidentSeeder extends Seeder
             'gender' => 'l',
             'birthdate' => '1999-01-01',
             'address' => 'Bulian',
-            'marital_status' => 'single',
+            'marital_status' => 'Belum Menikah',
             'education' => 's1',
             'phone' => '1234567890',
-            'resident_status' => 'active',
+            'resident_status' => 'Menetap',
         ]);
     }
 }
