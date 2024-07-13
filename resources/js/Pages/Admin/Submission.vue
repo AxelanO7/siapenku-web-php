@@ -475,21 +475,86 @@ const isSubmiting = ref(false);
                                     oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
                                 />
                             </div>
-                            <!-- needs -->
-                            <div>
-                                <label class="text-base font-bold flex"
-                                    >Keperluan
+                            <!-- profession -->
+                            <div class="flex flex-col">
+                                <label class="text-base font-bold flex">
+                                    Pekerjaan
                                     <p class="text-red-500 ml-1">*</p>
                                 </label>
-                                <textarea
-                                    v-model="form.needs"
-                                    placeholder="Keperluan"
-                                    class="border-gray-300 w-full rounded-md"
-                                    rows="4"
-                                    style="resize: none"
-                                />
+                                <Popover v-model:open="openProfession">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openProfession"
+                                            class="justify-between"
+                                        >
+                                            {{
+                                                form.profession
+                                                    ? professions.find(
+                                                          (profession) =>
+                                                              profession.value ===
+                                                              form.profession
+                                                      )?.label
+                                                    : "Pekerjaan"
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Search..."
+                                            />
+                                            <CommandEmpty
+                                                >No data found</CommandEmpty
+                                            >
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="profession in professions"
+                                                        :key="profession.value"
+                                                        :value="
+                                                            profession.value
+                                                        "
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'string'
+                                                                ) {
+                                                                    form.profession =
+                                                                        ev.detail.value;
+                                                                }
+                                                                openProfession = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{ profession.label }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    form.profession ===
+                                                                        profession.value
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
-                            <!-- marital status with combo box -->
+                            <!-- marital status -->
                             <div class="flex flex-col">
                                 <label class="text-base font-bold flex">
                                     Status Perkawinan
@@ -572,82 +637,19 @@ const isSubmiting = ref(false);
                                     </PopoverContent>
                                 </Popover>
                             </div>
-                            <!-- profession with combo box  -->
-                            <div class="flex flex-col">
-                                <label class="text-base font-bold flex">
-                                    Pekerjaan
+                            <!-- needs -->
+                            <div>
+                                <label class="text-base font-bold flex"
+                                    >Keperluan
                                     <p class="text-red-500 ml-1">*</p>
                                 </label>
-                                <Popover v-model:open="openProfession">
-                                    <PopoverTrigger as-child>
-                                        <Button
-                                            variant="outline"
-                                            role="combobox"
-                                            :aria-expanded="openProfession"
-                                            class="justify-between"
-                                        >
-                                            {{
-                                                form.profession
-                                                    ? professions.find(
-                                                          (profession) =>
-                                                              profession.value ===
-                                                              form.profession
-                                                      )?.label
-                                                    : "Pekerjaan"
-                                            }}
-                                            <ChevronsUpDown
-                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
-                                            />
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent class="p-0">
-                                        <Command>
-                                            <CommandInput
-                                                class="h-9"
-                                                placeholder="Search..."
-                                            />
-                                            <CommandEmpty
-                                                >No data found</CommandEmpty
-                                            >
-                                            <CommandList>
-                                                <CommandGroup>
-                                                    <CommandItem
-                                                        v-for="profession in professions"
-                                                        :key="profession.value"
-                                                        :value="profession.value"
-                                                        @select="
-                                                            (ev) => {
-                                                                if (
-                                                                    typeof ev
-                                                                        .detail
-                                                                        .value ===
-                                                                    'string'
-                                                                ) {
-                                                                    form.profession =
-                                                                        ev.detail.value;
-                                                                }
-                                                                openProfession = false;
-                                                            }
-                                                        "
-                                                    >
-                                                        {{ profession.label }}
-                                                        <Check
-                                                            :class="
-                                                                cn(
-                                                                    'ml-auto h-4 w-4',
-                                                                    form.profession ===
-                                                                        profession.value
-                                                                        ? 'opacity-100'
-                                                                        : 'opacity-0'
-                                                                )
-                                                            "
-                                                        />
-                                                    </CommandItem>
-                                                </CommandGroup>
-                                            </CommandList>
-                                        </Command>
-                                    </PopoverContent>
-                                </Popover>
+                                <textarea
+                                    v-model="form.needs"
+                                    placeholder="Keperluan"
+                                    class="border-gray-300 w-full rounded-md"
+                                    rows="4"
+                                    style="resize: none"
+                                />
                             </div>
                             <!-- attachment -->
                             <div>
