@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KasiSeeder::class
         ]);
+        $this->call([
+            LetterSeeder::class
+        ]);
     }
 }
