@@ -3,7 +3,7 @@ import axios from "axios";
 class ApiHelper {
     baseUrl = "";
     constructor() {
-        this.baseUrl = "http://127.0.0.1:8000/api";
+        this.baseUrl = "http://167.99.66.254/api";
         // this.baseUrl = `http://159.223.41.12/api`;
     }
     async getBaseUrl() {
