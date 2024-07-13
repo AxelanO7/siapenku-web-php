@@ -70,6 +70,68 @@ const handleCreate = () => {
                         placeholder="Tanggal Lahir"
                     />
                 </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+                        Alamat
+                    </label>
+                    <textarea
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="address"
+                        placeholder="Alamat"
+                    ></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="marital_status">
+                        Status Pernikahan
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="marital_status"
+                    >
+                        <option value="belum menikah">Belum Menikah</option>
+                        <option value="menikah">Menikah</option>
+                        <option value="cerai">Cerai</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="education">
+                        Pendidikan
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="education"
+                    >
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                        <option value="D3">D3</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+                        No. Telepon
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="phone"
+                        placeholder="No. Telepon"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="resident_status">
+                        Status Penduduk
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="resident_status"
+                    >
+                        <option value="Tetap">Tetap</option>
+                        <option value="Tidak Tetap">Tidak Tetap</option>
+                    </select>
+                </div>
             </form>
         `,
         showCancelButton: true,
@@ -87,6 +149,11 @@ const createResident = async () => {
         name: document.getElementById("name").value,
         gender: document.getElementById("gender").value,
         birthdate: document.getElementById("birthdate").value,
+        address: document.getElementById("address").value,
+        marital_status: document.getElementById("marital_status").value,
+        education: document.getElementById("education").value,
+        phone: document.getElementById("phone").value,
+        resident_status: document.getElementById("resident_status").value,
     };
     const baseUrl = await ApiHelper.getBaseUrl();
     await axios
@@ -148,6 +215,68 @@ const handleEdit = (val) => {
                         placeholder="Tanggal Lahir"
                     />
                 </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+                        Alamat
+                    </label>
+                    <textarea
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="address"
+                        placeholder="Alamat"
+                    ></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="marital_status">
+                        Status Pernikahan
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="marital_status"
+                    >
+                        <option value="belum menikah">Belum Menikah</option>
+                        <option value="menikah">Menikah</option>
+                        <option value="cerai">Cerai</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="education">
+                        Pendidikan
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="education"
+                    >
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                        <option value="D3">D3</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+                        No. Telepon
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="phone"
+                        placeholder="No. Telepon"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="resident_status">
+                        Status Penduduk
+                    </label>
+                    <select
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="resident_status"
+                    >
+                        <option value="Tetap">Tetap</option>
+                        <option value="Tidak Tetap">Tidak Tetap</option>
+                    </select>
+                </div>
             </form>
         `,
         didOpen: () => {
@@ -161,6 +290,13 @@ const handleEdit = (val) => {
                 ("0" + (date.getMonth() + 1)).slice(-2) +
                 "-" +
                 ("0" + date.getDate()).slice(-2);
+            document.getElementById("address").value = val.address;
+            document.getElementById("marital_status").value =
+                val.marital_status;
+            document.getElementById("education").value = val.education;
+            document.getElementById("phone").value = val.phone;
+            document.getElementById("resident_status").value =
+                val.resident_status;
         },
         showCancelButton: true,
         confirmButtonText: "Simpan",
@@ -178,6 +314,11 @@ const editResident = async (valId) => {
         name: document.getElementById("name").value,
         gender: document.getElementById("gender").value,
         birthdate: document.getElementById("birthdate").value,
+        address: document.getElementById("address").value,
+        marital_status: document.getElementById("marital_status").value,
+        education: document.getElementById("education").value,
+        phone: document.getElementById("phone").value,
+        resident_status: document.getElementById("resident_status").value,
     };
     const baseUrl = await ApiHelper.getBaseUrl();
     await axios
@@ -310,12 +451,12 @@ onMounted(() => {
                                         >
                                             Edit
                                         </button>
-                                        <button
+                                        <!-- <button
                                             class="bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-4 rounded text-lg w-20"
                                             @click="handleDelete(item.id)"
                                         >
                                             Hapus
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             </tbody>

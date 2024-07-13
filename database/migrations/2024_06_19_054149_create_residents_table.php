@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender');
             $table->string('birthdate');
+            $table->string('address');
+            $table->string('marital_status');
+            $table->string('education');
+            $table->string('phone');
+            $table->string('resident_status');
         });
     }
 

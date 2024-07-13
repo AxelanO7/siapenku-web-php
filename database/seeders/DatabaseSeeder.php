@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LetterSeeder::class
         ]);
+        $this->call([
+            ResidentSeeder::class
+        ]);
     }
 }

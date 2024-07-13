@@ -12,6 +12,11 @@ class Resident extends Model
         'nik',
         'name',
         'gender',
-        'birthdate'
+        'birthdate',
+        'address',
+        'marital_status',
+        'education',
+        'phone',
+        'resident_status'
     ];
 }
