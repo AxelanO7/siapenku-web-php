@@ -39,6 +39,9 @@ const getLetters = async () => {
         .get(`${baseUrl}/letter`)
         .then((response) => {
             const data = response.data.data;
+            data.sort((a, b) => {
+                return new Date(b.updated_at) - new Date(a.updated_at);
+            });
             letters.value = data;
         })
         .catch((error) => {
@@ -124,8 +127,8 @@ onMounted(() => {
                         </thead>
                         <tbody>
                             <tr
-                            v-if="letters.length === 0"
-                            class="bg-gray-100 text-gray-600 border border-gray-400"
+                                v-if="letters.length === 0"
+                                class="bg-gray-100 text-gray-600 border border-gray-400"
                             >
                                 <td
                                     class="text-center border border-gray-400 px-4 py-2 text-gray-600"

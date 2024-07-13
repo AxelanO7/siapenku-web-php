@@ -37,6 +37,9 @@ const getLetters = async () => {
         .get(`${baseUrl}/letter`)
         .then((response) => {
             const data = response.data.data;
+            data.sort((a, b) => {
+                return new Date(b.updated_at) - new Date(a.updated_at);
+            });
             letters.value = data;
         })
         .catch((error) => {
