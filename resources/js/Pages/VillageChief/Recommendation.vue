@@ -553,6 +553,34 @@ onMounted(() => {
                                     </p>
                                 </div>
                             </div>
+                            <!-- status perkawinan -->
+                            <div class="flex pl-8">
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/4">
+                                        11. Status Perkawinan
+                                    </div>
+                                    <p class="w-3/4">
+                                        :
+                                        {{ dataValidate.marital_status }}
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- pekerjaan -->
+                            <div class="flex pl-8">
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/4">12. Pekerjaan</div>
+                                    <p class="w-3/4">
+                                        <!-- to capitalize -->
+                                        :
+                                        {{
+                                            dataValidate.profession
+                                                .charAt(0)
+                                                .toUpperCase() +
+                                            dataValidate.profession.slice(1)
+                                        }}
+                                    </p>
+                                </div>
+                            </div>
                             <!-- lampiran -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">

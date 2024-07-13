@@ -222,10 +222,37 @@ onMounted(() => {
                                     </p>
                                 </div>
                             </div>
+                            <!-- status perkawinan -->
+                            <div class="flex pl-8">
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/4">
+                                        10. Status Perkawinan
+                                    </div>
+                                    <p class="w-3/4">
+                                        :
+                                        {{ dataValidate.marital_status }}
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- pekerjaan -->
+                            <div class="flex pl-8">
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/4">11. Pekerjaan</div>
+                                    <p class="w-3/4">
+                                        :
+                                        {{
+                                            dataValidate.profession
+                                                .charAt(0)
+                                                .toUpperCase() +
+                                            dataValidate.profession.slice(1)
+                                        }}
+                                    </p>
+                                </div>
+                            </div>
                             <!-- keperluan -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">10. Keperluan</div>
+                                    <div class="w-1/4">12. Keperluan</div>
                                     <p class="w-3/4">
                                         : {{ dataValidate.needs }}
                                     </p>
@@ -234,7 +261,7 @@ onMounted(() => {
                             <!-- lampiran -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">11. Lampiran</div>
+                                    <div class="w-1/4">13. Lampiran</div>
                                     <div class="flex">
                                         :
                                         <div

@@ -83,6 +83,10 @@ const translateKeyToIndonesian = (key) => {
             return "Keperluan";
         case "attachment":
             return "Lampiran";
+        case "marital_status":
+            return "Status Perkawinan";
+        case "profession":
+            return "Pekerjaan";
     }
 };
 
@@ -127,7 +131,7 @@ onMounted(() => {
                         <hr class="border-2 border-black my-4" />
                         <div class="space-y-2 px-8">
                             <div
-                                v-for="(value, key, index) in dataValidate"
+                                v-for="(value, key) in dataValidate"
                                 class="flex text-left"
                             >
                                 <div
