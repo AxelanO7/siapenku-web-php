@@ -21,6 +21,8 @@ class Letter extends Model
         'needs',
         'attachment',
         'status',
+        'marital_status',
+        'profession',
         'type_letter',
         'no_letter',
         'kasi_id',

@@ -35,6 +35,8 @@ const form = useForm({
     nationality: "",
     needs: "",
     attachmentName: "",
+    marital_status: "",
+    profession: "",
     attachment: null,
 });
 
@@ -54,6 +56,8 @@ const submit = async () => {
             nationality: form.nationality,
             needs: form.needs,
             attachment: form.attachmentName,
+            marital_status: form.marital_status,
+            profession: form.profession,
             status: "pending",
         })
         .then((response) => {
@@ -170,7 +174,6 @@ const genders = [
     { value: "l", label: "Laki-laki" },
     { value: "p", label: "Perempuan" },
 ];
-
 const religions = [
     { value: "islam", label: "Islam" },
     { value: "kristen", label: "Kristen" },
@@ -179,9 +182,27 @@ const religions = [
     { value: "budha", label: "Budha" },
     { value: "konghucu", label: "Konghucu" },
 ];
+const maritalStatuses = [
+    { value: "Belum Menikah", label: "Belum Menikah" },
+    { value: "Menikah", label: "Menikah" },
+    { value: "Cerai", label: "Cerai" },
+];
+const professions = [
+    { value: "pns", label: "PNS" },
+    { value: "tni", label: "TNI" },
+    { value: "polri", label: "Polri" },
+    { value: "swasta", label: "Swasta" },
+    { value: "wiraswasta", label: "Wiraswasta" },
+    { value: "petani", label: "Petani" },
+    { value: "nelayan", label: "Nelayan" },
+    { value: "buruh", label: "Buruh" },
+    { value: "lainnya", label: "Lainnya" },
+];
 
 const openGender = ref(false);
-const valueGender = ref("");
+const openReligion = ref(false);
+const openMaritalStatus = ref(false);
+const openProfession = ref(false);
 
 const isSubmiting = ref(false);
 </script>
@@ -467,6 +488,166 @@ const isSubmiting = ref(false);
                                     rows="4"
                                     style="resize: none"
                                 />
+                            </div>
+                            <!-- marital status with combo box -->
+                            <div class="flex flex-col">
+                                <label class="text-base font-bold flex">
+                                    Status Perkawinan
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <Popover v-model:open="openMaritalStatus">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openMaritalStatus"
+                                            class="justify-between"
+                                        >
+                                            {{
+                                                form.marital_status
+                                                    ? maritalStatuses.find(
+                                                          (marital_status) =>
+                                                              marital_status.value ===
+                                                              form.marital_status
+                                                      )?.label
+                                                    : "Status Perkawinan"
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Search..."
+                                            />
+                                            <CommandEmpty
+                                                >No data found</CommandEmpty
+                                            >
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="marital_status in maritalStatuses"
+                                                        :key="
+                                                            marital_status.value
+                                                        "
+                                                        :value="
+                                                            marital_status.value
+                                                        "
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'string'
+                                                                ) {
+                                                                    form.marital_status =
+                                                                        ev.detail.value;
+                                                                }
+                                                                openMaritalStatus = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{
+                                                            marital_status.label
+                                                        }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    form.marital_status ===
+                                                                        marital_status.value
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
+                            </div>
+                            <!-- profession with combo box  -->
+                            <div class="flex flex-col">
+                                <label class="text-base font-bold flex">
+                                    Pekerjaan
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <Popover v-model:open="openProfession">
+                                    <PopoverTrigger as-child>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            :aria-expanded="openProfession"
+                                            class="justify-between"
+                                        >
+                                            {{
+                                                form.profession
+                                                    ? professions.find(
+                                                          (profession) =>
+                                                              profession.value ===
+                                                              form.profession
+                                                      )?.label
+                                                    : "Pekerjaan"
+                                            }}
+                                            <ChevronsUpDown
+                                                class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                            />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent class="p-0">
+                                        <Command>
+                                            <CommandInput
+                                                class="h-9"
+                                                placeholder="Search..."
+                                            />
+                                            <CommandEmpty
+                                                >No data found</CommandEmpty
+                                            >
+                                            <CommandList>
+                                                <CommandGroup>
+                                                    <CommandItem
+                                                        v-for="profession in professions"
+                                                        :key="profession.value"
+                                                        :value="profession.value"
+                                                        @select="
+                                                            (ev) => {
+                                                                if (
+                                                                    typeof ev
+                                                                        .detail
+                                                                        .value ===
+                                                                    'string'
+                                                                ) {
+                                                                    form.profession =
+                                                                        ev.detail.value;
+                                                                }
+                                                                openProfession = false;
+                                                            }
+                                                        "
+                                                    >
+                                                        {{ profession.label }}
+                                                        <Check
+                                                            :class="
+                                                                cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    form.profession ===
+                                                                        profession.value
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0'
+                                                                )
+                                                            "
+                                                        />
+                                                    </CommandItem>
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
                             <!-- attachment -->
                             <div>

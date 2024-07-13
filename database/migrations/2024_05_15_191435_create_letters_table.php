@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('address');
             $table->string('nationality');
             $table->string('needs');
-            $table->string('attachment');
             $table->string('status');
+            $table->string('marital_status');
+            $table->string('profession');
+            $table->string('attachment');
             $table->string('type_letter')->nullable();
             $table->string('no_letter')->nullable();
 

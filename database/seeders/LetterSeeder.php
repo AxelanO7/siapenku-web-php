@@ -25,6 +25,8 @@ class LetterSeeder extends Seeder
             'needs' => 'KTP',
             'attachment' => 'logo.png',
             'status' => 'pending',
+            'profession' => 'swasta',
+            'marital_status' => 'Belum Menikah',
         ]);
     }
 }

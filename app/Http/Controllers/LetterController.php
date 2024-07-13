@@ -78,10 +78,10 @@ class LetterController extends Controller
             'address' => 'required',
             'nationality' => 'required',
             'needs' => 'required',
+            'profession' => 'required',
+            'marital_status' => 'required',
             'attachment' => 'required',
             'status' => 'required',
-            'type_letter' => 'optional',
-            'no_letter' => 'optional',
         ]);
         return true;
     }
@@ -102,6 +102,8 @@ class LetterController extends Controller
         $letter->needs = $request->needs;
         $letter->attachment = $request->attachment;
         $letter->status = $request->status;
+        $letter->profession = $request->profession;
+        $letter->marital_status = $request->marital_status;
         $letter->type_letter = $request->type_letter;
         $letter->no_letter = $request->no_letter;
         $letter->kasi_id = $request->kasi_id;
@@ -164,6 +166,8 @@ class LetterController extends Controller
         $letter->nationality = $request->nationality;
         $letter->needs = $request->needs;
         $letter->attachment = $request->attachment;
+        $letter->profession = $request->profession;
+        $letter->marital_status = $request->marital_status;
         $letter->status = $request->status;
         $letter->type_letter = $request->type_letter;
         if ($request->no_letter == null) {
