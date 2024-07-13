@@ -66,6 +66,10 @@ const handleTapFile = (value) => {
     });
 };
 
+const handleBack = () => {
+    window.location.href = "/village-chief/validate";
+};
+
 const idIndex = window.location.href.split("/").pop();
 onMounted(() => {
     getLetter();
@@ -277,6 +281,14 @@ onMounted(() => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-end mt-8">
+                <Button
+                    class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-8 rounded transition duration-200 ease-in-out text-xl cursor-pointer hover:text-white"
+                    @click="handleBack"
+                >
+                    Kembali
+                </Button>
             </div>
         </div>
     </CustomAppLayout>
