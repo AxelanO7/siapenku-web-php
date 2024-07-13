@@ -47,14 +47,14 @@ const reportItems = [
         date: "25/05/2023",
         time: "13.30",
         name: "Eka Yasa",
-        title: "Suket Usaha",
+        title: "Suket Us    aha",
     },
 ];
 </script>
 
 <template>
     <CustomAppLayout title="Dashboard">
-        <CustomSearchInput />
+        <!-- <CustomSearchInput /> -->
         <div class="flex space-x-12 px-8 pt-8">
             <div class="w-full space-y-4">
                 <CustomCard

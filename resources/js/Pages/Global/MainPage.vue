@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
     <CustomAppLayout title="Dashboard">
-        <CustomSearchInput />
+        <!-- <CustomSearchInput /> -->
         <div class="flex space-x-12 px-8 mt-8 mb-12 select-none">
             <div class="w-full space-y-4">
                 <CustomCard

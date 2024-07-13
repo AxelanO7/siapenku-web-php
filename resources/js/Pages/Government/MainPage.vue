@@ -54,7 +54,7 @@ const reportItems = [
 
 <template>
     <CustomAppLayout title="Dashboard">
-        <CustomSearchInput />
+        <!-- <CustomSearchInput /> -->
         <div class="flex space-x-12 px-8 pt-8">
             <div class="w-full space-y-4">
                 <CustomCard
