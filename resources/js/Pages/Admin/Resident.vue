@@ -6,7 +6,19 @@ import { onMounted, ref } from "vue";
 import CustomSpinner from "@/Components/Customs/CustomSpinner.vue";
 import Swal from "sweetalert2";
 
-const tableHeaders = ["No.", "NIK", "Nama", "L/P", "Tgl Lahir", "Aksi"];
+const tableHeaders = [
+    "No.",
+    "NIK",
+    "Nama",
+    "L/P",
+    "Tgl Lahir",
+    "Alamat",
+    "Status",
+    "Pendidikan",
+    "No. Telepon",
+    "Status Penduduk",
+    "Aksi",
+];
 const isLoading = ref(false);
 
 const residents = ref([]);
@@ -88,9 +100,9 @@ const handleCreate = () => {
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="marital_status"
                     >
-                        <option value="belum menikah">Belum Menikah</option>
-                        <option value="menikah">Menikah</option>
-                        <option value="cerai">Cerai</option>
+                        <option value="Belum Menikah">Belum Menikah</option>
+                        <option value="Menikah">Menikah</option>
+                        <option value="Cerai">Cerai</option>
                     </select>
                 </div>
                 <div class="mb-4">
@@ -233,9 +245,9 @@ const handleEdit = (val) => {
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="marital_status"
                     >
-                        <option value="belum menikah">Belum Menikah</option>
-                        <option value="menikah">Menikah</option>
-                        <option value="cerai">Cerai</option>
+                        <option value="Belum Menikah">Belum Menikah</option>
+                        <option value="Menikah">Menikah</option>
+                        <option value="Cerai">Cerai</option>
                     </select>
                 </div>
                 <div class="mb-4">
@@ -442,6 +454,31 @@ onMounted(() => {
                                     >
                                         {{ item.birthdate }}
                                     </td>
+                                    <td
+                                        class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    >
+                                        {{ item.address }}
+                                    </td>
+                                    <td
+                                        class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    >
+                                        {{ item.marital_status }}
+                                    </td>
+                                    <td
+                                        class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    >
+                                        {{ item.education }}
+                                    </td>
+                                    <td
+                                        class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    >
+                                        {{ item.phone }}
+                                    </td>
+                                    <td
+                                        class="text-center border border-gray-400 px-4 py-2 text-gray-600"
+                                    >
+                                        {{ item.resident_status }}
+                                        </td>
                                     <td
                                         class="text-center border border-gray-400 px-4 py-2 text-gray-600 space-x-4"
                                     >
