@@ -47,7 +47,7 @@ const reportItems = [
         date: "25/05/2023",
         time: "13.30",
         name: "Eka Yasa",
-        title: "Suket Us    aha",
+        title: "Suket Usaha",
     },
 ];
 </script>

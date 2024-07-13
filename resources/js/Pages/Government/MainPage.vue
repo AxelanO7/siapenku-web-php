@@ -8,19 +8,19 @@ const cardItems = [
         title: "Data Masyarakat",
         description: "Klik untuk melihat data masyarakat Desa",
         shortDescription: "Balian",
-        route: "/admin/dashboard",
+        route: "/government/validate",
     },
     {
         title: "Surat Keterangan Usaha",
         description: "Klik untuk melihat laporan pengajuan",
         shortDescription: "adminstrasi",
-        route: "/admin/dashboard",
+        route: "/government/validate",
     },
     {
         title: "Surat Keterangan KK Baru",
         description: "Klik untuk melihat data pengajuan",
         shortDescription: "administrasi",
-        route: "/admin/dashboard",
+        route: "/government/validate",
     },
 ];
 
