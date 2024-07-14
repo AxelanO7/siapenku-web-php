@@ -79,12 +79,12 @@ const translateKeyToIndonesian = (key) => {
             return "Nomor KTP";
         case "nationality":
             return "Kewarganegaraan";
-        case "needs":
-            return "Keperluan";
         case "marital_status":
             return "Status Perkawinan";
         case "profession":
             return "Pekerjaan";
+        case "needs":
+            return "Keperluan";
         case "attachment":
             return "Lampiran";
     }
