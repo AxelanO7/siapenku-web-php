@@ -584,7 +584,7 @@ onMounted(() => {
                             <!-- lampiran -->
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
-                                    <div class="w-1/4">11. Lampiran</div>
+                                    <div class="w-1/4">13. Lampiran</div>
                                     <div class="flex">
                                         :
                                         <div
