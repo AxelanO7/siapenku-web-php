@@ -95,6 +95,8 @@ const updateAttachment = async (idProps, filename) => {
         nationality: form.nationality,
         needs: form.needs,
         attachment: filename,
+        marital_status: form.marital_status,
+        profession: form.profession,
         status: "pending",
     };
     axios
