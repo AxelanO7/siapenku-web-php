@@ -99,11 +99,11 @@ const handleSend = async () => {
             // });
             console.log(error);
         });
+    window.location.href = `/government/done/${idIndex}`;
 };
 
 const handleDownload = async () => {
     handleSend();
-    window.location.href = `/government/done/${idIndex}`;
     // const downloadElement = document.getElementById("download-content");
     // const opt = {
     //     margin: 0,
