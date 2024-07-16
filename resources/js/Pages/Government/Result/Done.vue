@@ -68,7 +68,7 @@ onMounted(() => {
                             src="/assets/images/kop.png"
                             class="h-24 w-24 absolute left-20"
                         />
-                        <div>
+                        <div class="font-bold uppercase text-lg">
                             <h3>Pemerintahan Kabupaten Buleleng</h3>
                             <h3>Kecamatan Kabutambahan</h3>
                             <h3>Desa Bulian</h3>
@@ -265,7 +265,11 @@ onMounted(() => {
                                     Bulian,
                                     {{
                                         new Date(dataValidate?.updated_at)
-                                            .toLocaleDateString("id-ID")
+                                            .toLocaleDateString("id-ID", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })
                                             .split("/")
                                             .join("-")
                                     }}
