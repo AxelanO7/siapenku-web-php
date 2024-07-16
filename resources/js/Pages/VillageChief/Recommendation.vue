@@ -611,7 +611,11 @@ onMounted(() => {
                                     Bulian,
                                     {{
                                         new Date(dataValidate?.updated_at)
-                                            .toLocaleDateString("id-ID")
+                                            .toLocaleDateString("id-ID", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })
                                             .split("/")
                                             .join("-")
                                     }}
