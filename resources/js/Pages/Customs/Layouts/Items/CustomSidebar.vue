@@ -28,6 +28,14 @@ const submissionList = [
         title: "Kematian",
         route: "/submission/death-letter",
     },
+    // {
+    //     title: "Bedah Nama",
+    //     route: "/submission/name-change-letter",
+    // },
+    // {
+    //     title: "Ahli Waris",
+    //     route: "/submission/heir-letter",
+    // },
 ];
 </script>
 
