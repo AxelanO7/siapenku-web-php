@@ -5,11 +5,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@sc/components/ui/popover";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@sc/components/ui/popover";
 
 const props = defineProps(["title", "sidebarRoute", "icon"]);
 const windowWidth = ref(window.innerWidth);
