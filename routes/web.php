@@ -30,7 +30,7 @@ Route::get('/', function () {
 })->name('main_page');
 
 
-Route::get('submission', function () {
+Route::get('submission/{type}', function () {
     return Inertia::render('Admin/Submission');
 })->name('submission');
 Route::get('resident', function () {
