@@ -28,10 +28,9 @@ const getSidebarItems = () => {
         },
         {
             title: `${role === "Admin" ? "Pengajuan" : "Validasi"}`,
-            sidebarRoute: `
-            ${
+            sidebarRoute: `${
                 role === "Admin"
-                    ? "submission"
+                    ? "/submission"
                     : role === "Kadus"
                     ? "/village-chief/validate"
                     : "/government/validate"
