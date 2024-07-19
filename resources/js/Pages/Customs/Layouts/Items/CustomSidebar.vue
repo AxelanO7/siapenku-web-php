@@ -5,6 +5,11 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@sc/components/ui/popover";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@sc/components/ui/popover";
 
 const props = defineProps(["title", "sidebarRoute", "icon"]);
 const windowWidth = ref(window.innerWidth);
@@ -17,7 +22,7 @@ const goToRoute = (route) => {
 
 const submissionList = [
     {
-        title: "Keterangan Umum",
+        title: "Surat Keterangan Umum",
         route: "/submission/general-letter",
     },
     {
@@ -28,14 +33,6 @@ const submissionList = [
         title: "Kematian",
         route: "/submission/death-letter",
     },
-    // {
-    //     title: "Bedah Nama",
-    //     route: "/submission/name-change-letter",
-    // },
-    // {
-    //     title: "Ahli Waris",
-    //     route: "/submission/heir-letter",
-    // },
 ];
 </script>
 
