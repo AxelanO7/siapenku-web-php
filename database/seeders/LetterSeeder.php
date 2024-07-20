@@ -30,6 +30,7 @@ class LetterSeeder extends Seeder
             'att_family_card' => 'logo.png',
             'att_certificate' => 'logo.png',
             'att_rs' => 'logo.png',
+<<<<<<< HEAD
             'order_child' => '1',
             'birth_attendant' => 'bidan',
             'address_attendant' => 'Bulian',
@@ -53,6 +54,8 @@ class LetterSeeder extends Seeder
             'district_death' => 'Bulian',
             'province_death' => 'Bali',
             'cause_death' => 'sakit',
+=======
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
         ]);
     }
 }

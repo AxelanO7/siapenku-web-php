@@ -65,6 +65,7 @@ class LetterController extends Controller
         //
     }
 
+<<<<<<< HEAD
     // public function validateRequest(Request $request)
     // {
     //     $request->validate([
@@ -112,6 +113,54 @@ class LetterController extends Controller
         // $letter->att_rs = $request->att_rs;
         // $letter->save();
         $letter = letter::create($request->all());
+=======
+    public function validateRequest(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'birth_place' => 'required',
+            'birth_date' => 'required',
+            'gender' => 'required',
+            'religion' => 'required',
+            'family_card' => 'required',
+            'identity_card' => 'required',
+            'address' => 'required',
+            'nationality' => 'required',
+            'needs' => 'required',
+            'profession' => 'required',
+            'marital_status' => 'required',
+            'status' => 'required',
+        ]);
+        return true;
+    }
+
+    public function createLetter(Request $request)
+    {
+        $this->validateRequest($request);
+        $letter = new letter();
+        $letter->name = $request->name;
+        $letter->birth_place = $request->birth_place;
+        $letter->birth_date = $request->birth_date;
+        $letter->gender = $request->gender;
+        $letter->religion = $request->religion;
+        $letter->family_card = $request->family_card;
+        $letter->identity_card = $request->identity_card;
+        $letter->address = $request->address;
+        $letter->nationality = $request->nationality;
+        $letter->needs = $request->needs;
+        $letter->status = $request->status;
+        $letter->profession = $request->profession;
+        $letter->marital_status = $request->marital_status;
+        $letter->type_letter = $request->type_letter;
+        $letter->no_letter = $request->no_letter;
+        $letter->kasi_id = $request->kasi_id;
+        $letter->kadus_id = $request->kadus_ids;
+        $letter->type_submission = $request->type_submission;
+        $letter->att_family_card = $request->att_family_card;
+        $letter->att_certificate = $request->att_certificate;
+        $letter->att_rs = $request->att_rs;
+        $letter->save();
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
 
         return response()->json([
             'message' => 'Letter created successfully',
@@ -158,7 +207,28 @@ class LetterController extends Controller
     public function updateLetter(Request $request, $id)
     {
         $letter = letter::find($id);
+<<<<<<< HEAD
         $no_letter = 0;
+=======
+        $letter->name = $request->name;
+        $letter->birth_place = $request->birth_place;
+        $letter->birth_date = $request->birth_date;
+        $letter->gender = $request->gender;
+        $letter->religion = $request->religion;
+        $letter->family_card = $request->family_card;
+        $letter->identity_card = $request->identity_card;
+        $letter->address = $request->address;
+        $letter->nationality = $request->nationality;
+        $letter->needs = $request->needs;
+        $letter->profession = $request->profession;
+        $letter->marital_status = $request->marital_status;
+        $letter->status = $request->status;
+        $letter->type_letter = $request->type_letter;
+        $letter->type_submission = $request->type_submission;
+        $letter->att_family_card = $request->att_family_card;
+        $letter->att_certificate = $request->att_certificate;
+        $letter->att_rs = $request->att_rs;
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
         if ($request->no_letter == null) {
             $no_letter = $this->generateLastNoLetter($request->type_letter);
         } else {

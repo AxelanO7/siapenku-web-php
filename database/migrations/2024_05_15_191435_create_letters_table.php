@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('letters', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+<<<<<<< HEAD
             $table->string('name')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('birth_date')->nullable();
@@ -27,6 +28,21 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('marital_status')->nullable();
             $table->string('profession')->nullable();
+=======
+            $table->string('name');
+            $table->string('birth_place');
+            $table->string('birth_date');
+            $table->string('gender');
+            $table->string('religion');
+            $table->string('family_card');
+            $table->string('identity_card');
+            $table->string('address');
+            $table->string('nationality');
+            $table->string('needs');
+            $table->string('status');
+            $table->string('marital_status');
+            $table->string('profession');
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
             $table->string('type_letter')->nullable();
             $table->string('no_letter')->nullable();
             $table->string('type_submission')->nullable();
@@ -34,6 +50,7 @@ return new class extends Migration
             $table->string('att_family_card')->nullable();
             $table->string('att_certificate')->nullable();
             $table->string('att_rs')->nullable();
+<<<<<<< HEAD
             // birth
             $table->string('order_child')->nullable();
             $table->string('birth_attendant')->nullable();
@@ -59,6 +76,8 @@ return new class extends Migration
             $table->string('district_death')->nullable();
             $table->string('province_death')->nullable();
             $table->string('cause_death')->nullable();
+=======
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
 
             $table->unsignedBigInteger('kasi_id')->nullable();
             $table->foreign('kasi_id')->references('id')->on('kasis');

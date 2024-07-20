@@ -108,6 +108,7 @@ const translateKeyToIndonesian = (key) => {
             return "Lampiran Ijazah";
         case "att_rs":
             return "Lampiran Surat Keterangan Rumah Sakit";
+<<<<<<< HEAD
         case "order_child":
             return "Anak ke";
         case "birth_attendant":
@@ -156,6 +157,8 @@ const translateKeyToIndonesian = (key) => {
             return "Penyebab Kematian";
         default:
             return key;
+=======
+>>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
     }
 };
 
