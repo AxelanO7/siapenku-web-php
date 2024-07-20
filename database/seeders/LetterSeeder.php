@@ -23,10 +23,13 @@ class LetterSeeder extends Seeder
             'address' => 'Bulian',
             'nationality' => 'Indonesia',
             'needs' => 'KTP',
-            'attachment' => 'logo.png',
             'status' => 'pending',
             'profession' => 'swasta',
             'marital_status' => 'Belum Menikah',
+            'type_submission' => 'general-letter',
+            'att_family_card' => 'logo.png',
+            'att_certificate' => 'logo.png',
+            'att_rs' => 'logo.png',
         ]);
     }
 }

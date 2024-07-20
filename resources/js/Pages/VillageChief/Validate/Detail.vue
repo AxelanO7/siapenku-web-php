@@ -87,6 +87,14 @@ const translateKeyToIndonesian = (key) => {
             return "Keperluan";
         case "attachment":
             return "Lampiran";
+        case "type_submission":
+            return "Jenis Pengajuan";
+        case "att_family_card":
+            return "Lampiran Kartu Keluarga";
+        case "att_certificate":
+            return "Lampiran Ijazah";
+        case "att_rs":
+            return "Lampiran Surat Keterangan Rumah Sakit";
     }
 };
 
@@ -109,7 +117,7 @@ onMounted(() => {
 <template>
     <div>
         <CustomAppLayout title="Submission">
-            <div class="mx-12 mt-12">
+            <div class="mx-12 my-12">
                 <div class="bg-white rounded-lg shadow-lg">
                     <div class="text-center font-medium text-xl pt-4 pb-8">
                         <div
@@ -148,7 +156,8 @@ onMounted(() => {
                                         key !== 'kasi_id' &&
                                         key !== 'kadus_id' &&
                                         key !== 'kadus' &&
-                                        key !== 'kasi'
+                                        key !== 'kasi' &&
+                                        value !== null
                                     "
                                 >
                                     <div class="w-1/3">
@@ -157,20 +166,20 @@ onMounted(() => {
                                         </h3>
                                     </div>
                                     <div
-                                        v-if="key === 'attachment'"
+                                        v-if="
+                                            key === 'att_family_card' ||
+                                            key === 'att_certificate' ||
+                                            key === 'att_rs'
+                                        "
                                         class="w-2/3 flex"
                                         @click="handleTapFile(value)"
                                     >
                                         :
                                         <div
                                             class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.attachment
-                                                )
-                                            "
+                                            @click="handleTapFile(value)"
                                         >
-                                            {{ dataValidate.attachment }}
+                                            {{ value }}
                                         </div>
                                     </div>
                                     <div v-else class="w-2/3">

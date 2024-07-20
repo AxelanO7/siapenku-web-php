@@ -19,7 +19,6 @@ class Letter extends Model
         'address',
         'nationality',
         'needs',
-        'attachment',
         'status',
         'marital_status',
         'profession',
@@ -28,6 +27,10 @@ class Letter extends Model
         'kasi_id',
         'kasi',
         'kadus_id',
-        'kadus'
+        'kadus',
+        'type_submission',
+        'att_family_card',
+        'att_certificate',
+        'att_rs',
     ];
 }

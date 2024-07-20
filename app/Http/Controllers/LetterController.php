@@ -80,7 +80,6 @@ class LetterController extends Controller
             'needs' => 'required',
             'profession' => 'required',
             'marital_status' => 'required',
-            'attachment' => 'required',
             'status' => 'required',
         ]);
         return true;
@@ -100,7 +99,6 @@ class LetterController extends Controller
         $letter->address = $request->address;
         $letter->nationality = $request->nationality;
         $letter->needs = $request->needs;
-        $letter->attachment = $request->attachment;
         $letter->status = $request->status;
         $letter->profession = $request->profession;
         $letter->marital_status = $request->marital_status;
@@ -108,6 +106,10 @@ class LetterController extends Controller
         $letter->no_letter = $request->no_letter;
         $letter->kasi_id = $request->kasi_id;
         $letter->kadus_id = $request->kadus_ids;
+        $letter->type_submission = $request->type_submission;
+        $letter->att_family_card = $request->att_family_card;
+        $letter->att_certificate = $request->att_certificate;
+        $letter->att_rs = $request->att_rs;
         $letter->save();
 
         return response()->json([
@@ -165,11 +167,14 @@ class LetterController extends Controller
         $letter->address = $request->address;
         $letter->nationality = $request->nationality;
         $letter->needs = $request->needs;
-        $letter->attachment = $request->attachment;
         $letter->profession = $request->profession;
         $letter->marital_status = $request->marital_status;
         $letter->status = $request->status;
         $letter->type_letter = $request->type_letter;
+        $letter->type_submission = $request->type_submission;
+        $letter->att_family_card = $request->att_family_card;
+        $letter->att_certificate = $request->att_certificate;
+        $letter->att_rs = $request->att_rs;
         if ($request->no_letter == null) {
             $letter->no_letter = $this->generateLastNoLetter($request->type_letter);
         } else {

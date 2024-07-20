@@ -78,7 +78,7 @@ const handleSend = async () => {
     };
     payload = { ...payload, ...additionalPayload };
     payload.status = "done";
-    axios
+    await axios
         .put(`${baseUrl}/letter/${idIndex}`, payload)
         .then((response) => {
             console.log(response);
