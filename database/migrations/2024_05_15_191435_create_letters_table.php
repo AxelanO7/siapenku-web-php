@@ -27,9 +27,13 @@ return new class extends Migration
             $table->string('status');
             $table->string('marital_status');
             $table->string('profession');
-            $table->string('attachment');
             $table->string('type_letter')->nullable();
             $table->string('no_letter')->nullable();
+            $table->string('type_submission')->nullable();
+            // attachment
+            $table->string('att_family_card')->nullable();
+            $table->string('att_certificate')->nullable();
+            $table->string('att_rs')->nullable();
 
             $table->unsignedBigInteger('kasi_id')->nullable();
             $table->foreign('kasi_id')->references('id')->on('kasis');

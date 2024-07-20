@@ -34,10 +34,15 @@ const form = useForm({
     address: "",
     nationality: "",
     needs: "",
-    attachmentName: "",
-    marital_status: "",
+    maritalStatus: "",
     profession: "",
-    attachment: null,
+    attFC: null,
+    attNameFC: "",
+    attCE: null,
+    attNameCE: "",
+    attRS: null,
+    attNameRS: "",
+    typeSubmission: window.location.pathname.split("/").pop(),
 });
 
 const submit = async () => {
@@ -55,10 +60,13 @@ const submit = async () => {
             address: form.address,
             nationality: form.nationality,
             needs: form.needs,
-            attachment: form.attachmentName,
-            marital_status: form.marital_status,
+            marital_status: form.maritalStatus,
             profession: form.profession,
             status: "pending",
+            type_submission: form.typeSubmission,
+            att_family_card: form.attNameFC,
+            att_certificate: form.attNameCE,
+            att_rs: form.attNameRS,
         })
         .then((response) => {
             Swal.fire({
@@ -68,7 +76,7 @@ const submit = async () => {
                 timer: 1500,
             });
             const resId = response.data.data.id;
-            saveFile(resId, form.attachment);
+            saveFile(resId, form.attFC, form.attCE, form.attRS);
         })
         .catch((error) => {
             Swal.fire({
@@ -81,7 +89,7 @@ const submit = async () => {
     isSubmiting.value = false;
 };
 
-const updateAttachment = async (idProps, filename) => {
+const updateAttachment = async (idProps, nFC, nCE, nRS) => {
     const baseUrl = await AuthHelper.getBaseUrl();
     const payload = {
         name: form.name,
@@ -94,10 +102,13 @@ const updateAttachment = async (idProps, filename) => {
         address: form.address,
         nationality: form.nationality,
         needs: form.needs,
-        attachment: filename,
-        marital_status: form.marital_status,
+        marital_status: form.maritalStatus,
         profession: form.profession,
         status: "pending",
+        type_submission: form.typeSubmission,
+        att_family_card: nFC,
+        att_certificate: nCE,
+        att_rs: nRS,
     };
     axios
         .put(`${baseUrl}/letter/${idProps}`, payload)
@@ -125,27 +136,82 @@ const updateAttachment = async (idProps, filename) => {
         });
 };
 
-const saveFile = async (idProps, file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    const baseUrl = await AuthHelper.getBaseUrl();
-    axios
-        .post(`${baseUrl}/letter/file`, formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-        .then((response) => {
-            console.log(response);
-            const fileName = response.data.data;
-            updateAttachment(idProps, fileName);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+const saveFile = async (idProps, fileFC, fileCE, fileRS) => {
+    if (form.attFC !== null) {
+        const formDataFC = new FormData();
+        formDataFC.append("file", fileFC);
+        const baseUrl = await AuthHelper.getBaseUrl();
+        axios
+            .post(`${baseUrl}/letter/file`, formDataFC, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                const fileName = response.data.data;
+                updateAttachment(
+                    idProps,
+                    fileName,
+                    form.attNameCE,
+                    form.attNameRS
+                );
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    if (form.attCE !== null) {
+        const formDataCE = new FormData();
+        formDataCE.append("file", fileCE);
+        const baseUrl = await AuthHelper.getBaseUrl();
+        axios
+            .post(`${baseUrl}/letter/file`, formDataCE, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                const fileName = response.data.data;
+                updateAttachment(
+                    idProps,
+                    form.attNameFC,
+                    fileName,
+                    form.attNameRS
+                );
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    if (form.attRS !== null) {
+        const formDataRS = new FormData();
+        formDataRS.append("file", fileRS);
+        const baseUrl = await AuthHelper.getBaseUrl();
+        axios
+            .post(`${baseUrl}/letter/file`, formDataRS, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                const fileName = response.data.data;
+                updateAttachment(
+                    idProps,
+                    form.attNameFC,
+                    form.attNameCE,
+                    fileName
+                );
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 };
 
-const pickFile = (e) => {
+const handleChangeFamilyCard = (e) => {
     const allowedExtensions = /(\.pdf|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
         Swal.fire({
@@ -167,9 +233,63 @@ const pickFile = (e) => {
         e.target.value = "";
         return;
     }
-    form.attachmentName = e.target.files[0].name;
-    form.attachment = e.target.files[0];
-    console.log(form.attachment);
+    form.attNameFC = e.target.files[0].name;
+    form.attFC = e.target.files[0];
+    console.log(form.attFC);
+};
+
+const handleChangeCertificate = (e) => {
+    const allowedExtensions = /(\.pdf|\.png)$/i;
+    if (!allowedExtensions.exec(e.target.files[0].name)) {
+        Swal.fire({
+            icon: "error",
+            title: "File harus berupa pdf atau png",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        e.target.value = "";
+        return;
+    }
+    if (e.target.files[0].size > 2097152) {
+        Swal.fire({
+            icon: "error",
+            title: "File tidak boleh lebih dari 2MB",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        e.target.value = "";
+        return;
+    }
+    form.attNameCE = e.target.files[0].name;
+    form.attCE = e.target.files[0];
+    console.log(form.attCE);
+};
+
+const handleChangeRS = (e) => {
+    const allowedExtensions = /(\.pdf|\.png)$/i;
+    if (!allowedExtensions.exec(e.target.files[0].name)) {
+        Swal.fire({
+            icon: "error",
+            title: "File harus berupa pdf atau png",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        e.target.value = "";
+        return;
+    }
+    if (e.target.files[0].size > 2097152) {
+        Swal.fire({
+            icon: "error",
+            title: "File tidak boleh lebih dari 2MB",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        e.target.value = "";
+        return;
+    }
+    form.attNameRS = e.target.files[0].name;
+    form.attRS = e.target.files[0];
+    console.log(form.attRS);
 };
 
 const genders = [
@@ -594,13 +714,13 @@ const isSubmiting = ref(false);
                                                 class="justify-between w-full"
                                             >
                                                 {{
-                                                    form.marital_status
+                                                    form.maritalStatus
                                                         ? maritalStatuses.find(
                                                               (
                                                                   marital_status
                                                               ) =>
                                                                   marital_status.value ===
-                                                                  form.marital_status
+                                                                  form.maritalStatus
                                                           )?.label
                                                         : "Status Perkawinan"
                                                 }}
@@ -636,7 +756,7 @@ const isSubmiting = ref(false);
                                                                             .value ===
                                                                         'string'
                                                                     ) {
-                                                                        form.marital_status =
+                                                                        form.maritalStatus =
                                                                             ev.detail.value;
                                                                     }
                                                                     openMaritalStatus = false;
@@ -650,7 +770,7 @@ const isSubmiting = ref(false);
                                                                 :class="
                                                                     cn(
                                                                         'ml-auto h-4 w-4',
-                                                                        form.marital_status ===
+                                                                        form.maritalStatus ===
                                                                             marital_status.value
                                                                             ? 'opacity-100'
                                                                             : 'opacity-0'
@@ -679,22 +799,70 @@ const isSubmiting = ref(false);
                                     style="resize: none"
                                 />
                             </div>
-                            <!-- attachment -->
-                            <div>
-                                <label class="text-base font-bold flex"
-                                    >Lampiran
-                                    <p class="text-red-500 ml-1">*</p>
-                                </label>
-                                <input
-                                    type="file"
-                                    placeholder="Lampiran"
-                                    @change="pickFile"
-                                    class="border-gray-300 w-full text-sm"
-                                />
-                                <p class="text-sm text-gray-500 mt-2">
-                                    File harus berupa pdf dan tidak lebih dari
-                                    2MB
-                                </p>
+                            <div class="flex">
+                                <!-- attachment family card -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Lampiran Kartu Keluarga
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        placeholder="Lampiran"
+                                        @change="handleChangeFamilyCard"
+                                        class="border-gray-300 w-full text-sm"
+                                    />
+                                    <p class="text-sm text-gray-500 mt-2">
+                                        File harus berupa pdf dan tidak lebih
+                                        dari 2MB
+                                    </p>
+                                </div>
+                                <!-- attachment certificate -->
+                                <div
+                                    class="w-full"
+                                    v-if="
+                                        form.typeSubmission ===
+                                        'name-change-letter'
+                                    "
+                                >
+                                    <label class="text-base font-bold flex"
+                                        >Lampiran Serifikat
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        placeholder="Lampiran"
+                                        @change="handleChangeCertificate"
+                                        class="border-gray-300 w-full text-sm"
+                                    />
+                                    <p class="text-sm text-gray-500 mt-2">
+                                        File harus berupa pdf dan tidak lebih
+                                        dari 2MB
+                                    </p>
+                                </div>
+                                <!-- attachment rs -->
+                                <div
+                                    class="w-full"
+                                    v-if="
+                                        form.typeSubmission ===
+                                        ('birth-letter' || 'death-letter')
+                                    "
+                                >
+                                    <label class="text-base font-bold flex"
+                                        >Lampiran Surat Keterangan RS
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        placeholder="Lampiran"
+                                        @change="handleChangeRS"
+                                        class="border-gray-300 w-full text-sm"
+                                    />
+                                    <p class="text-sm text-gray-500 mt-2">
+                                        File harus berupa pdf dan tidak lebih
+                                        dari 2MB
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
