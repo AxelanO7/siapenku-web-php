@@ -28,7 +28,7 @@ class LetterSeeder extends Seeder
             'marital_status' => 'Belum Menikah',
             'type_submission' => 'general-letter',
             'att_family_card' => 'logo.png',
-            'att_certificate' => 'logo.png',
+            // 'att_certificate' => 'logo.png',
             'att_rs' => 'logo.png',
 <<<<<<< HEAD
             'order_child' => '1',
