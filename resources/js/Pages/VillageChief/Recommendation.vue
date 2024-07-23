@@ -333,7 +333,7 @@ onMounted(() => {
                         <div>
                             <h3>Pemerintahan Kabupaten Buleleng</h3>
                             <h3>Kecamatan Kabutambahan</h3>
-                            <h3>Banjar Dinas Dangin Margi</h3>
+                            <h3>Banjar Dinas Desa Bulian</h3>
                         </div>
                     </div>
                     <hr class="border-2 border-black my-4" />
@@ -857,7 +857,7 @@ onMounted(() => {
                                             .join("-")
                                     }}
                                 </p>
-                                <p>Kelian Banjar Dinas Dangin Margi</p>
+                                <p>Kelian Banjar Dinas Desa Bulian</p>
                                 <div class="w-44 mx-auto p-1 rounded mt-4">
                                     <!-- <p>Tanda Tangan Digital</p> -->
                                     <img

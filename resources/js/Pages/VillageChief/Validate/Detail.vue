@@ -197,7 +197,7 @@ onMounted(() => {
                                     Bulian
                                 </h3>
                                 <h3>Kecamatan Kabutambahan</h3>
-                                <h3>Banjar Dinas Dangin Margi</h3>
+                                <h3>Banjar Dinas Desa Bulian</h3>
                             </div>
                         </div>
                         <hr class="border-2 border-black my-4" />

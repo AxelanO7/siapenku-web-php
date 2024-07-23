@@ -43,7 +43,6 @@ const form = useForm({
     attRS: null,
     attNameRS: "",
     typeSubmission: window.location.pathname.split("/").pop(),
-<<<<<<< HEAD
     // birth
     orderChild: null,
     birthAttendant: null,
@@ -69,59 +68,11 @@ const form = useForm({
     districtDeath: null,
     provinceDeath: null,
     causeDeath: null,
-=======
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
 });
 
 const submit = async () => {
     isSubmiting.value = true;
     const baseUrl = await AuthHelper.getBaseUrl();
-<<<<<<< HEAD
-=======
-    axios
-        .post(`${baseUrl}/letter`, {
-            name: form.name,
-            birth_place: form.birthPlace,
-            birth_date: form.birthDate,
-            gender: form.gender,
-            religion: form.religion,
-            family_card: form.familyCard,
-            identity_card: form.identityCard,
-            address: form.address,
-            nationality: form.nationality,
-            needs: form.needs,
-            marital_status: form.maritalStatus,
-            profession: form.profession,
-            status: "pending",
-            type_submission: form.typeSubmission,
-            att_family_card: form.attNameFC,
-            att_certificate: form.attNameCE,
-            att_rs: form.attNameRS,
-        })
-        .then((response) => {
-            Swal.fire({
-                icon: "success",
-                title: "Berhasil mengirimkan data",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            const resId = response.data.data.id;
-            saveFile(resId, form.attFC, form.attCE, form.attRS);
-        })
-        .catch((error) => {
-            Swal.fire({
-                icon: "error",
-                title: "Gagal mengirimkan data",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-        });
-    isSubmiting.value = false;
-};
-
-const updateAttachment = async (idProps, nFC, nCE, nRS) => {
-    const baseUrl = await AuthHelper.getBaseUrl();
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
     const payload = {
         name: form.name,
         birth_place: form.birthPlace,
@@ -136,7 +87,6 @@ const updateAttachment = async (idProps, nFC, nCE, nRS) => {
         marital_status: form.maritalStatus,
         profession: form.profession,
         status: "pending",
-<<<<<<< HEAD
         att_family_card: form.attNameFC,
         att_certificate: form.attNameCE,
         att_rs: form.attNameRS,
@@ -235,12 +185,6 @@ const updateAttachment = async (idProps, nFC, nCE, nRS) => {
         district_death: form.districtDeath,
         province_death: form.provinceDeath,
         cause_death: form.causeDeath,
-=======
-        type_submission: form.typeSubmission,
-        att_family_card: nFC,
-        att_certificate: nCE,
-        att_rs: nRS,
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
     };
     axios
         .put(`${baseUrl}/letter/${idProps}`, payload)
@@ -269,7 +213,6 @@ const updateAttachment = async (idProps, nFC, nCE, nRS) => {
 };
 
 const saveFile = async (idProps, fileFC, fileCE, fileRS) => {
-<<<<<<< HEAD
     let fileNameFC = "";
     let fileNameCE = "";
     let fileNameRS = "";
@@ -357,80 +300,6 @@ const saveFile = async (idProps, fileFC, fileCE, fileRS) => {
         fileNameRS
     );
     updateAttachment(idProps, fileNameFC, fileNameCE, fileNameRS);
-=======
-    if (form.attFC !== null) {
-        const formDataFC = new FormData();
-        formDataFC.append("file", fileFC);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataFC, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    fileName,
-                    form.attNameCE,
-                    form.attNameRS
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-    if (form.attCE !== null) {
-        const formDataCE = new FormData();
-        formDataCE.append("file", fileCE);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataCE, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    form.attNameFC,
-                    fileName,
-                    form.attNameRS
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-    if (form.attRS !== null) {
-        const formDataRS = new FormData();
-        formDataRS.append("file", fileRS);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataRS, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    form.attNameFC,
-                    form.attNameCE,
-                    fileName
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
 };
 
 const handleChangeFamilyCard = (e) => {
@@ -575,7 +444,7 @@ const isSubmiting = ref(false);
                                     Bulian
                                 </h3>
                                 <h3>Kecamatan Kabutambahan</h3>
-                                <h3>Banjar Dinas Dangin Margi</h3>
+                                <h3>Banjar Dinas Desa Bulian</h3>
                             </div>
                         </div>
                         <hr class="border-2 border-black my-4" />
@@ -1499,7 +1368,6 @@ const isSubmiting = ref(false);
                                     style="resize: none"
                                 />
                             </div>
-<<<<<<< HEAD
                         </div>
                         <div class="flex px-8 text-start">
                             <!-- attachment family card -->
@@ -1563,72 +1431,6 @@ const isSubmiting = ref(false);
                                     File harus berupa pdf dan tidak lebih dari
                                     2MB
                                 </p>
-=======
-                            <div class="flex">
-                                <!-- attachment family card -->
-                                <div class="w-full">
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Kartu Keluarga
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeFamilyCard"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
-                                <!-- attachment certificate -->
-                                <div
-                                    class="w-full"
-                                    v-if="
-                                        form.typeSubmission ===
-                                        'name-change-letter'
-                                    "
-                                >
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Serifikat
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeCertificate"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
-                                <!-- attachment rs -->
-                                <div
-                                    class="w-full"
-                                    v-if="
-                                        form.typeSubmission ===
-                                        ('birth-letter' || 'death-letter')
-                                    "
-                                >
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Surat Keterangan RS
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeRS"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
                             </div>
                         </div>
                     </div>
