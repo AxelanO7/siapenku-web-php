@@ -845,7 +845,8 @@ const isSubmiting = ref(false);
                                     class="w-full"
                                     v-if="
                                         form.typeSubmission ===
-                                        ('birth-letter' || 'death-letter')
+                                            'birth-letter' ||
+                                        form.typeSubmission === 'death-letter'
                                     "
                                 >
                                     <label class="text-base font-bold flex"
