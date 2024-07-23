@@ -29,7 +29,7 @@ class LetterSeeder extends Seeder
             'type_submission' => 'general-letter',
             'att_family_card' => 'logo.png',
             // 'att_certificate' => 'logo.png',
-            'att_rs' => 'logo.png',
+            // 'att_rs' => 'logo.png',
         ]);
     }
 }
