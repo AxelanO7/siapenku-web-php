@@ -17,7 +17,7 @@ const goToRoute = (route) => {
 
 const submissionList = [
     {
-        title: "Surat Keterangan Umum",
+        title: "Keterangan Umum",
         route: "/submission/general-letter",
     },
     {
