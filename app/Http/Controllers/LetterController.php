@@ -192,15 +192,12 @@ class LetterController extends Controller
     public function getListNoLetter()
     {
         $list_no_letter = [
+            // surat keterangan umum
             "01/SKU/2024",
-            "02/SKD/2024",
-            "03/SKT/2024",
-            "04/SKK/2024",
-            "05/SKL/2024",
-            "06/SKP/2024",
-            "07/SKC/2024",
-            "08/SKBM/2024",
-            "09/SKM/2024"
+            // surat kematiian
+            "02/SKK/2024",
+            // surat kelahiran
+            "03/SKL/2024",
         ];
         return $list_no_letter;
     }
@@ -209,6 +206,18 @@ class LetterController extends Controller
         $typeLetter
     ) {
         $letter = letter::where('type_letter', $typeLetter)->latest()->first();
+        // remove space from string
+        switch ($typeLetter) {
+            case "Surat Kelahiran":
+                $typeLetter = "SKL";
+                break;
+            case "Surat Kematian":
+                $typeLetter = "SKK";
+                break;
+            case "Surat Keterangan Umum":
+                $typeLetter = "SKU";
+                break;
+        }
         if ($letter) {
             $no_letter = $letter->no_letter;
             $no_letter = explode('/', $no_letter);
@@ -243,6 +252,36 @@ class LetterController extends Controller
         $letter->delete();
         return response()->json([
             'message' => 'Letter deleted successfully'
+        ]);
+    }
+
+    public function getLetterByType($type)
+    {
+        switch ($type) {
+            case "birth-letter":
+                return "Surat Kelahiran";
+                break;
+            case "death-letter":
+                return "Surat Kematian";
+                break;
+            case "general-letter":
+                return "Surat Keterangan Umum";
+                break;
+        }
+    }
+
+    public function getTypeLetter($id)
+    {
+        $letter = letter::find($id);
+        $letterType = $this->getLetterByType($letter->type_submission);
+        $last_no_letter = $this->generateLastNoLetter($letterType);
+        $data = [
+            'letter_type' => $letterType,
+            'last_no_letter' => $last_no_letter
+        ];
+        return response()->json([
+            'message' => 'Letter by type',
+            'data' => $data
         ]);
     }
 }
