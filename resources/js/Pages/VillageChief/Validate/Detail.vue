@@ -7,10 +7,20 @@ import Swal from "sweetalert2";
 
 const indexItems = window.location.href.split("/").pop();
 
+const typeLetter = ref("");
+const getTypeLetter = async () => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios.get(`${baseUrl}/letter/type/${indexItems}`).then((response) => {
+        typeLetter.value = response.data.data;
+    });
+};
+
 const submit = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     const data = dataValidate.value;
     data.status = "sending";
+    data.type_letter = typeLetter.value.letter_type;
+    data.no_letter = typeLetter.value.last_no_letter;
     axios
         .put(`${baseUrl}/letter/${indexItems}`, data)
         .then((response) => {
@@ -43,6 +53,7 @@ const getValidate = async () => {
         .then((response) => {
             const data = response.data.data;
             dataValidate.value = data;
+            getTypeLetter();
         })
         .catch((error) => {
             console.log(error);
