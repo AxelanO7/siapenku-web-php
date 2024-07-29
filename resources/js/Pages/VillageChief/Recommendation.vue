@@ -339,7 +339,8 @@ onMounted(() => {
                         class="flex items-center w-full justify-center space-x-4"
                     >
                         <h3>Surat Keterangan :</h3>
-                        <Popover v-model:open="openSuket">
+                        <p>{{ dataValidate?.type_letter }}</p>
+                        <!-- <Popover v-model:open="openSuket">
                             <PopoverTrigger as-child>
                                 <Button
                                     variant="outline"
@@ -408,14 +409,15 @@ onMounted(() => {
                                     </CommandList>
                                 </Command>
                             </PopoverContent>
-                        </Popover>
+                        </Popover> -->
                     </div>
                     <div class="h-4" />
                     <div
                         class="flex items-center w-full justify-center space-x-4"
                     >
                         <h3>Nomor :</h3>
-                        <Popover v-model:open="openNoLetter">
+                        <p>{{ dataValidate?.no_letter }}</p>
+                        <!-- <Popover v-model:open="openNoLetter">
                             <PopoverTrigger as-child>
                                 <Button
                                     variant="outline"
@@ -483,7 +485,7 @@ onMounted(() => {
                                     </CommandList>
                                 </Command>
                             </PopoverContent>
-                        </Popover>
+                        </Popover> -->
                     </div>
                     <div class="h-4" />
                     <div class="px-8 text-left">
