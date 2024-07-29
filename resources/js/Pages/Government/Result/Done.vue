@@ -73,8 +73,8 @@ onMounted(() => {
                             <h3>Kecamatan Kabutambahan</h3>
                             <h3>Desa Bulian</h3>
                             <h3>
-                                Jln. Kubutambahan-Kintamani, Telp. 087758730344,
-                                Kode Pos 81172
+                                JlKubutambahan-Kintamani, Tel087758730344, Kode
+                                Pos 81172
                             </h3>
                         </div>
                     </div>
@@ -97,146 +97,339 @@ onMounted(() => {
                         <h3 class="mb-4">
                             Saya yang bertanda tangan dibawah ini :
                         </h3>
-                        <div class="space-y-2">
+                        <div>
                             <div class="flex items-center">
-                                <p class="w-1/4">a. Nama</p>
+                                <p class="w-1/4">Nama</p>
                                 <p class="mx-4">:</p>
                                 <p>{{ dataValidate?.kasi?.name }}</p>
                             </div>
                             <div class="flex">
-                                <p class="w-1/4">b. Jabatan</p>
+                                <p class="w-1/4">Jabatan</p>
                                 <p class="mx-4">:</p>
                                 <p>{{ dataValidate?.kasi?.position }}</p>
                             </div>
                         </div>
                         <h3 class="my-4">Dengan ini menyatakan bahwa :</h3>
-                        <div class="space-y-2" v-if="dataValidate">
-                            <!-- nama -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">1. Nama</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.name }}
-                                    </p>
+                        <div v-if="dataValidate">
+                            <div
+                                v-if="
+                                    dataValidate.type_submission ===
+                                    'birth-letter'
+                                "
+                            >
+                                <div>
+                                    <!-- nama -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                Nama Lengkap Anak
+                                            </div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.name }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- anak ke -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">Anak Ke</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.order_child }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- tempat lahir -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                Tempat Lahir
+                                            </div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.birth_place }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- alamat -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">Alamat</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.address }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- penolong kelahiran -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                Penolong Kelahiran
+                                            </div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{
+                                                    dataValidate.birth_attendant
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- alamat penolong -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                Alamat Penolong
+                                            </div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{
+                                                    dataValidate.address_attendant
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- tempat lahir -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">2. Tempat Lahir</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.birth_place }}
-                                    </p>
+                                <p class="mt-4">
+                                    Adalah anak kandung dari suami istri
+                                    tersebut dibawah ini :
+                                </p>
+                                <div class="ml-8">
+                                    <p>IBU</p>
+                                    <!-- nik ibu -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">NIK</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.identity_card_mother
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- nama ibu -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Nama</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.name_mother }}
+                                        </p>
+                                    </div>
+                                    <!-- tempat lahir ibu -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Tempat Lahir</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.birth_place_mother
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- tanggal lahir ibu -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Tanggal Lahir</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{ dataValidate.birth_date_mother }}
+                                        </p>
+                                    </div>
+                                    <!-- alamat ibu -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Alamat</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{ dataValidate.address_mother }}
+                                        </p>
+                                    </div>
+                                    <p>AYAH</p>
+                                    <!-- nik ayah -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">NIK</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.identity_card_father
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- nama ayah -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Nama</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.name_father }}
+                                        </p>
+                                    </div>
+                                    <!-- tempat lahir ayah -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Tempat Lahir</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.birth_place_father
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- tanggal lahir ayah -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Tanggal Lahir</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{ dataValidate.birth_date_father }}
+                                        </p>
+                                    </div>
+                                    <!-- alamat ayah -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">Alamat</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{ dataValidate.address_father }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- tanggal lahir -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">3. Tanggal Lahir</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.birth_date }}
+                                <div class="mt-4 flex">
+                                    <p class="w-1/4">
+                                        Surat keterangan ini digunakan untuk
                                     </p>
-                                </div>
-                            </div>
-                            <!-- jenis kelamin -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">4. Jenis Kelamin</div>
-                                    <p class="w-3/4">
-                                        :
-                                        {{
-                                            dataValidate.gender === 1
-                                                ? "Laki-laki"
-                                                : "Perempuan"
-                                        }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- agama -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">5. Agama</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.religion }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- no kk -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">6. No. KK</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.family_card }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- nik -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">7. NIK</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.identity_card }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- alamat -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">8. Alamat</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.address }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- kebangsaan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">9. Kebangsaan</div>
-                                    <p class="w-3/4">
-                                        :
-                                        {{ dataValidate.nationality }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- keperluan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">10. Keperluan</div>
-                                    <p class="w-3/4">
+                                    <p class="w-3/4 ml-8">
                                         : {{ dataValidate.needs }}
                                     </p>
                                 </div>
                             </div>
-                            <!-- status perkawinan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">
-                                        11. Status Perkawinan
+                            <div
+                                class="space-y-2"
+                                v-else-if="
+                                    dataValidate.type_submission ===
+                                    'death-letter'
+                                "
+                            >
+                                <div>
+                                    <!-- nama -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">1. Nama</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.name }}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p class="w-3/4">
-                                        :
-                                        {{ dataValidate.marital_status }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- pekerjaan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">12. Pekerjaan</div>
-                                    <p class="w-3/4">
-                                        <!-- to capitalize -->
-                                        :
-                                        {{
-                                            dataValidate.profession
-                                                .charAt(0)
-                                                .toUpperCase() +
-                                            dataValidate.profession.slice(1)
-                                        }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- lampiran -->
-                            <!-- <div class="flex pl-8">
+                                    <!-- nik -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">2. NIK</div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{ dataValidate.identity_card }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- no kk -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">3. NO KK</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.family_card }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- tempat lahir -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                4. Tempat Lahir
+                                            </div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.birth_place }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- tanggal lahir -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                5. Tanggal Lahir
+                                            </div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.birth_date }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- jenis kelamin -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                6. Jenis Kelamin
+                                            </div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{
+                                                    dataValidate.gender === 1
+                                                        ? "Laki-laki"
+                                                        : "Perempuan"
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- kewarganegaraan -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                7. Kewarganegaraan
+                                            </div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{ dataValidate.nationality }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- agama -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">8. Agama</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.religion }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- status perkawinan -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                9. Status Perkawinan
+                                            </div>
+                                            <p class="w-3/4">
+                                                :
+                                                {{
+                                                    dataValidate.marital_status
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- pekerjaan -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">
+                                                10. Pekerjaan
+                                            </div>
+                                            <p class="w-3/4">
+                                                <!-- to capitalize -->
+                                                :
+                                                {{
+                                                    dataValidate.profession
+                                                        .charAt(0)
+                                                        .toUpperCase() +
+                                                    dataValidate.profession.slice(
+                                                        1
+                                                    )
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- alamat -->
+                                    <div class="flex pl-8">
+                                        <div class="flex w-full items-center">
+                                            <div class="w-1/4">11. Alamat</div>
+                                            <p class="w-3/4">
+                                                : {{ dataValidate.address }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- lampiran -->
+                                    <!-- <div class="flex pl-8">
                                 <div class="flex w-full items-center">
                                     <div class="w-1/4">11 : Lampiran</div>
                                     <div class="flex">
@@ -254,6 +447,192 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div> -->
+                                </div>
+                                <p class="mt-4">Telah meninggal dunia pada :</p>
+                                <div>
+                                    <!-- tanggal kematian -->
+                                    <div class="flex">
+                                        <p class="w-1/4">
+                                            11. Hari / Tanggal Kematian
+                                        </p>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                new Date(
+                                                    dataValidate.date_death
+                                                ).toLocaleDateString("id-ID", {
+                                                    weekday: "long",
+                                                    year: "numeric",
+                                                    month: "long",
+                                                    day: "numeric",
+                                                })
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- tempat kematian -->
+                                    <div class="flex">
+                                        <p class="w-1/4">12. Tempat Kematian</p>
+                                        <p class="w-3/4">
+                                            : Desa
+                                            {{ dataValidate.village_death }}
+                                        </p>
+                                    </div>
+                                    <!-- kecamatan -->
+                                    <div class="flex">
+                                        <p class="w-1/4 ml-6">Kecamatan</p>
+                                        <p class="w-3/4">
+                                            : Kecamatan
+                                            {{ dataValidate.district_death }}
+                                        </p>
+                                    </div>
+                                    <!-- kabupaten -->
+                                    <div class="flex">
+                                        <p class="w-1/4 ml-6">Kabupaten</p>
+                                        <p class="w-3/4">
+                                            : Kabupaten
+                                            {{ dataValidate.regency_death }}
+                                        </p>
+                                    </div>
+                                    <!-- provinsi -->
+                                    <div class="flex">
+                                        <p class="w-1/4 ml-6">Provinsi</p>
+                                        <p class="w-3/4">
+                                            : Provinsi
+                                            {{ dataValidate.province_death }}
+                                        </p>
+                                    </div>
+                                    <!-- penyebab kematian -->
+                                    <div class="flex">
+                                        <p class="w-1/4">
+                                            13. Penyebab Kematian
+                                        </p>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.cause_death }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex">
+                                    <p class="w-1/4">
+                                        Surat keterangan ini digunakan untuk
+                                    </p>
+                                    <p class="w-3/4">
+                                        : {{ dataValidate.needs }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="space-y-2" v-else>
+                                <div class="ml-8">
+                                    <!-- nama -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">a. Nama</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.name }}
+                                        </p>
+                                    </div>
+                                    <!-- nik -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">b. NIK</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.identity_card }}
+                                        </p>
+                                    </div>
+                                    <!-- tempat lahir -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">c. Tempat Lahir</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.birth_place }}
+                                        </p>
+                                    </div>
+                                    <!-- tanggal lahir -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">
+                                            d. Tanggal Lahir
+                                        </div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.birth_date }}
+                                        </p>
+                                    </div>
+                                    <!-- jenis kelamin -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">
+                                            e. Jenis Kelamin
+                                        </div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.gender === 1
+                                                    ? "Laki-laki"
+                                                    : "Perempuan"
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- agama -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">f. Agama</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.religion }}
+                                        </p>
+                                    </div>
+                                    <!-- status perkawinan -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">
+                                            g. Status Perkawinan
+                                        </div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{ dataValidate.marital_status }}
+                                        </p>
+                                    </div>
+                                    <!-- pekerjaan -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">h. Pekerjaan</div>
+                                        <p class="w-3/4">
+                                            :
+                                            {{
+                                                dataValidate.profession
+                                                    .charAt(0)
+                                                    .toUpperCase() +
+                                                dataValidate.profession.slice(1)
+                                            }}
+                                        </p>
+                                    </div>
+                                    <!-- alamat -->
+                                    <div class="flex w-full items-center">
+                                        <div class="w-1/4">i. Alamat</div>
+                                        <p class="w-3/4">
+                                            : {{ dataValidate.address }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex">
+                                    <p class="w-1/4">
+                                        Surat keterangan ini digunakan untuk
+                                    </p>
+                                    <p class="w-3/4 ml-8">
+                                        : {{ dataValidate.needs }}
+                                    </p>
+                                </div>
+
+                                <!-- lampiran -->
+                                <!-- <div class="flex pl-8">
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/4">11 : Lampiran</div>
+                                    <div class="flex">
+                                        :
+                                        <div
+                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
+                                            @click="
+                                                handleTapFile(
+                                                    dataValidate.attachment
+                                                )
+                                            "
+                                        >
+                                            {{ dataValidate.attachment }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            </div>
                         </div>
                         <p class="mt-4">
                             Demikian surat keterangan ini dibuat untuk
@@ -274,7 +653,7 @@ onMounted(() => {
                                             .join("-")
                                     }}
                                 </p>
-                                <p>An. Prebekel Bulian</p>
+                                <p>APrebekel Bulian</p>
                                 <div class="w-44 mx-auto p-1 rounded mt-4">
                                     <img
                                         :src="`/assets/images/signature/${dataValidate?.kasi?.signature}`"

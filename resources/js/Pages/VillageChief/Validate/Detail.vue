@@ -95,6 +95,54 @@ const translateKeyToIndonesian = (key) => {
             return "Lampiran Ijazah";
         case "att_rs":
             return "Lampiran Surat Keterangan Rumah Sakit";
+        case "order_child":
+            return "Anak ke";
+        case "birth_attendant":
+            return "Pembantu Kelahiran";
+        case "address_attendant":
+            return "Alamat Pembantu Kelahiran";
+        case "identity_card_mother":
+            return "Nomor KTP Ibu";
+        case "name_mother":
+            return "Nama Ibu";
+        case "birth_place_mother":
+            return "Tempat Lahir Ibu";
+        case "birth_date_mother":
+            return "Tanggal Lahir Ibu";
+        case "address_mother":
+            return "Alamat Ibu";
+        case "identity_card_father":
+            return "Nomor KTP Ayah";
+        case "name_father":
+            return "Nama Ayah";
+        case "birth_place_father":
+            return "Tempat Lahir Ayah";
+        case "birth_date_father":
+            return "Tanggal Lahir Ayah";
+        case "address_father":
+            return "Alamat Ayah";
+        case "name_requester":
+            return "Nama Pemohon";
+        case "identity_card_requester":
+            return "Nomor KTP Pemohon";
+        case "address_requester":
+            return "Alamat Pemohon";
+        case "relationship_requester":
+            return "Hubungan dengan Pemohon";
+        case "date_death":
+            return "Tanggal Kematian";
+        case "village_death":
+            return "Desa Kematian";
+        case "sub_district_death":
+            return "Kecamatan Kematian";
+        case "district_death":
+            return "Kabupaten Kematian";
+        case "province_death":
+            return "Provinsi Kematian";
+        case "cause_death":
+            return "Penyebab Kematian";
+        default:
+            return key;
     }
 };
 
