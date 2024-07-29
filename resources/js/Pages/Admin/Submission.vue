@@ -43,31 +43,82 @@ const form = useForm({
     attRS: null,
     attNameRS: "",
     typeSubmission: window.location.pathname.split("/").pop(),
+    // birth
+    orderChild: null,
+    birthAttendant: null,
+    addressAttendant: null,
+    identityCardMother: null,
+    nameMother: null,
+    birthPlaceMother: null,
+    birthDateMother: null,
+    addressMother: null,
+    identityCardFather: null,
+    nameFather: null,
+    birthPlaceFather: null,
+    birthDateFather: null,
+    addressFather: null,
+    // death
+    nameRequester: null,
+    identityCardRequester: null,
+    addressRequester: null,
+    relationshipRequester: null,
+    dateDeath: null,
+    villageDeath: null,
+    subDistrictDeath: null,
+    districtDeath: null,
+    provinceDeath: null,
+    causeDeath: null,
 });
 
 const submit = async () => {
     isSubmiting.value = true;
     const baseUrl = await AuthHelper.getBaseUrl();
+    const payload = {
+        name: form.name,
+        birth_place: form.birthPlace,
+        birth_date: form.birthDate,
+        gender: form.gender,
+        religion: form.religion,
+        family_card: form.familyCard,
+        identity_card: form.identityCard,
+        address: form.address,
+        nationality: form.nationality,
+        needs: form.needs,
+        marital_status: form.maritalStatus,
+        profession: form.profession,
+        status: "pending",
+        att_family_card: form.attNameFC,
+        att_certificate: form.attNameCE,
+        att_rs: form.attNameRS,
+        type_submission: form.typeSubmission,
+        // birth
+        order_child: form.orderChild,
+        birth_attendant: form.birthAttendant,
+        address_attendant: form.addressAttendant,
+        identity_card_mother: form.identityCardMother,
+        name_mother: form.nameMother,
+        birth_place_mother: form.birthPlaceMother,
+        birth_date_mother: form.birthDateMother,
+        address_mother: form.addressMother,
+        identity_card_father: form.identityCardFather,
+        name_father: form.nameFather,
+        birth_place_father: form.birthPlaceFather,
+        birth_date_father: form.birthDateFather,
+        address_father: form.addressFather,
+        // death
+        name_requester: form.nameRequester,
+        identity_card_requester: form.identityCardRequester,
+        address_requester: form.addressRequester,
+        relationship_requester: form.relationshipRequester,
+        date_death: form.dateDeath,
+        village_death: form.villageDeath,
+        sub_district_death: form.subDistrictDeath,
+        district_death: form.districtDeath,
+        province_death: form.provinceDeath,
+        cause_death: form.causeDeath,
+    };
     axios
-        .post(`${baseUrl}/letter`, {
-            name: form.name,
-            birth_place: form.birthPlace,
-            birth_date: form.birthDate,
-            gender: form.gender,
-            religion: form.religion,
-            family_card: form.familyCard,
-            identity_card: form.identityCard,
-            address: form.address,
-            nationality: form.nationality,
-            needs: form.needs,
-            marital_status: form.maritalStatus,
-            profession: form.profession,
-            status: "pending",
-            type_submission: form.typeSubmission,
-            att_family_card: form.attNameFC,
-            att_certificate: form.attNameCE,
-            att_rs: form.attNameRS,
-        })
+        .post(`${baseUrl}/letter`, payload)
         .then((response) => {
             Swal.fire({
                 icon: "success",
@@ -105,10 +156,35 @@ const updateAttachment = async (idProps, nFC, nCE, nRS) => {
         marital_status: form.maritalStatus,
         profession: form.profession,
         status: "pending",
-        type_submission: form.typeSubmission,
         att_family_card: nFC,
         att_certificate: nCE,
         att_rs: nRS,
+        type_submission: form.typeSubmission,
+        // birth
+        order_child: form.orderChild,
+        birth_attendant: form.birthAttendant,
+        address_attendant: form.addressAttendant,
+        identity_card_mother: form.identityCardMother,
+        name_mother: form.nameMother,
+        birth_place_mother: form.birthPlaceMother,
+        birth_date_mother: form.birthDateMother,
+        address_mother: form.addressMother,
+        identity_card_father: form.identityCardFather,
+        name_father: form.nameFather,
+        birth_place_father: form.birthPlaceFather,
+        birth_date_father: form.birthDateFather,
+        address_father: form.addressFather,
+        // death
+        name_requester: form.nameRequester,
+        identity_card_requester: form.identityCardRequester,
+        address_requester: form.addressRequester,
+        relationship_requester: form.relationshipRequester,
+        date_death: form.dateDeath,
+        village_death: form.villageDeath,
+        sub_district_death: form.subDistrictDeath,
+        district_death: form.districtDeath,
+        province_death: form.provinceDeath,
+        cause_death: form.causeDeath,
     };
     axios
         .put(`${baseUrl}/letter/${idProps}`, payload)
@@ -352,7 +428,257 @@ const isSubmiting = ref(false);
                             </div>
                         </div>
                         <hr class="border-2 border-black my-4" />
-                        <div class="space-y-4 px-8 py-4 text-left">
+                        <!-- birth letter -->
+                        <div
+                            class="space-y-4 px-8 py-4 text-left"
+                            v-if="form.typeSubmission === 'birth-letter'"
+                        >
+                            <div class="flex space-x-8">
+                                <!-- name -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Nama Lengkap
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.name"
+                                        placeholder="Nama Lengkap Anak"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                                <!-- order child -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Urutan Anak
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.orderChild"
+                                        type="number"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- birth place -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Tempat Lahir
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.birthPlace"
+                                        placeholder="Tempat Lahir"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                                <!-- birth attendant -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Penolong Kelahiran
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.birthAttendant"
+                                        placeholder="Penolong Kelahiran"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- address -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Alamat
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <textarea
+                                        v-model="form.address"
+                                        placeholder="Alamat"
+                                        class="border-gray-300 w-full rounded-md"
+                                        rows="2"
+                                        style="resize: none"
+                                    />
+                                </div>
+                                <!-- address attendant -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Alamat Penolong Kelahiran
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <textarea
+                                        v-model="form.addressAttendant"
+                                        placeholder="Alamat Penolong Kelahiran"
+                                        class="border-gray-300 w-full rounded-md"
+                                        rows="2"
+                                        style="resize: none"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- identity card mother -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >NIK Ibu
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.identityCardMother"
+                                        type="number"
+                                        placeholder="NIK Ibu"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    />
+                                </div>
+                                <!-- name mother -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Nama Ibu
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.nameMother"
+                                        placeholder="Nama Ibu"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- birth place mother -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Tempat Lahir Ibu
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.birthPlaceMother"
+                                        placeholder="Tempat Lahir Ibu"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                                <!-- birth date mother -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Tanggal Lahir Ibu
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        v-model="form.birthDateMother"
+                                        placeholder="Tanggal Lahir Ibu"
+                                        class="border-gray-300 w-full rounded-md"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- identity card father -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >NIK Ayah
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.identityCardFather"
+                                        type="number"
+                                        placeholder="NIK Ayah"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    />
+                                </div>
+                                <!-- name father -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Nama Ayah
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.nameFather"
+                                        placeholder="Nama Ayah"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- birth place father -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Tempat Lahir Ayah
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        v-model="form.birthPlaceFather"
+                                        placeholder="Tempat Lahir Ayah"
+                                        class="border-gray-300 w-full rounded-md"
+                                        oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                    />
+                                </div>
+                                <!-- birth date father -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex">
+                                        Tanggal Lahir Ayah
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        v-model="form.birthDateFather"
+                                        placeholder="Tanggal Lahir Ayah"
+                                        class="border-gray-300 w-full rounded-md"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex space-x-8">
+                                <!-- address father -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Alamat Ayah
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <textarea
+                                        v-model="form.addressFather"
+                                        placeholder="Alamat Ayah"
+                                        class="border-gray-300 w-full rounded-md"
+                                        rows="2"
+                                        style="resize: none"
+                                    />
+                                </div>
+                                <!-- address mother -->
+                                <div class="w-full">
+                                    <label class="text-base font-bold flex"
+                                        >Alamat Ibu
+                                        <p class="text-red-500 ml-1">*</p>
+                                    </label>
+                                    <textarea
+                                        v-model="form.addressMother"
+                                        placeholder="Alamat Ibu"
+                                        class="border-gray-300 w-full rounded-md"
+                                        rows="2"
+                                        style="resize: none"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-base font-bold flex"
+                                    >Keperluan
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <textarea
+                                    v-model="form.needs"
+                                    placeholder="Keperluan"
+                                    class="border-gray-300 w-full rounded-md"
+                                    rows="4"
+                                    style="resize: none"
+                                />
+                            </div>
+                        </div>
+                        <!-- general letter -->
+                        <div class="space-y-4 px-8 py-4 text-left" v-else>
                             <div class="flex space-x-8">
                                 <!-- name -->
                                 <div class="w-full">
@@ -783,6 +1109,154 @@ const isSubmiting = ref(false);
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
+                                </div>
+                            </div>
+                            <!-- death column -->
+                            <div
+                                class="space-y-4"
+                                v-if="form.typeSubmission === 'death-letter'"
+                            >
+                                <div class="flex space-x-8">
+                                    <!-- name requester -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Nama Pemohon
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.nameRequester"
+                                            placeholder="Nama Pemohon"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                    <!-- identity card requester -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >NIK Pemohon
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.identityCardRequester"
+                                            type="number"
+                                            placeholder="NIK Pemohon"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex space-x-8">
+                                    <!-- address requester -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Alamat Pemohon
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <textarea
+                                            v-model="form.addressRequester"
+                                            placeholder="Alamat Pemohon"
+                                            class="border-gray-300 w-full rounded-md"
+                                            rows="1"
+                                            style="resize: none"
+                                        />
+                                    </div>
+                                    <!-- relationship -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Hubungan dengan Almarhum
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.relationship"
+                                            placeholder="Hubungan dengan Almarhum"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex space-x-8">
+                                    <!-- death date -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex">
+                                            Tanggal Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            type="date"
+                                            v-model="form.dateDeath"
+                                            placeholder="Tanggal Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                        />
+                                    </div>
+                                    <!-- cause death -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex">
+                                            Penyebab Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.causeDeath"
+                                            placeholder="Penyebab Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex space-x-8">
+                                    <!-- village death -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Desa Tempat Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.villageDeath"
+                                            placeholder="Desa Tempat Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                    <!-- sub district death -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Kecamatan Tempat Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.subDistrictDeath"
+                                            placeholder="Kecamatan Tempat Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex space-x-8">
+                                    <!-- district death -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Kabupaten Tempat Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.districtDeath"
+                                            placeholder="Kabupaten Tempat Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
+                                    <!-- province death -->
+                                    <div class="w-full">
+                                        <label class="text-base font-bold flex"
+                                            >Provinsi Tempat Kematian
+                                            <p class="text-red-500 ml-1">*</p>
+                                        </label>
+                                        <input
+                                            v-model="form.provinceDeath"
+                                            placeholder="Provinsi Tempat Kematian"
+                                            class="border-gray-300 w-full rounded-md"
+                                            oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <!-- needs -->
