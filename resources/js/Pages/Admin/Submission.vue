@@ -1273,71 +1273,69 @@ const isSubmiting = ref(false);
                                     style="resize: none"
                                 />
                             </div>
-                            <div class="flex">
-                                <!-- attachment family card -->
-                                <div class="w-full">
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Kartu Keluarga
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeFamilyCard"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
-                                <!-- attachment certificate -->
-                                <div
-                                    class="w-full"
-                                    v-if="
-                                        form.typeSubmission ===
-                                        'name-change-letter'
-                                    "
-                                >
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Serifikat
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeCertificate"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
-                                <!-- attachment rs -->
-                                <div
-                                    class="w-full"
-                                    v-if="
-                                        form.typeSubmission ===
-                                            'birth-letter' ||
-                                        form.typeSubmission === 'death-letter'
-                                    "
-                                >
-                                    <label class="text-base font-bold flex"
-                                        >Lampiran Surat Keterangan RS
-                                        <p class="text-red-500 ml-1">*</p>
-                                    </label>
-                                    <input
-                                        type="file"
-                                        placeholder="Lampiran"
-                                        @change="handleChangeRS"
-                                        class="border-gray-300 w-full text-sm"
-                                    />
-                                    <p class="text-sm text-gray-500 mt-2">
-                                        File harus berupa pdf dan tidak lebih
-                                        dari 2MB
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="flex">
+                            <!-- attachment family card -->
+                            <div class="w-full">
+                                <label class="text-base font-bold flex"
+                                    >Lampiran Kartu Keluarga
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <input
+                                    type="file"
+                                    placeholder="Lampiran"
+                                    @change="handleChangeFamilyCard"
+                                    class="border-gray-300 w-full text-sm"
+                                />
+                                <p class="text-sm text-gray-500 mt-2">
+                                    File harus berupa pdf dan tidak lebih dari
+                                    2MB
+                                </p>
+                            </div>
+                            <!-- attachment certificate -->
+                            <div
+                                class="w-full"
+                                v-if="
+                                    form.typeSubmission === 'name-change-letter'
+                                "
+                            >
+                                <label class="text-base font-bold flex"
+                                    >Lampiran Serifikat
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <input
+                                    type="file"
+                                    placeholder="Lampiran"
+                                    @change="handleChangeCertificate"
+                                    class="border-gray-300 w-full text-sm"
+                                />
+                                <p class="text-sm text-gray-500 mt-2">
+                                    File harus berupa pdf dan tidak lebih dari
+                                    2MB
+                                </p>
+                            </div>
+                            <!-- attachment rs -->
+                            <div
+                                class="w-full"
+                                v-if="
+                                    form.typeSubmission === 'birth-letter' ||
+                                    form.typeSubmission === 'death-letter'
+                                "
+                            >
+                                <label class="text-base font-bold flex"
+                                    >Lampiran Surat Keterangan RS
+                                    <p class="text-red-500 ml-1">*</p>
+                                </label>
+                                <input
+                                    type="file"
+                                    placeholder="Lampiran"
+                                    @change="handleChangeRS"
+                                    class="border-gray-300 w-full text-sm"
+                                />
+                                <p class="text-sm text-gray-500 mt-2">
+                                    File harus berupa pdf dan tidak lebih dari
+                                    2MB
+                                </p>
                             </div>
                         </div>
                     </div>
