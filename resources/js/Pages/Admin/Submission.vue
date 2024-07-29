@@ -1274,7 +1274,7 @@ const isSubmiting = ref(false);
                                 />
                             </div>
                         </div>
-                        <div class="flex">
+                        <div class="flex px-8 text-start">
                             <!-- attachment family card -->
                             <div class="w-full">
                                 <label class="text-base font-bold flex"
