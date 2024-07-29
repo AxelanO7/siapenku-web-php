@@ -752,7 +752,6 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
-                            <!-- lampiran ijazah -->
                             <div
                                 class="flex pl-8"
                                 v-if="dataValidate.att_certificate"
@@ -774,7 +773,6 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
-                            <!-- lampiran surat keterangan rs -->
                             <div class="flex pl-8" v-if="dataValidate.att_rs">
                                 <div class="flex w-full items-center">
                                     <div class="w-1/4">

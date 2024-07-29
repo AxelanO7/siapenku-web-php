@@ -325,13 +325,9 @@ onMounted(() => {
                                         :
                                         <div
                                             class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.att_certificate
-                                                )
-                                            "
+                                            @click="handleTapFile(value)"
                                         >
-                                            {{ dataValidate.att_certificate }}
+                                            {{ value }}
                                         </div>
                                     </div>
                                 </div>
