@@ -158,32 +158,39 @@ class LetterController extends Controller
     public function updateLetter(Request $request, $id)
     {
         $letter = letter::find($id);
-        $letter->name = $request->name;
-        $letter->birth_place = $request->birth_place;
-        $letter->birth_date = $request->birth_date;
-        $letter->gender = $request->gender;
-        $letter->religion = $request->religion;
-        $letter->family_card = $request->family_card;
-        $letter->identity_card = $request->identity_card;
-        $letter->address = $request->address;
-        $letter->nationality = $request->nationality;
-        $letter->needs = $request->needs;
-        $letter->profession = $request->profession;
-        $letter->marital_status = $request->marital_status;
-        $letter->status = $request->status;
-        $letter->type_letter = $request->type_letter;
-        $letter->type_submission = $request->type_submission;
-        $letter->att_family_card = $request->att_family_card;
-        $letter->att_certificate = $request->att_certificate;
-        $letter->att_rs = $request->att_rs;
+        $no_letter = 0;
         if ($request->no_letter == null) {
-            $letter->no_letter = $this->generateLastNoLetter($request->type_letter);
+            $no_letter = $this->generateLastNoLetter($request->type_letter);
         } else {
-            $letter->no_letter = $request->no_letter;
+            $no_letter = $request->no_letter;
         }
-        $letter->kasi_id = $request->kasi_id;
-        $letter->kadus_id = $request->kadus_id;
-        $letter->save();
+        $letter->update($request->all());
+        // $letter->name = $request->name;
+        // $letter->birth_place = $request->birth_place;
+        // $letter->birth_date = $request->birth_date;
+        // $letter->gender = $request->gender;
+        // $letter->religion = $request->religion;
+        // $letter->family_card = $request->family_card;
+        // $letter->identity_card = $request->identity_card;
+        // $letter->address = $request->address;
+        // $letter->nationality = $request->nationality;
+        // $letter->needs = $request->needs;
+        // $letter->profession = $request->profession;
+        // $letter->marital_status = $request->marital_status;
+        // $letter->status = $request->status;
+        // $letter->type_letter = $request->type_letter;
+        // $letter->type_submission = $request->type_submission;
+        // $letter->att_family_card = $request->att_family_card;
+        // $letter->att_certificate = $request->att_certificate;
+        // $letter->att_rs = $request->att_rs;
+        // if ($request->no_letter == null) {
+        //     $letter->no_letter = $this->generateLastNoLetter($request->type_letter);
+        // } else {
+        //     $letter->no_letter = $request->no_letter;
+        // }
+        // $letter->kasi_id = $request->kasi_id;
+        // $letter->kadus_id = $request->kadus_id;
+        // $letter->save();
         return response()->json([
             'message' => 'Letter updated successfully',
             'data' => $letter
