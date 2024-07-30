@@ -480,7 +480,7 @@ onMounted(() => {
                                     <!-- kecamatan -->
                                     <div class="flex">
                                         <p class="w-1/4 ml-6">Kecamatan</p>
-                                        <p class="w-3/4">
+                                        <p class="w-[calc(75% + 6px]">
                                             : Kecamatan
                                             {{ dataValidate.district_death }}
                                         </p>
@@ -488,7 +488,7 @@ onMounted(() => {
                                     <!-- kabupaten -->
                                     <div class="flex">
                                         <p class="w-1/4 ml-6">Kabupaten</p>
-                                        <p class="w-3/4">
+                                        <p class="w-[calc(75% + 6px]">
                                             : Kabupaten
                                             {{ dataValidate.regency_death }}
                                         </p>
@@ -496,7 +496,7 @@ onMounted(() => {
                                     <!-- provinsi -->
                                     <div class="flex">
                                         <p class="w-1/4 ml-6">Provinsi</p>
-                                        <p class="w-3/4">
+                                        <p class="w-[calc(75% + 6px]">
                                             : Provinsi
                                             {{ dataValidate.province_death }}
                                         </p>
