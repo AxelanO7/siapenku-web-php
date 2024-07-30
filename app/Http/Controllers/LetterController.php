@@ -164,6 +164,8 @@ class LetterController extends Controller
         } else {
             $no_letter = $request->no_letter;
         }
+        // make kadus key null
+        $request->kadus = null;
         $letter->update($request->all());
         // $letter->name = $request->name;
         // $letter->birth_place = $request->birth_place;
