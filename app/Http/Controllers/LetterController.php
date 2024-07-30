@@ -65,29 +65,29 @@ class LetterController extends Controller
         //
     }
 
-    public function validateRequest(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'birth_place' => 'required',
-            'birth_date' => 'required',
-            'gender' => 'required',
-            'religion' => 'required',
-            'family_card' => 'required',
-            'identity_card' => 'required',
-            'address' => 'required',
-            'nationality' => 'required',
-            'needs' => 'required',
-            'profession' => 'required',
-            'marital_status' => 'required',
-            'status' => 'required',
-        ]);
-        return true;
-    }
+    // public function validateRequest(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'birth_place' => 'required',
+    //         'birth_date' => 'required',
+    //         'gender' => 'required',
+    //         'religion' => 'required',
+    //         'family_card' => 'required',
+    //         'identity_card' => 'required',
+    //         'address' => 'required',
+    //         'nationality' => 'required',
+    //         'needs' => 'required',
+    //         'profession' => 'required',
+    //         'marital_status' => 'required',
+    //         'status' => 'required',
+    //     ]);
+    //     return true;
+    // }
 
     public function createLetter(Request $request)
     {
-        $this->validateRequest($request);
+        // $this->validateRequest($request);
         $letter = new letter();
         $letter->name = $request->name;
         $letter->birth_place = $request->birth_place;
