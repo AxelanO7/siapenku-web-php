@@ -479,9 +479,7 @@ onMounted(() => {
                                     </div>
                                     <!-- kecamatan -->
                                     <div class="flex">
-                                        <p class="w-[cal(25% +6px ] pl-6">
-                                            Kecamatan
-                                        </p>
+                                        <p class="w-1/4 pl-6">Kecamatan</p>
                                         <p class="w-3/4">
                                             : Kecamatan
                                             {{ dataValidate.district_death }}
@@ -489,9 +487,7 @@ onMounted(() => {
                                     </div>
                                     <!-- kabupaten -->
                                     <div class="flex">
-                                        <p class="w-[cal(25% +6px ] pl-6">
-                                            Kabupaten
-                                        </p>
+                                        <p class="w-1/4 pl-6">Kabupaten</p>
                                         <p class="w-3/4">
                                             : Kabupaten
                                             {{ dataValidate.regency_death }}
@@ -499,9 +495,7 @@ onMounted(() => {
                                     </div>
                                     <!-- provinsi -->
                                     <div class="flex">
-                                        <p class="w-[cal(25% +6px ] pl-6">
-                                            Provinsi
-                                        </p>
+                                        <p class="w-1/4 pl-6">Provinsi</p>
                                         <p class="w-3/4">
                                             : Provinsi
                                             {{ dataValidate.province_death }}
