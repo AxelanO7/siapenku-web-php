@@ -172,8 +172,8 @@ const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     let payload = dataValidate.value;
     const additionalPayload = {
-        no_letter: valueNoLetter.value,
-        type_letter: valueSuket.value,
+        // no_letter: valueNoLetter.value,
+        // type_letter: valueSuket.value,
         kadus_id: valueKadus.value,
     };
     payload = { ...payload, ...additionalPayload };
