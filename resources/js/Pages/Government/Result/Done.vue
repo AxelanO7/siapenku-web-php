@@ -479,24 +479,30 @@ onMounted(() => {
                                     </div>
                                     <!-- kecamatan -->
                                     <div class="flex">
-                                        <p class="w-1/4 ml-6">Kecamatan</p>
-                                        <p class="w-[calc(75% + 6px]">
+                                        <p class="w-[cal(25% +6px ] pl-6">
+                                            Kecamatan
+                                        </p>
+                                        <p class="w-3/4">
                                             : Kecamatan
                                             {{ dataValidate.district_death }}
                                         </p>
                                     </div>
                                     <!-- kabupaten -->
                                     <div class="flex">
-                                        <p class="w-1/4 ml-6">Kabupaten</p>
-                                        <p class="w-[calc(75% + 6px]">
+                                        <p class="w-[cal(25% +6px ] pl-6">
+                                            Kabupaten
+                                        </p>
+                                        <p class="w-3/4">
                                             : Kabupaten
                                             {{ dataValidate.regency_death }}
                                         </p>
                                     </div>
                                     <!-- provinsi -->
                                     <div class="flex">
-                                        <p class="w-1/4 ml-6">Provinsi</p>
-                                        <p class="w-[calc(75% + 6px]">
+                                        <p class="w-[cal(25% +6px ] pl-6">
+                                            Provinsi
+                                        </p>
+                                        <p class="w-3/4">
                                             : Provinsi
                                             {{ dataValidate.province_death }}
                                         </p>
