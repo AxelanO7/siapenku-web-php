@@ -241,6 +241,11 @@ class LetterController extends Controller
     public function saveFile(
         Request $request
     ) {
+        if (!$request->hasFile('file')) {
+            return response()->json([
+                'message' => 'File not found'
+            ]);
+        }
         $file = $request->file('file');
         // filename from file
         $file_name = time() . '.' . $file->getClientOriginalExtension();

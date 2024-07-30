@@ -213,78 +213,93 @@ const updateAttachment = async (idProps, nFC, nCE, nRS) => {
 };
 
 const saveFile = async (idProps, fileFC, fileCE, fileRS) => {
-    if (form.attFC !== null) {
-        const formDataFC = new FormData();
-        formDataFC.append("file", fileFC);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataFC, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    fileName,
-                    form.attNameCE,
-                    form.attNameRS
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-    if (form.attCE !== null) {
-        const formDataCE = new FormData();
-        formDataCE.append("file", fileCE);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataCE, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    form.attNameFC,
-                    fileName,
-                    form.attNameRS
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-    if (form.attRS !== null) {
-        const formDataRS = new FormData();
-        formDataRS.append("file", fileRS);
-        const baseUrl = await AuthHelper.getBaseUrl();
-        axios
-            .post(`${baseUrl}/letter/file`, formDataRS, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const fileName = response.data.data;
-                updateAttachment(
-                    idProps,
-                    form.attNameFC,
-                    form.attNameCE,
-                    fileName
-                );
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+    let fileNameFC = "";
+    let fileNameCE = "";
+    let fileNameRS = "";
+    const baseUrl = await AuthHelper.getBaseUrl();
+    // if (form.attFC !== null) {
+    const formDataFC = new FormData();
+    formDataFC.append("file", fileFC);
+    await axios
+        .post(`${baseUrl}/letter/file`, formDataFC, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            const fileName = response.data.data;
+            fileNameFC = fileName;
+            // updateAttachment(
+            //     idProps,
+            //     fileName,
+            //     form.attNameCE,
+            //     form.attNameRS
+            // );
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    // }
+    // if (form.attCE !== null) {
+    const formDataCE = new FormData();
+    formDataCE.append("file", fileCE);
+    await axios
+        .post(`${baseUrl}/letter/file`, formDataCE, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            const fileName = response.data.data;
+            fileNameCE = fileName;
+            // updateAttachment(
+            //     idProps,
+            //     form.attNameFC,
+            //     fileName,
+            //     form.attNameRS
+            // );
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    // }
+    // if (form.attRS !== null) {
+    const formDataRS = new FormData();
+    formDataRS.append("file", fileRS);
+    await axios
+        .post(`${baseUrl}/letter/file`, formDataRS, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            const fileName = response.data.data;
+            fileNameRS = fileName;
+            // updateAttachment(
+            //     idProps,
+            //     form.attNameFC,
+            //     form.attNameCE,
+            //     fileName
+            // );
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    // }
+    console.log(
+        "idProps",
+        idProps,
+        "fileNameFC",
+        fileNameFC,
+        "fileNameCE",
+        fileNameCE,
+        "fileNameRS",
+        fileNameRS
+    );
+    updateAttachment(idProps, fileNameFC, fileNameCE, fileNameRS);
 };
 
 const handleChangeFamilyCard = (e) => {
