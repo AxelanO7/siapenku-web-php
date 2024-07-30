@@ -74,6 +74,7 @@ const selectedKasi = ref();
 const handleSend = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     let payload = dataValidate.value;
+    delete dataValidate.value.kadus;
     const additionalPayload = {
         kasi_id: valueKasi.value,
     };
