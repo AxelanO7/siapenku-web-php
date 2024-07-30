@@ -25,6 +25,7 @@ const dataValidate = ref();
 const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     dataValidate.value.status = "validated";
+    dataValidate.value.kadus = null;
     axios
         .put(`${baseUrl}/letter/${idIndex}`, dataValidate.value)
         .then((response) => {
