@@ -73,8 +73,11 @@ onMounted(() => {
                             <h3>Kecamatan Kabutambahan</h3>
                             <h3>Desa Bulian</h3>
                             <h3>
-                                JlKubutambahan-Kintamani, Tel087758730344, Kode
-                                Pos 81172
+                                JlKubutambahan-Kintamani,
+                                <span class="block">
+                                    Telepon 087758730344,
+                                </span>
+                                Kode Pos 81172
                             </h3>
                         </div>
                     </div>
