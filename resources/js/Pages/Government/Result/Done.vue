@@ -100,12 +100,12 @@ onMounted(() => {
                         <div>
                             <div class="flex items-center">
                                 <p class="w-1/4">Nama</p>
-                                <p class="mx-4">:</p>
+                                <p class="mx-4 pl-2">:</p>
                                 <p>{{ dataValidate?.kasi?.name }}</p>
                             </div>
                             <div class="flex">
                                 <p class="w-1/4">Jabatan</p>
-                                <p class="mx-4">:</p>
+                                <p class="mx-4 pl-2">:</p>
                                 <p>{{ dataValidate?.kasi?.position }}</p>
                             </div>
                         </div>
@@ -455,7 +455,7 @@ onMounted(() => {
                                         <p class="w-1/4">
                                             11. Hari / Tanggal Kematian
                                         </p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             :
                                             {{
                                                 new Date(
@@ -472,7 +472,7 @@ onMounted(() => {
                                     <!-- tempat kematian -->
                                     <div class="flex">
                                         <p class="w-1/4">12. Tempat Kematian</p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             : Desa
                                             {{ dataValidate.village_death }}
                                         </p>
@@ -480,7 +480,7 @@ onMounted(() => {
                                     <!-- kecamatan -->
                                     <div class="flex">
                                         <p class="w-1/4 pl-6">Kecamatan</p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             : Kecamatan
                                             {{ dataValidate.district_death }}
                                         </p>
@@ -488,7 +488,7 @@ onMounted(() => {
                                     <!-- kabupaten -->
                                     <div class="flex">
                                         <p class="w-1/4 pl-6">Kabupaten</p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             : Kabupaten
                                             {{ dataValidate.regency_death }}
                                         </p>
@@ -496,7 +496,7 @@ onMounted(() => {
                                     <!-- provinsi -->
                                     <div class="flex">
                                         <p class="w-1/4 pl-6">Provinsi</p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             : Provinsi
                                             {{ dataValidate.province_death }}
                                         </p>
@@ -506,7 +506,7 @@ onMounted(() => {
                                         <p class="w-1/4">
                                             13. Penyebab Kematian
                                         </p>
-                                        <p class="w-3/4">
+                                        <p class="w-3/4 pl-6">
                                             : {{ dataValidate.cause_death }}
                                         </p>
                                     </div>
@@ -515,7 +515,7 @@ onMounted(() => {
                                     <p class="w-1/4">
                                         Surat keterangan ini digunakan untuk
                                     </p>
-                                    <p class="w-3/4">
+                                    <p class="w-3/4 pl-6">
                                         : {{ dataValidate.needs }}
                                     </p>
                                 </div>
