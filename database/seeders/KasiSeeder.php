@@ -15,7 +15,7 @@ class KasiSeeder extends Seeder
         Kasi::create([
             'id' => 1,
             'name' => 'I Made Sudirsa',
-            'position' => 'Prebekel Bulian',
+            'position' => 'Perbekel Bulian',
             'signature' => 'kasi.png',
         ]);
     }
