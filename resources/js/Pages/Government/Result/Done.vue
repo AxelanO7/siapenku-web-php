@@ -102,14 +102,14 @@ onMounted(() => {
                         </h3>
                         <div>
                             <div class="flex items-center">
-                                <p class="w-1/3">Nama</p>
-                                <p class="pl-6">
+                                <p class="w-1/3 pl-8">Nama</p>
+                                <p class="pl-5">
                                     : {{ dataValidate?.kasi?.name }}
                                 </p>
                             </div>
                             <div class="flex">
-                                <p class="w-1/3">Jabatan</p>
-                                <p class="pl-6">
+                                <p class="w-1/3 pl-8">Jabatan</p>
+                                <p class="pl-5">
                                     : {{ dataValidate?.kasi?.position }}
                                 </p>
                             </div>
@@ -292,11 +292,9 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="mt-4 flex">
-                                    <p class="w-1/3">
+                                    <p>
                                         Surat keterangan ini digunakan untuk
-                                    </p>
-                                    <p class="w-2/3 ml-8">
-                                        : {{ dataValidate.needs }}
+                                        {{ dataValidate.needs }}
                                     </p>
                                 </div>
                             </div>
@@ -522,11 +520,9 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="mt-4 flex">
-                                    <p class="w-1/3">
+                                    <p>
                                         Surat keterangan ini digunakan untuk
-                                    </p>
-                                    <p class="w-2/3 pl-6">
-                                        : {{ dataValidate.needs }}
+                                        {{ dataValidate.needs }}
                                     </p>
                                 </div>
                             </div>
@@ -615,11 +611,9 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="mt-4 flex">
-                                    <p class="w-1/3">
+                                    <p>
                                         Surat keterangan ini digunakan untuk
-                                    </p>
-                                    <p class="w-2/3 ml-8">
-                                        : {{ dataValidate.needs }}
+                                        {{ dataValidate.needs }}
                                     </p>
                                 </div>
 
