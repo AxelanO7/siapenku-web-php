@@ -178,6 +178,8 @@ const handleValidate = async () => {
     };
     payload = { ...payload, ...additionalPayload };
     payload.status = "sended";
+    delete payload.kasi;
+    delete payload.kadus;
     axios
         .put(`${baseUrl}/letter/${idIndex}`, payload)
         .then((response) => {

@@ -26,6 +26,7 @@ const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     dataValidate.value.status = "validated";
     delete dataValidate.value.kadus;
+    delete dataValidate.value.kasi;
     axios
         .put(`${baseUrl}/letter/${idIndex}`, dataValidate.value)
         .then((response) => {

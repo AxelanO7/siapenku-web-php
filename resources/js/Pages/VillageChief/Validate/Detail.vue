@@ -21,6 +21,8 @@ const submit = async () => {
     data.status = "sending";
     data.type_letter = typeLetter.value.letter_type;
     data.no_letter = typeLetter.value.last_no_letter;
+    delete data.kasi;
+    delete data.kadus;
     axios
         .put(`${baseUrl}/letter/${indexItems}`, data)
         .then((response) => {
