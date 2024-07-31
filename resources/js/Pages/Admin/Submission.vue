@@ -411,11 +411,16 @@ const professions = [
     { value: "buruh", label: "Buruh" },
     { value: "lainnya", label: "Lainnya" },
 ];
+const nationalities = [
+    { value: "WNI", label: "WNI" },
+    { value: "WNA", label: "WNA" },
+];
 
 const openGender = ref(false);
 const openReligion = ref(false);
 const openMaritalStatus = ref(false);
 const openProfession = ref(false);
+const openNationality = ref(false);
 
 const isSubmiting = ref(false);
 </script>
@@ -929,15 +934,90 @@ const isSubmiting = ref(false);
                                 <!-- nationaly -->
                                 <div class="w-full">
                                     <label class="text-base font-bold flex"
-                                        >Kebangsaan
+                                        >Kewarganegaraan
                                         <p class="text-red-500 ml-1">*</p>
                                     </label>
-                                    <input
+                                    <Popover v-model:open="openNationality">
+                                        <PopoverTrigger as-child>
+                                            <Button
+                                                variant="outline"
+                                                role="combobox"
+                                                :aria-expanded="openNationality"
+                                                class="w-full justify-between"
+                                            >
+                                                {{
+                                                    form.nationality
+                                                        ? nationalities.find(
+                                                              (nationality) =>
+                                                                  nationality.value ===
+                                                                  form.nationality
+                                                          )?.label
+                                                        : "Kewarganegaraan"
+                                                }}
+                                                <ChevronsUpDown
+                                                    class="ml-2 h-4 w-4 shrink-0 opacity-50"
+                                                />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent class="p-0">
+                                            <Command>
+                                                <CommandInput
+                                                    class="h-9"
+                                                    placeholder="Search..."
+                                                />
+                                                <CommandEmpty
+                                                    >No data found</CommandEmpty
+                                                >
+                                                <CommandList>
+                                                    <CommandGroup>
+                                                        <CommandItem
+                                                            v-for="national in nationalities"
+                                                            :key="
+                                                                national.value
+                                                            "
+                                                            :value="
+                                                                national.value
+                                                            "
+                                                            @select="
+                                                                (ev) => {
+                                                                    if (
+                                                                        typeof ev
+                                                                            .detail
+                                                                            .value ===
+                                                                        'string'
+                                                                    ) {
+                                                                        form.nationality =
+                                                                            ev.detail.value;
+                                                                    }
+                                                                    openNationality = false;
+                                                                }
+                                                            "
+                                                        >
+                                                            {{ national.label }}
+                                                            <Check
+                                                                :class="
+                                                                    cn(
+                                                                        'ml-auto h-4 w-4',
+                                                                        form.nationality ===
+                                                                            national.value
+                                                                            ? 'opacity-100'
+                                                                            : 'opacity-0'
+                                                                    )
+                                                                "
+                                                            />
+                                                        </CommandItem>
+                                                    </CommandGroup>
+                                                </CommandList>
+                                            </Command>
+                                        </PopoverContent>
+                                    </Popover>
+
+                                    <!-- <input
                                         v-model="form.nationality"
                                         placeholder="Kebangsaan"
                                         class="border-gray-300 w-full rounded-md"
                                         oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '')"
-                                    />
+                                    /> -->
                                 </div>
                             </div>
                             <!-- address -->
