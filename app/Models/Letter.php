@@ -32,7 +32,6 @@ class Letter extends Model
         'att_family_card',
         'att_certificate',
         'att_rs',
-<<<<<<< HEAD
         'order_child',
         'birth_attendant',
         'address_attendant',
@@ -56,7 +55,5 @@ class Letter extends Model
         'district_death',
         'province_death',
         'cause_death',
-=======
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
     ];
 }
