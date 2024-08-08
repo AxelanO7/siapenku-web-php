@@ -248,7 +248,6 @@ onMounted(() => {
                                             {{ translateKeyToIndonesian(key) }}
                                         </h3>
                                     </div>
-<<<<<<< HEAD
                                     <div
                                         v-if="
                                             key === 'att_family_card' ||
@@ -264,92 +263,6 @@ onMounted(() => {
                                             @click="handleTapFile(value)"
                                         >
                                             {{ value }}
-=======
-                                    <p class="w-3/4">
-                                        :
-                                        {{ dataValidate.marital_status }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- pekerjaan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">11. Pekerjaan</div>
-                                    <p class="w-3/4">
-                                        :
-                                        {{
-                                            dataValidate.profession
-                                                .charAt(0)
-                                                .toUpperCase() +
-                                            dataValidate.profession.slice(1)
-                                        }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- keperluan -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">12. Keperluan</div>
-                                    <p class="w-3/4">
-                                        : {{ dataValidate.needs }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- lampiran kartu keluarga -->
-                            <div class="flex pl-8">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">13. Lampiran KK</div>
-                                    <div class="flex">
-                                        :
-                                        <div
-                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.att_family_card
-                                                )
-                                            "
-                                        >
-                                            {{ dataValidate.att_family_card }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- lampiran ijazah -->
-                            <div
-                                class="flex pl-8"
-                                v-if="dataValidate.att_certificate"
-                            >
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">14. Lampiran Ijazah</div>
-                                    <div class="flex">
-                                        :
-                                        <div
-                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="handleTapFile(value)"
-                                        >
-                                            {{ value }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- lampiran surat keterangan rs -->
-                            <div class="flex pl-8" v-if="dataValidate.att_rs">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">
-                                        15. Lampiran Surat RS
-                                    </div>
-                                    <div class="flex">
-                                        :
-                                        <div
-                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.att_rs
-                                                )
-                                            "
-                                        >
-                                            {{ dataValidate.att_rs }}
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
                                         </div>
                                     </div>
                                     <div v-else class="w-2/3">

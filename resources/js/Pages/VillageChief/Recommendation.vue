@@ -728,10 +728,6 @@ onMounted(() => {
                                     </p>
                                 </div>
                             </div>
-<<<<<<< HEAD
-=======
-                            <!-- lampiran kartu keluarga -->
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
                             <div class="flex pl-8">
                                 <div class="flex w-full items-center">
                                     <div class="w-1/4">13. Lampiran KK</div>
@@ -746,50 +742,6 @@ onMounted(() => {
                                             "
                                         >
                                             {{ dataValidate.att_family_card }}
-<<<<<<< HEAD
-=======
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="flex pl-8"
-                                v-if="dataValidate.att_certificate"
-                            >
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">14. Lampiran Ijazah</div>
-                                    <div class="flex">
-                                        :
-                                        <div
-                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.att_certificate
-                                                )
-                                            "
-                                        >
-                                            {{ dataValidate.att_certificate }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex pl-8" v-if="dataValidate.att_rs">
-                                <div class="flex w-full items-center">
-                                    <div class="w-1/4">
-                                        15. Lampiran Surat RS
-                                    </div>
-                                    <div class="flex">
-                                        :
-                                        <div
-                                            class="bg-gray-200 px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition duration-200 ease-in-out ml-1"
-                                            @click="
-                                                handleTapFile(
-                                                    dataValidate.att_rs
-                                                )
-                                            "
-                                        >
-                                            {{ dataValidate.att_rs }}
->>>>>>> c0b22dd (refactor: Add new fields for letter submission in Letter model and seeder)
                                         </div>
                                     </div>
                                 </div>
