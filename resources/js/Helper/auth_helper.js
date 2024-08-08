@@ -4,7 +4,7 @@ class ApiHelper {
     baseUrl = "";
     constructor() {
         // this.baseUrl = `http://localhost:8000/api`;
-        this.baseUrl = `http://157.230.246.157/api`;
+        this.baseUrl = `http://68.183.182.78/api`;
     }
     async getBaseUrl() {
         return this.baseUrl;
