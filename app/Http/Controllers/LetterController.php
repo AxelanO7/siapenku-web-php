@@ -213,32 +213,107 @@ class LetterController extends Controller
     }
 
     public function generateLastNoLetter(
-        $typeLetter
+        $typeLetter,
+        $letterRef
     ) {
         $letter = letter::where('type_letter', $typeLetter)->latest()->first();
-        // remove space from string
-        switch ($typeLetter) {
-            case "Surat Kelahiran":
-                $typeLetter = "SKL";
-                break;
-            case "Surat Kematian":
-                $typeLetter = "SKK";
-                break;
-            case "Surat Keterangan Umum":
-                $typeLetter = "SKU";
-                break;
+        // switch ($typeLetter) {
+        //     case "Surat Kelahiran":
+        //         $typeLetter = "SKL";
+        //         break;
+        //     case "Surat Kematian":
+        //         $typeLetter = "SKK";
+        //         break;
+        //     case "Surat Keterangan Umum":
+        //         $typeLetter = "SKU";
+        //         break;
+        // }
+        $lgh = false;
+        $dm = false;
+        $bddm = false;
+        $bb = false;
+        $bts = false;
+        if (
+            str_contains(strtolower($letterRef->address), 'lodguwuh')
+        ) {
+            $lgh = true;
         }
-        if ($letter) {
-            $no_letter = $letter->no_letter;
-            $no_letter = explode('/', $no_letter);
-            $no_letter = $no_letter[0];
-            $no_letter = (int)$no_letter + 1;
-            $no_letter = $no_letter . '/' . $typeLetter . '/' . date('Y');
-            return $no_letter;
+        if (
+            str_contains(strtolower($letterRef->address), 'dangin')
+        ) {
+            $dm = true;
+        }
+        if (
+            str_contains(strtolower($letterRef->address), 'dauh')
+        ) {
+            $bddm = true;
+        }
+        if (
+            str_contains(strtolower($letterRef->address), 'banyu')
+        ) {
+            $bb = true;
+        }
+        if (
+            str_contains(strtolower($letterRef->address), 'bantes')
+        ) {
+            $bts = true;
+        }
+        $no_letter = $letter->no_letter;
+        $no_letter = explode('/', $no_letter);
+        $no_letter = $no_letter[0];
+        $no_letter = (int)$no_letter + 1;
+        // change no month into roman no
+        $month = date('M');
+        $month = date('m', strtotime($month));
+        $month = $this->convertToRoman($month);
+        if ($typeLetter != "Surat Keterangan Umum") {
+            if ($lgh) {
+                return '0' . $no_letter . '/LGH/' . $month . '/' . date('Y');
+            }
+            if ($dm) {
+                return '0' . $no_letter . '/DM/' . $month . '/' . date('Y');
+            }
+            if ($bddm) {
+                return '0' . $no_letter . '/BDDM/' . $month . '/' . date('Y');
+            }
+            if ($bb) {
+                return '0' . $no_letter . '/BB/' . $month . '/' . date('Y');
+            }
+            if ($bts) {
+                return '0' . $no_letter . '/BTS/' . $month . '/' . date('Y');
+            }
         } else {
-            return '01/' . $typeLetter . '/' . date('Y');
+            return '0' . $no_letter . '/UMUM/' . $month . '/' . date('Y');
         }
     }
+
+    public function convertToRoman($num)
+    {
+        $n = intval($num);
+        $res = '';
+        $romanNumber_Array = array(
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        );
+        foreach ($romanNumber_Array as $roman => $number) {
+            $matches = intval($n / $number);
+            $res .= str_repeat($roman, $matches);
+            $n = $n % $number;
+        }
+        return $res;
+    }
+
 
     public function saveFile(
         Request $request
@@ -289,7 +364,7 @@ class LetterController extends Controller
     {
         $letter = letter::find($id);
         $letterType = $this->getLetterByType($letter->type_submission);
-        $last_no_letter = $this->generateLastNoLetter($letterType);
+        $last_no_letter = $this->generateLastNoLetter($letterType, $letter);
         $data = [
             'letter_type' => $letterType,
             'last_no_letter' => $last_no_letter
