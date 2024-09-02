@@ -160,7 +160,7 @@ class LetterController extends Controller
         $letter = letter::find($id);
         $no_letter = 0;
         if ($request->no_letter == null) {
-            $no_letter = $this->generateLastNoLetter($request->type_letter);
+            $no_letter = $this->generateLastNoLetter($request->type_letter, $letter);
         } else {
             $no_letter = $request->no_letter;
         }
@@ -366,7 +366,7 @@ class LetterController extends Controller
     public function getTypeLetter($id)
     {
         $letter = letter::find($id);
-        $letterType = $this->getLetterByType($letter->type_submission);
+        $letterType = $this->getLetterByType($letter->type_submission, $letter);
         $last_no_letter = $this->generateLastNoLetter($letterType, $letter);
         $data = [
             'letter_type' => $letterType,

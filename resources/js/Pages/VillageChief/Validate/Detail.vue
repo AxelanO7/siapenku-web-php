@@ -160,6 +160,7 @@ const translateKeyToIndonesian = (key) => {
 };
 
 const handleTapFile = (value) => {
+    console.log(value);
     Swal.fire({
         title: "Lampiran",
         text: value,

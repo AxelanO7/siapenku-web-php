@@ -303,11 +303,12 @@ const saveFile = async (idProps, fileFC, fileCE, fileRS) => {
 };
 
 const handleChangeFamilyCard = (e) => {
-    const allowedExtensions = /(\.pdf|\.png)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
         Swal.fire({
             icon: "error",
-            title: "File harus berupa pdf atau png",
+            // png or jpg
+            title: "File harus berupa jpg atau png",
             showConfirmButton: false,
             timer: 1500,
         });
@@ -330,11 +331,11 @@ const handleChangeFamilyCard = (e) => {
 };
 
 const handleChangeCertificate = (e) => {
-    const allowedExtensions = /(\.pdf|\.png)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
         Swal.fire({
             icon: "error",
-            title: "File harus berupa pdf atau png",
+            title: "File harus berupa jpg atau png",
             showConfirmButton: false,
             timer: 1500,
         });
@@ -357,11 +358,11 @@ const handleChangeCertificate = (e) => {
 };
 
 const handleChangeRS = (e) => {
-    const allowedExtensions = /(\.pdf|\.png)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
     if (!allowedExtensions.exec(e.target.files[0].name)) {
         Swal.fire({
             icon: "error",
-            title: "File harus berupa pdf atau png",
+            title: "File harus berupa jpg atau png",
             showConfirmButton: false,
             timer: 1500,
         });
@@ -1383,8 +1384,8 @@ const isSubmiting = ref(false);
                                     class="border-gray-300 w-full text-sm"
                                 />
                                 <p class="text-sm text-gray-500 mt-2">
-                                    File harus berupa pdf dan tidak lebih dari
-                                    2MB
+                                    File harus berupa jpg, jpeg, atau png dan
+                                    tidak lebih dari 2MB
                                 </p>
                             </div>
                             <!-- attachment certificate -->
@@ -1405,8 +1406,8 @@ const isSubmiting = ref(false);
                                     class="border-gray-300 w-full text-sm"
                                 />
                                 <p class="text-sm text-gray-500 mt-2">
-                                    File harus berupa pdf dan tidak lebih dari
-                                    2MB
+                                    File harus berupa jpg, jpeg, atau png dan
+                                    tidak lebih dari 2MB
                                 </p>
                             </div>
                             <!-- attachment rs -->
@@ -1428,8 +1429,8 @@ const isSubmiting = ref(false);
                                     class="border-gray-300 w-full text-sm"
                                 />
                                 <p class="text-sm text-gray-500 mt-2">
-                                    File harus berupa pdf dan tidak lebih dari
-                                    2MB
+                                    File harus berupa jpg, jpeg, atau png dan
+                                    tidak lebih dari 2MB
                                 </p>
                             </div>
                         </div>
