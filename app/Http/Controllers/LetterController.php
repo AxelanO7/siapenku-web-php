@@ -258,6 +258,9 @@ class LetterController extends Controller
         ) {
             $bts = true;
         }
+        if ($letter->no_letter == null) {
+            return '01/' . $typeLetter . '/' . date('Y');
+        }
         $no_letter = $letter->no_letter;
         $no_letter = explode('/', $no_letter);
         $no_letter = $no_letter[0];
