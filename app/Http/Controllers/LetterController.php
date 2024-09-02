@@ -258,8 +258,6 @@ class LetterController extends Controller
         ) {
             $bts = true;
         }
-        echo '<script>console.log(' . json_encode($letter) . ')</script>';
-        echo '<script>console.log(' . json_encode($typeLetter) . ')</script>';
         if ($letter->no_letter == null) {
             return '01/' . $typeLetter . '/' . date('Y');
         }
