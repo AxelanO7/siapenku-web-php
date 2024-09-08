@@ -217,17 +217,6 @@ class LetterController extends Controller
         $letterRef
     ) {
         $letter = letter::where('type_letter', $typeLetter)->latest()->first();
-        // switch ($typeLetter) {
-        //     case "Surat Kelahiran":
-        //         $typeLetter = "SKL";
-        //         break;
-        //     case "Surat Kematian":
-        //         $typeLetter = "SKK";
-        //         break;
-        //     case "Surat Keterangan Umum":
-        //         $typeLetter = "SKU";
-        //         break;
-        // }
         $lgh = false;
         $dm = false;
         $bddm = false;
@@ -258,8 +247,26 @@ class LetterController extends Controller
         ) {
             $bts = true;
         }
-        if ($letter->no_letter == null) {
-            return '01/' . $typeLetter . '/' . date('Y');
+        if ($letter == null) {
+            if ($typeLetter != "Surat Keterangan Umum") {
+                if ($lgh) {
+                    return '01/LGH/' . date('m') . '/' . date('Y');
+                }
+                if ($dm) {
+                    return '01/DM/' . date('m') . '/' . date('Y');
+                }
+                if ($bddm) {
+                    return '01/BDDM/' . date('m') . '/' . date('Y');
+                }
+                if ($bb) {
+                    return '01/BB/' . date('m') . '/' . date('Y');
+                }
+                if ($bts) {
+                    return '01/BTS/' . date('m') . '/' . date('Y');
+                }
+            } else {
+                return '01/UMUM/' . date('m') . '/' . date('Y');
+            }
         }
         $no_letter = $letter->no_letter;
         $no_letter = explode('/', $no_letter);
