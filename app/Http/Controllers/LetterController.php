@@ -248,31 +248,34 @@ class LetterController extends Controller
             $bts = true;
         }
         if ($letter == null) {
+            $month = date('M');
+            $month = date('m', strtotime($month));
+            $month = $this->convertToRoman($month);
             if ($typeLetter != "Surat Keterangan Umum") {
                 if ($lgh) {
-                    return '01/LGH/' . date('m') . '/' . date('Y');
+                    return '01/LGH/' . $month . '/' . date('Y');
                 }
                 if ($dm) {
-                    return '01/DM/' . date('m') . '/' . date('Y');
+                    return '01/DM/' . $month . '/' . date('Y');
                 }
                 if ($bddm) {
-                    return '01/BDDM/' . date('m') . '/' . date('Y');
+                    return '01/BDDM/' . $month . '/' . date('Y');
                 }
                 if ($bb) {
-                    return '01/BB/' . date('m') . '/' . date('Y');
+                    return '01/BB/' . $month . '/' . date('Y');
                 }
                 if ($bts) {
-                    return '01/BTS/' . date('m') . '/' . date('Y');
+                    return '01/BTS/' . $month . '/' . date('Y');
                 }
+                return '01/UMUM/' . $month . '/' . date('Y');
             } else {
-                return '01/UMUM/' . date('m') . '/' . date('Y');
+                return '01/UMUM/' . $month . '/' . date('Y');
             }
         }
         $no_letter = $letter->no_letter;
         $no_letter = explode('/', $no_letter);
         $no_letter = $no_letter[0];
         $no_letter = (int)$no_letter + 1;
-        // change no month into roman no
         $month = date('M');
         $month = date('m', strtotime($month));
         $month = $this->convertToRoman($month);
