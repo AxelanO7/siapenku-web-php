@@ -212,92 +212,59 @@ class LetterController extends Controller
         return $list_no_letter;
     }
 
-    public function generateLastNoLetter(
-        $typeLetter,
-        $letterRef
-    ) {
+    public function generateLastNoLetterByType($typeLetter)
+    {
         $letter = letter::where('type_letter', $typeLetter)->latest()->first();
-        $lgh = false;
-        $dm = false;
-        $bddm = false;
-        $bb = false;
-        $bts = false;
-        if (
-            str_contains(strtolower($letterRef->address), 'lodguwuh')
-        ) {
-            $lgh = true;
-        }
-        if (
-            str_contains(strtolower($letterRef->address), 'dangin')
-        ) {
-            $dm = true;
-        }
-        if (
-            str_contains(strtolower($letterRef->address), 'dauh')
-        ) {
-            $bddm = true;
-        }
-        if (
-            str_contains(strtolower($letterRef->address), 'banyu')
-        ) {
-            $bb = true;
-        }
-        if (
-            str_contains(strtolower($letterRef->address), 'bantes')
-        ) {
-            $bts = true;
-        }
+        $short_type_letter = $this->getShortLetterByType($typeLetter);
         if ($letter == null) {
-            $month = date('M');
-            $month = date('m', strtotime($month));
-            $month = $this->convertToRoman($month);
-            if ($typeLetter != "Surat Keterangan Umum") {
-                if ($lgh) {
-                    return '01/LGH/' . $month . '/' . date('Y');
-                }
-                if ($dm) {
-                    return '01/DM/' . $month . '/' . date('Y');
-                }
-                if ($bddm) {
-                    return '01/BDDM/' . $month . '/' . date('Y');
-                }
-                if ($bb) {
-                    return '01/BB/' . $month . '/' . date('Y');
-                }
-                if ($bts) {
-                    return '01/BTS/' . $month . '/' . date('Y');
-                }
-                return '01/UMUM/' . $month . '/' . date('Y');
-            } else {
-                return '01/UMUM/' . $month . '/' . date('Y');
-            }
+            return '01/' . $short_type_letter . '/' . date('Y');
         }
         $no_letter = $letter->no_letter;
         $no_letter = explode('/', $no_letter);
         $no_letter = $no_letter[0];
         $no_letter = (int)$no_letter + 1;
+        return '0' . $no_letter . '/' . $short_type_letter . '/' . date('Y');
+    }
+
+    public function generateLastNoLetter(
+        $letterRef
+    ) {
+        // $letter = letter::where('type_letter', $typeLetter)->latest()->first();
+
+        // latest letter
+        $letter = Letter::latest()->first();
+        $lgh = false;
+        $dm = false;
+        $bddm = false;
+        $bb = false;
+        $bts = false;
+        if (str_contains(strtolower($letterRef->address), 'lodguwuh')) $lgh = true;
+        if (str_contains(strtolower($letterRef->address), 'dangin')) $dm = true;
+        if (str_contains(strtolower($letterRef->address), 'dauh')) $bddm = true;
+        if (str_contains(strtolower($letterRef->address), 'banyu')) $bb = true;
+        if (str_contains(strtolower($letterRef->address), 'bantes')) $bts = true;
         $month = date('M');
         $month = date('m', strtotime($month));
         $month = $this->convertToRoman($month);
-        if ($typeLetter != "Surat Keterangan Umum") {
-            if ($lgh) {
-                return '0' . $no_letter . '/LGH/' . $month . '/' . date('Y');
-            }
-            if ($dm) {
-                return '0' . $no_letter . '/DM/' . $month . '/' . date('Y');
-            }
-            if ($bddm) {
-                return '0' . $no_letter . '/BDDM/' . $month . '/' . date('Y');
-            }
-            if ($bb) {
-                return '0' . $no_letter . '/BB/' . $month . '/' . date('Y');
-            }
-            if ($bts) {
-                return '0' . $no_letter . '/BTS/' . $month . '/' . date('Y');
-            }
-        } else {
-            return '0' . $no_letter . '/UMUM/' . $month . '/' . date('Y');
+        $year = date('Y');
+        if ($letter == null) {
+            if ($lgh) return '01/LGH/' . $month . '/' . $year;
+            if ($dm) return '01/DM/' . $month . '/' . $year;
+            if ($bddm) return '01/BDDM/' . $month . '/' . $year;
+            if ($bb) return '01/BB/' . $month . '/' . $year;
+            if ($bts) return '01/BTS/' . $month . '/' . $year;
+            return '01/UMUM/' . $month . '/' . $year;
         }
+        $no_letter = $letter->no_letter;
+        $no_letter = explode('/', $no_letter);
+        $no_letter = $no_letter[0];
+        $no_letter = (int)$no_letter + 1;
+        if ($lgh) return '0' . $no_letter . '/LGH/' . $month . '/' . $year;
+        if ($dm) return '0' . $no_letter . '/DM/' . $month . '/' . $year;
+        if ($bddm) return '0' . $no_letter . '/BDDM/' . $month . '/' . $year;
+        if ($bb) return '0' . $no_letter . '/BB/' . $month . '/' . $year;
+        if ($bts) return '0' . $no_letter . '/BTS/' . $month . '/' . $year;
+        return '0' . $no_letter . '/UMUM/' . $month . '/' . $year;
     }
 
     public function convertToRoman($num)
@@ -373,14 +340,31 @@ class LetterController extends Controller
         }
     }
 
+    public function getShortLetterByType($type)
+    {
+        switch ($type) {
+            case "birth-letter":
+                return "SKL";
+                break;
+            case "death-letter":
+                return "SKK";
+                break;
+            case "general-letter":
+                return "UMUM";
+                break;
+        }
+    }
+
     public function getTypeLetter($id)
     {
         $letter = letter::find($id);
         $letterType = $this->getLetterByType($letter->type_submission, $letter);
-        $last_no_letter = $this->generateLastNoLetter($letterType, $letter);
+        $last_no_letter = $this->generateLastNoLetter($letter);
+        $last_no_letter_by_type = $this->generateLastNoLetterByType($letter->type_submission);
         $data = [
             'letter_type' => $letterType,
-            'last_no_letter' => $last_no_letter
+            'last_no_letter' => $last_no_letter,
+            'last_no_letter_by_type' => $last_no_letter_by_type
         ];
         return response()->json([
             'message' => 'Letter by type',

@@ -168,12 +168,20 @@ const getKadus = async () => {
 };
 const dataKadus = ref();
 
+const typeLetter = ref();
+const getTypeLetter = async () => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios.get(`${baseUrl}/letter/type/${idIndex}`).then((response) => {
+        typeLetter.value = response.data.data;
+    });
+};
+
 const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     let payload = dataValidate.value;
     const additionalPayload = {
-        // no_letter: valueNoLetter.value,
         // type_letter: valueSuket.value,
+        no_letter: typeLetter.value.last_no_letter_by_type,
         kadus_id: valueKadus.value,
     };
     payload = { ...payload, ...additionalPayload };
@@ -315,6 +323,7 @@ const idIndex = window.location.href.split("/").pop();
 onMounted(() => {
     getLetter();
     getKadus();
+    getTypeLetter();
 });
 </script>
 
