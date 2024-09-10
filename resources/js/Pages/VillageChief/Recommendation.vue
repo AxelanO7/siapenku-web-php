@@ -427,7 +427,7 @@ onMounted(() => {
                         class="flex items-center w-full justify-center space-x-4"
                     >
                         <h3>Nomor :</h3>
-                        <p>{{ dataValidate?.no_letter }}</p>
+                        <p>{{ typeLetter.value.last_no_letter_by_type }}</p>
                         <!-- <Popover v-model:open="openNoLetter">
                             <PopoverTrigger as-child>
                                 <Button
