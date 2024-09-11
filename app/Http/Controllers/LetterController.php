@@ -238,11 +238,13 @@ class LetterController extends Controller
         $bddm = false;
         $bb = false;
         $bts = false;
-        if (str_contains(strtolower($letterRef->address), 'lodguwuh')) $lgh = true;
-        if (str_contains(strtolower($letterRef->address), 'dangin')) $dm = true;
-        if (str_contains(strtolower($letterRef->address), 'dauh')) $bddm = true;
-        if (str_contains(strtolower($letterRef->address), 'banyu')) $bb = true;
-        if (str_contains(strtolower($letterRef->address), 'bantes')) $bts = true;
+        if ($letterRef->address != null) {
+            if (str_contains(strtolower($letterRef->address), 'lodguwuh')) $lgh = true;
+            if (str_contains(strtolower($letterRef->address), 'dangin')) $dm = true;
+            if (str_contains(strtolower($letterRef->address), 'dauh')) $bddm = true;
+            if (str_contains(strtolower($letterRef->address), 'banyu')) $bb = true;
+            if (str_contains(strtolower($letterRef->address), 'bantes')) $bts = true;
+        }
         $month = date('M');
         $month = date('m', strtotime($month));
         $month = $this->convertToRoman($month);
