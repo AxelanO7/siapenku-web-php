@@ -181,7 +181,7 @@ const handleValidate = async () => {
     let payload = dataValidate.value;
     const additionalPayload = {
         // type_letter: valueSuket.value,
-        no_letter: typeLetter.value.last_no_letter_by_type,
+        // no_letter: typeLetter.value.last_no_letter_by_type,
         kadus_id: valueKadus.value,
     };
     payload = { ...payload, ...additionalPayload };
