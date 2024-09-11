@@ -160,7 +160,7 @@ class LetterController extends Controller
         $letter = letter::find($id);
         $no_letter = 0;
         if ($request->no_letter == null) {
-            $no_letter = $this->generateLastNoLetter($request->type_letter, $letter);
+            $no_letter = $this->generateLastNoLetter($letter);
         } else {
             $no_letter = $request->no_letter;
         }
@@ -238,7 +238,9 @@ class LetterController extends Controller
         $bddm = false;
         $bb = false;
         $bts = false;
-        if ($letterRef->address != null) {
+        if (
+            $letterRef->address != null || $letterRef->address != ''
+        ) {
             if (str_contains(strtolower($letterRef->address), 'lodguwuh')) $lgh = true;
             if (str_contains(strtolower($letterRef->address), 'dangin')) $dm = true;
             if (str_contains(strtolower($letterRef->address), 'dauh')) $bddm = true;
