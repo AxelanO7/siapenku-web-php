@@ -6,6 +6,14 @@ import ApiHelper from "@/Helper/auth_helper";
 import { Button } from "@sc/components/ui/button";
 import Swal from "sweetalert2";
 
+const typeLetter = ref("");
+const getTypeLetter = async () => {
+    const baseUrl = await ApiHelper.getBaseUrl();
+    axios.get(`${baseUrl}/letter/type/${indexItems}`).then((response) => {
+        typeLetter.value = response.data.data;
+    });
+};
+
 // applicant data
 const getLetter = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
@@ -14,6 +22,7 @@ const getLetter = async () => {
         .then((response) => {
             const data = response.data.data;
             dataValidate.value = data;
+            getTypeLetter();
             filterData();
         })
         .catch((error) => {
@@ -25,6 +34,7 @@ const dataValidate = ref();
 const handleValidate = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
     dataValidate.value.status = "validated";
+    dataValidate.value.no_letter = typeLetter.value.last_no_letter_by_type;
     delete dataValidate.value.kadus;
     delete dataValidate.value.kasi;
     axios
