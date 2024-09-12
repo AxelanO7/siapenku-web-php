@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const typeLetter = ref("");
 const getTypeLetter = async () => {
     const baseUrl = await ApiHelper.getBaseUrl();
-    axios.get(`${baseUrl}/letter/type/${indexItems}`).then((response) => {
+    axios.get(`${baseUrl}/letter/type/${idIndex}`).then((response) => {
         typeLetter.value = response.data.data;
     });
 };
