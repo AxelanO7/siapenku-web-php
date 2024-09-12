@@ -216,14 +216,18 @@ class LetterController extends Controller
     {
         $letter = letter::where('type_letter', $typeLetter)->latest()->first();
         $short_type_letter = $this->getShortLetterByType($typeLetter);
+        $month = date('M');
+        $month = date('m', strtotime($month));
+        $month = $this->convertToRoman($month);
+        $year = date('Y');
         if ($letter == null) {
-            return '01/' . $short_type_letter . '/' . date('Y');
+            return '01/' . $short_type_letter . '/' . $month . '/' . $year;
         }
         $no_letter = $letter->no_letter;
         $no_letter = explode('/', $no_letter);
         $no_letter = $no_letter[0];
         $no_letter = (int)$no_letter + 1;
-        return '0' . $no_letter . '/' . $short_type_letter . '/' . date('Y');
+        return '0' . $no_letter . '/' . $short_type_letter . '/' . $month . '/' . $year;
     }
 
     public function generateLastNoLetter(
