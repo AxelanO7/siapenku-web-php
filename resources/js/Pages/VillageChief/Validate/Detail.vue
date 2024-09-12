@@ -248,7 +248,7 @@ onMounted(() => {
                                         :
                                         {{
                                             value === "general-letter"
-                                                ? "Surat Umum"
+                                                ? "Surat Keterangan Umum"
                                                 : value === "birth-letter"
                                                 ? "Surat Kelahiran"
                                                 : value === "death-letter"
