@@ -245,7 +245,16 @@ onMounted(() => {
                                         </div>
                                     </div>
                                     <div v-else class="w-2/3">
-                                        : {{ value }}
+                                        :
+                                        {{
+                                            value === "general-letter"
+                                                ? "Surat Umum"
+                                                : value === "birth-letter"
+                                                ? "Surat Kelahiran"
+                                                : value === "death-letter"
+                                                ? "Surat Kematian"
+                                                : value
+                                        }}
                                     </div>
                                 </div>
                             </div>
